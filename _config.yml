@@ -37,7 +37,7 @@ titlecase: false # Transform title into titlecase
 external_link:
   enable: true # Open external links in new tab
   field: site # Apply to the whole site
-  exclude: '_posts/LICENSE'
+  exclude: 
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
@@ -91,7 +91,7 @@ pagination_dir: page
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
 include:
-exclude:
+exclude: "_posts/LICENSE"
 ignore:
 
 # Extensions
