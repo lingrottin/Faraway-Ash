@@ -1,0 +1,10 @@
+p pre,p code,code[class*="language-"], pre[class*="language-"] {
+	font-family: 'Cascadia Code', Consolas, 'Andale Mono', 'Ubuntu Mono',monospace!important;
+}
+div.code-widget {
+	font-family: 'Red Hat Display';
+	font-weight: 400;
+}
+div.code-wrapper pre{
+	background-color: #562323!important;
+}
