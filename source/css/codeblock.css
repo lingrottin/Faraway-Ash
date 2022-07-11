@@ -5,6 +5,6 @@ div.code-widget {
 	font-family: 'Red Hat Display';
 	font-weight: 400;
 }
-div.code-wrapper pre{
+html[data-user-color-scheme=dark] div.code-wrapper pre{
 	background-color: #562323!important;
 }
