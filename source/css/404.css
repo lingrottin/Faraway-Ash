@@ -3,4 +3,13 @@ body.page404 span#subtitle {
 	text-shadow: 0.5rem 0.5rem lightpink;
 	color: white;
 }
+body.page404 span#subtitle {
+	font-size: 15rem;
+	text-shadow: 0.5rem 0.5rem lightpink;
+	color: white;
+}
+body.page404 span#subtitle:hover,
+body.page404 span#subtitle:focus{
+	color: white!important;
+}
 
