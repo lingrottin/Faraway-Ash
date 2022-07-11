@@ -143,7 +143,7 @@ color:
   body_bg_color: "#FDEFF4"
   # 暗色模式下的 body 背景色，下同
   # Color in dark mode, the same below
-  body_bg_color_dark: "#1E0000" #"#240000"
+  body_bg_color_dark: "#101010" #"#240000"
 
   # 顶部菜单背景色
   # Color of navigation bar background
@@ -173,7 +173,7 @@ color:
   # 主面板背景色
   # Color of main board
   board_color: "#fff"
-  board_color_dark:  "#451B1B" #"#3c1111"
+  board_color_dark:  "#191919" #"#3c1111"
 
   # 文章正文字体色
   # Color of post text

@@ -15,7 +15,7 @@ tags:
   - 服务器
   - 运维
 categories:
-  - 探索
+  - 星耀
 index_img: /img/indexes/openwrt.webp
 excerpt: 将有线的打印机接在路由器上，释放出无线的力量。
 ---

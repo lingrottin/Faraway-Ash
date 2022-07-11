@@ -6,6 +6,39 @@ layout: about
 # Faraway Ash
 这里是 Lingrottin 的私人博客，欢迎！
 
+## 关于我
+一个扑街高一学生。
+* 对折腾的兴趣满满
+* 精通汉语、熟识英语、正在学习俄语
+* 能写C、C#、HTML+CSS+JavaScript、Bash、PowerShell、Python
+* 网名 Lingrottin
+* ~~很可爱~~
+* [有两个比我可爱的朋友](#关于朋友)
+
+## 关于朋友
+* 热力图 (RLt) : [<a href="https://akyuu.cn/">他的Blog</a>]
+* ~~**最可爱的**~~ 尤尔苏斯 菲莱恩 (UrsusFeline) : [<a href="https://lgy07.github.io">他的博客</a>] [<a href="https://juan.lgy07.me">他的学习博客</a>]
+
+## 关于分类
+<ul>
+<li class="about-category-name"><b>尘埃</b></li>
+记录琐事。
+<p class="about-category-saying" align="right">——琐事如尘埃不值一提，只得轻轻扫入记忆的盒子里。</p>
+
+<li class="about-category-name"><b>星耀</b></li>
+技术性文章。
+<p class="about-category-saying" align="right">——人可以消失，但知识将如星耀般永不磨灭。</p>
+
+<li class="about-category-name"><b>烈焰</b></li>
+记录探索和发现的过程。
+<p class="about-category-saying" align="right">——探索未知，就如举起火焰，驱散阴霾。</p>
+
+<li class="about-category-name"><b>自然</b></li>
+可能会写一些故事。
+<p class="about-category-saying" align="right">——人生于地球归于地球，终是自然的一部分：人的故事便亦是自然的一部分。</p>
+ 
+</ul>
+
 ## 关于“Faraway Ash”
 **Faraway Ash** 直译作远方的灰烬，诗意一些就是“遥烬”了。
 这个名字是没有什么意思的呢，起源只是我想要一个诗意的名字。而 Ash 是我比较喜欢的一个单词，想来“在远方”的意境也比较美妙，这个博客就因此叫 Faraway Ash 了。
@@ -47,15 +80,4 @@ Dear creator, if you do not want me to use your artworks, plz. contact me to rem
 该网站采用了 Cloudflare Pages 和 Cloudflare CDN 加速，对大陆用户可能不友好。
 有条件建议搭配梯子访问。
 
-## 关于我
-一个扑街高一学生。
-* 对折腾的兴趣满满
-* 精通汉语、熟识英语、正在学习俄语
-* 能写C、C#、HTML+CSS+JavaScript、Bash、PowerShell、Python
-* 网名 Lingrottin
-* ~~很可爱~~
-* [有两个比我可爱的朋友](#关于朋友)
 
-## 关于朋友
-* 热力图 (RLt) : [<a href="https://akyuu.cn/">他的Blog</a>]
-* ~~**最可爱的**~~ 尤尔苏斯 菲莱恩 (UrsusFeline) : [<a href="https://lgy07.github.io">他的博客</a>] [<a href="https://juan.lgy07.me">他的学习博客</a>]
