@@ -1,8 +1,35 @@
-div.banner-text div.h2 span#subtitle, div.markdown-body h1, div.markdown-body h2, div.markdown-body h3, div.markdown-body h4, div.markdown-body h5, div.markdown-body h6, div.index-card h1.index-header {
+div.banner-text div.h2 span#subtitle,
+div.markdown-body h1,
+div.markdown-body h2,
+div.markdown-body h3,
+div.markdown-body h4,
+div.markdown-body h5,
+div.markdown-body h6,
+div.index-card h1.index-header {
 	font-family: 'Red Hat Display', 'Noto Sans SC';
-        font-weight: 700;
+    font-weight: 700;
+	transition: color 0.2s ease-in-out;
+}
+div.banner-text div.h2 span#subtitle:hover,
+div.markdown-body h1:hover, 
+div.markdown-body h2:hover,
+div.markdown-body h3:hover,
+div.markdown-body h4:hover,
+div.markdown-body h5:hover,
+div.markdown-body h6:hover,
+div.banner-text div.h2 span#subtitle:focus,
+div.markdown-body h1:focus, 
+div.markdown-body h2:focus,
+div.markdown-body h3:focus,
+div.markdown-body h4:focus,
+div.markdown-body h5:focus,
+div.markdown-body h6:focus {
+	font-family: 'Red Hat Display', 'Noto Sans SC';
+    font-weight: 700; 
+	transition: color 0.2s ease-in-out;
+	color: var(--link-hover-color);
 }
 div#toc a.tocbot-link {
-	font-family: 'Red Hat Display', 'Noto Sans SC';
+	font-family: 'Red Hat Display',  'Noto Sans SC';
 	font-weight: 500;
 }

@@ -30,7 +30,7 @@ tab_title_separator: " - "
 
 # 强制所有链接升级为 HTTPS（适用于图片等资源出现 HTTP 混入报错）
 # Force all links to be HTTPS (applicable to HTTP mixed error)
-force_https: false
+force_https: true
 
 # 代码块的增强配置
 # Enhancements to code blocks
@@ -143,7 +143,7 @@ color:
   body_bg_color: "#FDEFF4"
   # 暗色模式下的 body 背景色，下同
   # Color in dark mode, the same below
-  body_bg_color_dark: "#240000" #"#101010"
+  body_bg_color_dark: "#1E0000" #"#240000"
 
   # 顶部菜单背景色
   # Color of navigation bar background
@@ -173,7 +173,7 @@ color:
   # 主面板背景色
   # Color of main board
   board_color: "#fff"
-  board_color_dark: "#3c1111"
+  board_color_dark:  "#451B1B" #"#3c1111"
 
   # 文章正文字体色
   # Color of post text
@@ -198,7 +198,7 @@ color:
   # 超链接悬浮背景色
   # Color of link background when hovering
   link_hover_bg_color: "#f8f9fa"
-  link_hover_bg_color_dark: "#364151"
+  link_hover_bg_color_dark: "#562323"
 
   # 分隔线和表格边线的颜色
   # Color of horizontal rule and table border
@@ -953,7 +953,7 @@ tag:
     min_font: 15
     max_font: 30
     unit: px
-    start_color: "#BBBBEE"
+    start_color: "#FF5C8D"
     end_color: "#337ab7"
 
 

@@ -4,9 +4,21 @@ a.navbar-brand strong {
 	font-weight: 900;
 	font-size: 1.35rem!important;
 }
-nav.navbar-dark a,nav.navbar-dark strong{
-	color: white!important;
+html[data-user-color-scheme=dark] nav#navbar a.navbar-brand strong :hover,
+html[data-user-color-scheme=dark] nav#navbar a.navbar-brand strong :focus {
+	color: #FF99D2;
 }
+nav#navbar.navbar-dark a,
+nav#navbar.navbar-dark strong{
+	transition: color 0.2s ease-in-out;
+	color: white;
+}
+nav#navbar a:hover,
+nav#navbar strong:hover{
+	transition: color 0.2s ease-in-out;
+	color: #FF99D2;
+}
+
 li.nav-item a.nav-link {
 	font-size: 1rem!important;
 }
