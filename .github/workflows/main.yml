@@ -31,16 +31,17 @@ jobs:
       
     - name: Deploy to Cloudflare Pages
       env:
-        GIT_NAME: EF
+        GIT_NAME: FA
         GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
-        REPO: github.com/akyuu-cn/evershifting-fountain
+        REPO: github.com/lingrottin/FarawayAsh
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
+        git config --global init.defaultBranch cf_web
         cd ./public && git init && git add -A
         git config --global user.name $GIT_NAME
         git config --global user.email $GIT_EMAIL
         git commit -m "Site deployed by GitHub Actions"
-        git push --force --quiet "https://$GH_TOKEN@$REPO" master:cf_web
+        git push --force --quiet "https://$GH_TOKEN@$REPO"
         
     - name: Deploy to server
       uses: easingthemes/ssh-deploy@v2.2.11
