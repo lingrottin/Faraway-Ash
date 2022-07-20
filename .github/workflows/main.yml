@@ -42,7 +42,7 @@ jobs:
       uses: easingthemes/ssh-deploy@v2.2.11
       env:
         SSH_PRIVATE_KEY: '${{ secrets.SSH_PRIV_KEY }}'
-        ARGS:'"-avz --delete --chown=nginx:nginx --rsync-path="sudo rsync"'
+        ARGS: '-avz --delete --chown=nginx:nginx --rsync-path="sudo rsync"'
         SOURCE: "public/"
         REMOTE_HOST: '${{ secrets.SERVER_IP }}'
         REMOTE_USER: 'root'
