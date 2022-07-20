@@ -77,7 +77,6 @@ Dear creator, if you do not want me to use your artworks, plz. contact me to rem
 剩余未在此列出的作品，若未在作品出现的页面内单独列出，则版权均归于我。
 
 ## 关于访问
-该网站采用了 Cloudflare Pages 和 Cloudflare CDN 加速，对大陆用户可能不友好。
-有条件建议搭配梯子访问。
-
-
+~~该网站采用了 Cloudflare Pages 和 Cloudflare CDN 加速，对大陆用户可能不友好。~~
+~~有条件建议搭配梯子访问。~~
+博客已经随 University of Fool 搬迁到了中国香港，但仍然保留在 Cloudflare Pages 上的[备用链接](https://lingrottin.pages.dev)
