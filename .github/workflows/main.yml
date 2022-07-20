@@ -1,0 +1,49 @@
+name: Hexo Deployment
+# Thanks ltfjx
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  hexo-deployment:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '16.15.1'
+
+    - name: Install dependencies & Generate static files
+      run: |
+        npm install --location=global hexo-cli
+        npm install
+        hexo clean
+        hexo generate
+        
+    - name: Deploy to Cloudflare Pages
+      uses: ad-m/github-push-action@master
+      with:
+        github-token: ${{ secrets.GH_TOKEN }}
+        branch: cf-web
+        force: true
+        directory: "public/"
+        repo: "lingrottin/FarawayAsh"
+        
+    - name: Deploy to server
+      uses: easingthemes/ssh-deploy@v2.2.11
+      env:
+        SSH_PRIVATE_KEY: '${{ secrets.SSH_PRIV_KEY }}'
+        ARGS:'"-avz --delete --chown=nginx:nginx --rsync-path="sudo rsync"'
+        SOURCE: "public/"
+        REMOTE_HOST: '${{ secrets.SERVER_IP }}'
+        REMOTE_USER: 'root'
+        TARGET: '/usr/local/openresty/nginx/fa/'
