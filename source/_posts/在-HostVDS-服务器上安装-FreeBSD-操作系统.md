@@ -43,9 +43,9 @@ excerpt: 通常的 KVM 服务器都可以满足需求，完全不需要导入镜
 先转到 [Tiny Core Linux 的官网](http://www.tinycorelinux.net)，下载 Core 版本即可。（不在国内的服务器，建议不要使用带 X 的版本，否则延迟会非常折磨人）
 
 将文件上传到服务器的用户目录下，用以下命令将镜像挂载到 `/mnt`：
-
+```bash
     mount -o loop ~/Core-current.iso /mnt
-    
+```
 
 用 `tree` 查看一下目录结构：
 
@@ -59,13 +59,13 @@ excerpt: 通常的 KVM 服务器都可以满足需求，完全不需要导入镜
 
 **`vmlinuz`** : 是 Linux 内核
 
-打开 `isolinux.cf`g，可以看见如下行：
-
+打开 `isolinux.cfg`，可以看见如下行：
+```syslinux
     label microcore
             kernel /boot/vmlinuz
             initrd /boot/core.gz
             append loglevel=3
-    
+```
 
 如此，我们就知道如何启动 Tiny Core Linux 了。然后将 `core.gz` 和 `vmlinuz` 放到/boot 下（最好新建一个目录）
 
@@ -78,18 +78,20 @@ excerpt: 通常的 KVM 服务器都可以满足需求，完全不需要导入镜
 进入 GRUB 界面后，先上下移动光标使倒计时解除，然后按 c 进入 GRUB 命令行。
 
 首先先确定 ROOT 是否是服务器硬盘（通常来说，是的）：
-
+```bash
     ls /boot
+```
     
 
 如果没有报错，那么请往下看。
 
 使用上面获得的 isolinux 启动流程启动 Tiny Core Linux：
-
+```grub
     ls /boot/tinycore # 确定 Tiny Core 文件位置
     linux /boot/tinycore/vmlinuz # 加载内核
     initrd /boot/tinycore/core.gz # 加载根文件系统
     boot # 启动
+```
     
 
 ![](/img/bsdinst/bsdinst-2.webp)
@@ -105,13 +107,15 @@ excerpt: 通常的 KVM 服务器都可以满足需求，完全不需要导入镜
 ## 写入 mfsBSD
 
 在进入以上系统后，我们就能拥有根分区的完全改写权了。由于过程需要访问网络，请先验证 ip 是否正确：
-
+```bash
     ifconfig || ip address
+```
     
 
 然后把 [mfsBSD](https://mfsbsd.vx.sk/) 写入硬盘（380MB）：
-
+```bash
     wget -O- --no-check-certificate https://mfsbsd.vx.sk/files/images/13/amd64/mfsbsd-se-13.1-RELEASE-amd64.img | dd bs=1M of=/dev/vda # 根据实际情况更改/dev/vda
+```
     
 
 **注意：你可以下载[标准版本](https://mfsbsd.vx.sk/files/images/13/amd64/mfsbsd-13.1-RELEASE-amd64.img)（98MB）以减少流量用量。**
@@ -185,19 +189,22 @@ excerpt: 通常的 KVM 服务器都可以满足需求，完全不需要导入镜
 ### 配置 ssh
 
 编辑 sshd 配置文件：
-
+```bash
     vim /etc/ssh/sshd_config
+```
     
 
 #### 重启 sshd
-
+```bash
     service sshd restart
+```
     
 
 #### 配置 sudo
-
+```bash
     pkg install sudo
     EDITOR=vim visudo #反注释"%wheel ALL=ALL(ALL) ALL"
+```
     
 
 最后别忘记在本地终端测试 ssh 设置。
