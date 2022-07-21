@@ -50,3 +50,10 @@ div#toc a.tocbot-link {
 	font-family: 'Red Hat Display',  'Noto Sans SC';
 	font-weight: 500;
 }
+div.category-collapse {
+	font-family: 'Red Hat Display',  'Noto Sans SC';
+	font-weight: normal;
+}
+div.category-collapse a.list-group-item.active {
+	font-weight: 700;
+}

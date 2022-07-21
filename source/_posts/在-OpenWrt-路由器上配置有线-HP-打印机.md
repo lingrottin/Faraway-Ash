@@ -1,6 +1,6 @@
 ---
 title: 在 OpenWrt 路由器上配置有线 HP 打印机
-date: 2022-07-09 13:51:08
+date: 2022-06-22 13:51:08
 tags: 
   - OpenWrt
   - HP
