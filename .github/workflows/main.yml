@@ -7,7 +7,7 @@ on:
 
 jobs:
   hexo-deployment:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     env:
       TZ: Asia/Shanghai
 
@@ -44,7 +44,7 @@ jobs:
         git push --force "https://$GH_TOKEN@$REPO" cf_web:cf_web
         
     - name: Deploy to server
-      uses: easingthemes/ssh-deploy@v2.2.11
+      uses: easingthemes/ssh-deploy@main
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIV_KEY }}
         ARGS: '-avz --delete --chown=www:www'
