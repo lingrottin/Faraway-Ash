@@ -1,5 +1,5 @@
 p pre,p code,code[class*="language-"], pre[class*="language-"] {
-	font-family: 'Cascadia Code', Consolas, 'Andale Mono', 'Ubuntu Mono',monospace!important;
+	font-family: 'Monaco', 'Cascadia Code', Consolas, 'Andale Mono', 'Ubuntu Mono',monospace!important;
 }
 div.code-widget {
 	font-family: 'Red Hat Display';

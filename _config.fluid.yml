@@ -50,7 +50,7 @@ code:
   highlight:
     enable: true
 
-    # 代码块是否显示行号
+   # 代码块是否显示行号
     # If true, the code block display line numbers
     line_number: true
 
@@ -227,7 +227,7 @@ color:
 # Font
 font:
   font_size: 18px
-  font_family: "'Noto Serif SC',Monaco"
+  font_family: "'Noto Serif SC',serif"
   letter_spacing: 0.02em
   code_font_size: 85%
 
@@ -355,7 +355,7 @@ navbar:
 
     # 模糊像素，只能为数字，数字越大模糊度越高
     # Number of blurred pixel. the larger the number, the higher the blur
-    px: 10
+    px: 20
 
     # 不透明度，数字越大透明度越低，注意透明过度可能看不清菜单字体
     # Ratio of opacity, 1.0 is completely opaque
@@ -370,7 +370,7 @@ navbar:
     - { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" }
     - { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
     - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
-    #- { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
+    - { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
 
 # 搜索功能，基于 hexo-generator-search 插件，若已安装其他搜索插件请关闭此功能，以避免生成多余的索引文件
 # Search feature, based on hexo-generator-search. If you have installed other search plugins, please disable this feature to avoid generating redundant index files
@@ -508,7 +508,7 @@ index:
 
     # 为空则按 hexo config.subtitle 显示
     # If empty, text based on `subtitle` in hexo config
-    text: "远方的灰烬似早已消失又似记忆残存"
+    text: "Enita will be gone to Faraway Ash"
 
     # 通过 API 接口作为首页副标题的内容，必须返回的是 JSON 格式，如果请求失败则按 text 字段显示，该功能必须先开启 typing 打字机功能
     # Subtitle of the homepage through the API, must be returned a JSON. If the request fails, it will be displayed in `text` value. This feature must first enable the typing animation
@@ -1025,6 +1025,30 @@ links:
   # 友链的成员项
   # Member item of page
   items:
+    - {
+      title: "University of Fool",
+      intro: "<em>我们的</em>愚笨大学",
+      link: "https://uof.edu.kg",
+      avatar: "/img/friendlink/uof.webp"
+    }
+    - {
+      title: "Evershifting Fountain",
+      link: "https://akyuu.cn",
+      intro: "热力图的博客",
+      avatar: "/img/friendlink/f.a.png"
+    }
+    - {
+      title: "UrsusFeline 的博客",
+      intro: "他最可爱了",
+      link: "https://blog.rosmontis.fun",
+      avatar: "https://cravatar.cn/avatar/8d7d29c3dd7cabfdd47daf62c57a6405?s=117&d=mm&r=g" # 因为他的站点还没有图标，就用头像代替
+    }
+    - {
+      title: "Fluid",
+      intro: "本博客主题的官方博客",
+      link: "https://hexo.fluid-dev.com/",
+      avatar: "/img/fluid.png"
+    }
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image

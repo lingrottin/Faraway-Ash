@@ -47,8 +47,9 @@ jobs:
       uses: easingthemes/ssh-deploy@v2.2.11
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIV_KEY }}
-        ARGS: '-avz --delete --chown=nginx:nginx --rsync-path="sudo rsync"'
+        ARGS: '-avz --delete --chown=www:www'
         SOURCE: "public/"
         REMOTE_HOST: ${{ secrets.SERVER_IP }}
-        REMOTE_USER: 'uofadmin'
-        TARGET: '/var/www/html_faraway_ash/'
+        REMOTE_PORT: ${{ secrets.SERVER_PORT }}
+        REMOTE_USER: ${{ secrets.SERVER_USER }}
+        TARGET: '/www/wwwroot/enita.cn/'
