@@ -24,10 +24,9 @@ jobs:
 
     - name: Install dependencies & Generate static files
       run: |
-        npm install --location=global hexo-cli
-        npm install
-        hexo clean
-        hexo generate
+        npx yarn
+        npx hexo clean
+        npx hexo generate
       
     - name: Deploy to Cloudflare Pages
       env:
@@ -47,9 +46,9 @@ jobs:
       uses: easingthemes/ssh-deploy@main
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIV_KEY }}
-        ARGS: '-avz -u --chown=www:www'
+        ARGS: '-avz -u --chown=nginx:nginx'
         SOURCE: "public/"
         REMOTE_HOST: ${{ secrets.SERVER_IP }}
         REMOTE_PORT: ${{ secrets.SERVER_PORT }}
         REMOTE_USER: ${{ secrets.SERVER_USER }}
-        TARGET: '/www/wwwroot/enita.cn/'
+        TARGET: '/var/www/'

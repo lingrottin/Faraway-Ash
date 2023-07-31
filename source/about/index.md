@@ -53,29 +53,29 @@ layout: about
 使用 Magicavoxel 制作像素风格图标的创意来自好友的博客 [Evershifting Fountain](https://akyuu.cn/post/22062001/) ，向他致谢。
 
 ## 关于配色
-喜欢粉色是我的优良传统哦。
+喜欢粉色是我的优良传统哦。  
 并且...这套色系看起来大方活泼和梦幻。
 
 ## 关于版权
-无特别声明，本站所有文章都按照[知识共享协议 署名-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-sa/4.0/)（CC BY-SA 4.0）对外界许可。
+无特别声明，本站所有文章都按照[知识共享协议 署名-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-sa/4.0/)（CC BY-SA 4.0）对外界许可。  
 本站部分文章被我本人搬运自/搬运至[University of Fool](https://uof.edu.kg/)，UOF采用[知识共享协议 署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/)（CC BY-NC-SA 4.0）对外界许可。使用者选择不同协议，需要注明来自不同网站。
 
 ## 关于 [University of Fool](https://uof.edu.kg/)
-这不是真正的大学，只是我和朋友们联手建立的博客站。
-该博客使用 WordPress 搭配一个地处俄罗斯的服务器，相对来说运营成本比我们的博客要高。
-“大学”的由来只是这个 .edu.kg 的域名，我们并不具备任何教育资质，请千万不要误会。
-我以后的文章会先发到 FA 上再选择性搬运到 UOF ，后者相对来说应该刊载更有价值的内容。
+这不是真正的大学，只是我和朋友们联手建立的博客站。  
+该博客使用 WordPress 搭配一个地处俄罗斯的服务器，相对来说运营成本比我们的博客要高。  
+“大学”的由来只是这个 .edu.kg 的域名，我们并不具备任何教育资质，请千万不要误会。  
+我以后的文章会先发到 FA 上再选择性搬运到 UOF ，后者相对来说应该刊载更有价值的内容。  
 UOF 采用[知识共享协议 署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/)（CC BY-NC-SA 4.0）对外界许可。
 
 ## 关于外部作品使用
-以下作品版权归作者所有。
+以下作品版权归作者所有。  
 The contents listed below is copyrighted by the authors of the contents.
 * 首页大图来自[Pixiv](https://www.pixiv.net/artworks/89991203)
 * 本页大图来自 [GNOME 默认壁纸](https://gitlab.gnome.org/GNOME/gnome-backgrounds/-/blob/main/backgrounds/blobs-d.svg)，以 GNU 公共许可协议 2.0 向外界授权
 * [404 页](/404)大图来自 [GNOME 默认壁纸](https://gitlab.gnome.org/GNOME/gnome-backgrounds/-/blob/main/backgrounds/drool-d.svg)，以 GNU 公共许可协议 2.0 向外界授权
 
-侵删。
-Dear creator, if you do not want me to use your artworks, plz. contact me to remove it.
+侵删。  
+Dear creator, if you do not want me to use your artworks, plz. contact me to remove it.  
 我的邮箱：<a href="mailto:ellistwooten8269@outlook.com">ellistwooten8269@outlook.com</a>
 <br>
 剩余未在此列出的作品，若未在作品出现的页面内单独列出，则版权均归于我。

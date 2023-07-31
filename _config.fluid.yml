@@ -57,7 +57,7 @@ code:
     # 实现高亮的库，对应下面的设置
     # Highlight library
     # Options: highlightjs | prismjs
-    lib: "prismjs"
+    lib: "highlightjs"
 
     highlightjs:
       # 在链接中挑选 style 填入
