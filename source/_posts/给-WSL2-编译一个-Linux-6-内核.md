@@ -117,3 +117,6 @@ uname -r
 ```
 ![uname -r 的输出](/img/wsl2-linux6/uname-r.webp)  
 享受你 WSL 上的 Linux 6 吧！
+
+## References
+- [如何让WSL2使用自己编译的内核](https://zhuanlan.zhihu.com/p/324530180)
