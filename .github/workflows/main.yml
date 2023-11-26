@@ -46,9 +46,9 @@ jobs:
       uses: easingthemes/ssh-deploy@main
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIV_KEY }}
-        ARGS: '-avz -u --chown=nginx:nginx'
+        ARGS: '-avz -u --chown=root:root'
         SOURCE: "public/"
         REMOTE_HOST: ${{ secrets.SERVER_IP }}
         REMOTE_PORT: ${{ secrets.SERVER_PORT }}
         REMOTE_USER: ${{ secrets.SERVER_USER }}
-        TARGET: '/var/www/'
+        TARGET: '/usr/share/nginx/html'
