@@ -9,6 +9,8 @@ tags:
   - 编译
 index_img: /img/wsl2-linux6/special.webp
 excerpt: 给 WSL2 手动编译一个 Linux 6 内核，凭借人类高质量编译过程，获得全新的 Linux 体验。
+categories:
+  - 星耀
 ---
 ![neofetch 输出](/img/wsl2-linux6/special.webp)
 ## 前言
