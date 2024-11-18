@@ -32,7 +32,7 @@ layout: about
 ## 关于朋友
 
 - 热力图 (RLt) : [<a href="https://akyuu.cn/">他的网站</a>]
-- ~~**最可爱的**~~ 尤尔苏斯 菲莱恩 (UrsusFeline) : ~~[<a href="https://lgy07.github.io">他的博客</a>]~~
+- ~~**最可爱的**~~ 尤尔苏斯 菲莱恩 (UrsusFeline) : ~~[<a href="https://lgy07.github.io">他的博客</a>]~~ （可能已经挂掉了）
 
 ## 关于本站分类
 
