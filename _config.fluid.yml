@@ -226,7 +226,7 @@ color:
 # 主题字体配置
 # Font
 font:
-  font_size: 18px
+  font_size: 19px # 比先前大 1px 因为低分屏上文字有点花
   font_family: "'Noto Serif SC',serif"
   letter_spacing: 0.02em
   code_font_size: 85%
