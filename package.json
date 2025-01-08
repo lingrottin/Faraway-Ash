@@ -23,7 +23,10 @@
     "hexo-renderer-stylus": "^3.0.0",
     "hexo-server": "^3.0.0",
     "hexo-theme-landscape": "^1.0.0",
+
+
     "jsdom": "^25.0.1",
+
     "typed.js": "^2.0.12"
   }
 }
