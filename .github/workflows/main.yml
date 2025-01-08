@@ -20,11 +20,11 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: '16.15.1'
+        node-version: '22.12.0'
 
     - name: Install dependencies & Generate static files
       run: |
-        npx yarn
+        npx pnpm install
         npx hexo clean
         npx hexo generate
       
