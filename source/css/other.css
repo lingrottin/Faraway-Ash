@@ -1,3 +1,9 @@
+html,
+body,
+.markdown-body {
+	font-weight: 500;
+}
+
 div.banner-text div.h2 span#subtitle,
 div.markdown-body h1,
 div.markdown-body h2,
@@ -7,28 +13,30 @@ div.markdown-body h5,
 div.markdown-body h6,
 div.index-card h1.index-header {
 	font-family: 'Red Hat Display', 'Noto Sans SC';
-    font-weight: 700;
+	font-weight: 700;
 	transition: color 0.2s ease-in-out;
 }
+
 div.banner-text div.h2 span#subtitle:hover,
-div.markdown-body h1:hover, 
+div.markdown-body h1:hover,
 div.markdown-body h2:hover,
 div.markdown-body h3:hover,
 div.markdown-body h4:hover,
 div.markdown-body h5:hover,
 div.markdown-body h6:hover,
 div.banner-text div.h2 span#subtitle:focus,
-div.markdown-body h1:focus, 
+div.markdown-body h1:focus,
 div.markdown-body h2:focus,
 div.markdown-body h3:focus,
 div.markdown-body h4:focus,
 div.markdown-body h5:focus,
 div.markdown-body h6:focus {
 	font-family: 'Red Hat Display', 'Noto Sans SC';
-	font-weight: 700; 
+	font-weight: 700;
 	transition: color 0.2s ease-in-out;
 	color: var(--link-hover-color);
 }
+
 li.about-category-name b:focus,
 li.about-category-name b:hover {
 	font-family: 'Noto Serif SC';
@@ -36,24 +44,29 @@ li.about-category-name b:hover {
 	transition: color 0.2s ease-in-out;
 	color: var(--link-hover-color);
 }
+
 li.about-category-name b,
-li.about-category-name b{
-        font-family: 'Noto Serif SC';
-        font-weight: 900;
-        transition: color 0.2s ease-in-out;
-        color: var(--post-text-color);
+li.about-category-name b {
+	font-family: 'Noto Serif SC';
+	font-weight: 900;
+	transition: color 0.2s ease-in-out;
+	color: var(--post-text-color);
 }
+
 p.about-category-saying {
-	color:var(--post-link-color);
+	color: var(--post-link-color);
 }
+
 div#toc a.tocbot-link {
-	font-family: 'Red Hat Display',  'Noto Sans SC';
+	font-family: 'Red Hat Display', 'Noto Sans SC';
 	font-weight: 500;
 }
+
 div.category-collapse {
-	font-family: 'Red Hat Display',  'Noto Sans SC';
+	font-family: 'Red Hat Display', 'Noto Sans SC';
 	font-weight: normal;
 }
+
 div.category-collapse a.list-group-item.active {
 	font-weight: 700;
 }

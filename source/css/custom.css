@@ -3,3 +3,4 @@
 @import url("/css/font.css");
 @import url("/css/navbar.css");
 @import url("/css/other.css");
+@import url("https://unpkg.com/@catppuccin/highlightjs/css/catppuccin-mocha.css");

@@ -1,10 +1,14 @@
-p pre,p code,code[class*="language-"], pre[class*="language-"] {
-	font-family: 'Monaco', 'Cascadia Code', Consolas, 'Andale Mono', 'Ubuntu Mono',monospace!important;
+p pre,
+p code,
+code.hljs {
+	font-family: 'Monaco', 'Cascadia Code', monospace !important;
 }
+
 div.code-widget {
 	font-family: 'Red Hat Display';
 	font-weight: 400;
 }
-html[data-user-color-scheme=dark] div.code-wrapper pre{
-	background-color: #222!important;
+
+html[data-user-color-scheme=dark] .highlight table {
+	background-color: #222222 !important;
 }
