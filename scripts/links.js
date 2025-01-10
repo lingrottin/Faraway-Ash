@@ -44,7 +44,7 @@ hexo.extend.filter.register("after_render:html", (html, locals) => {
   }`;
   const document = new JSDOM(html).window.document;
   const elements = document.getElementsByTagName("fa-link-item");
-  if (!elements) return;
+  if (!elements.length) return;
   Array.from(elements).forEach(element => makeLinkItem(element));
   document.head.innerHTML += `<style>${styles}</style>`;
   console.log("[FA] 处理了链接项！");
