@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@adobe/css-tools':
+        specifier: ^4.4.1
+        version: 4.4.1
       hexo:
         specifier: ^7.3.0
         version: 7.3.0(chokidar@3.6.0)
@@ -26,6 +29,9 @@ importers:
       hexo-generator-tag:
         specifier: ^2.0.0
         version: 2.0.0
+      hexo-pagination:
+        specifier: ^4.0.0
+        version: 4.0.0
       hexo-renderer-ejs:
         specifier: ^2.0.0
         version: 2.0.0
@@ -41,9 +47,18 @@ importers:
       hexo-theme-landscape:
         specifier: ^1.0.0
         version: 1.0.0
+      hexo-util:
+        specifier: ^3.3.0
+        version: 3.3.0
+      highlight.js:
+        specifier: ^11.11.1
+        version: 11.11.1
       jsdom:
         specifier: ^26.0.0
         version: 26.0.0
+      moment:
+        specifier: ^2.30.1
+        version: 2.30.1
       typed.js:
         specifier: ^2.1.0
         version: 2.1.0
@@ -52,6 +67,9 @@ packages:
 
   '@adobe/css-tools@4.3.3':
     resolution: {integrity: sha512-rE0Pygv0sEZ4vBWHlAgJLGDU7Pm8xoO6p3wsEceb7GYAjScrOHpEo8KK/eVkAcnSM+slAEtXjA2JpdjLp4fJQQ==}
+
+  '@adobe/css-tools@4.4.1':
+    resolution: {integrity: sha512-12WGKBQzjUAI4ayyF4IAtfw2QR/IDoqk6jTddXDhtYTJF9ASmoE1zst7cVtP0aL/F1jUJL5r+JxKXKEgHNbEUQ==}
 
   '@asamuzakjp/css-color@2.8.2':
     resolution: {integrity: sha512-RtWv9jFN2/bLExuZgFFZ0I3pWWeezAHGgrmjqGGWclATl1aDe3yhCUaI0Ilkp6OCk9zX7+FjvDasEX8Q9Rxc5w==}
@@ -469,6 +487,10 @@ packages:
   hexo-pagination@3.0.0:
     resolution: {integrity: sha512-8oo1iozloZo7TojPVYg4IxL3SJKCBdSJ908fTlIxIK7TWJIKdYnQlW31+12DBJ0NhVZA/lZisPObGF08wT8fKw==}
     engines: {node: '>=14'}
+
+  hexo-pagination@4.0.0:
+    resolution: {integrity: sha512-jNG6AX3EHzY3FRfdzB46tZ833CUX4WudZue3yv6kKaVCCWR61iwFL9LD6xQadvwHBuT1oHy444dJClWORG4sxg==}
+    engines: {node: '>=18'}
 
   hexo-renderer-ejs@2.0.0:
     resolution: {integrity: sha512-qCjE1IdwgDgv65qyb0KMVCwCdSVAkH0vwAe9XihjvaKWkmb9dtt8DgErOdqCXn0HReSyWiEVP2BrLRj3gyHwOQ==}
@@ -1047,6 +1069,8 @@ snapshots:
 
   '@adobe/css-tools@4.3.3': {}
 
+  '@adobe/css-tools@4.4.1': {}
+
   '@asamuzakjp/css-color@2.8.2':
     dependencies:
       '@csstools/css-calc': 2.1.1(@csstools/css-parser-algorithms@3.0.4(@csstools/css-tokenizer@3.0.3))(@csstools/css-tokenizer@3.0.3)
@@ -1457,6 +1481,8 @@ snapshots:
       picocolors: 1.1.1
 
   hexo-pagination@3.0.0: {}
+
+  hexo-pagination@4.0.0: {}
 
   hexo-renderer-ejs@2.0.0:
     dependencies:
