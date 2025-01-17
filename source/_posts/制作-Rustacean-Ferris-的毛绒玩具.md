@@ -23,7 +23,7 @@ Rust 的非官方吉祥物 Ferris 真的非！常！可！爱！！
 
 为了表达对它的爱（？），我甚至买下了 [ferris.love](https://ferris.love)，放了几张可爱的图片上去。
 
-某一天我在浏览网站的时候，大概是为 ferris.love 的搭建取材，在 [rustacean.net](https://rustacean.net) 上看到了 edunham 的 Ferris 毛绒玩偶制作教程。（[Plushie Rustacean Pattern](https://edunham.net/2016/04/11/plushie_rustacean_pattern.html)）
+某一天我在浏览网站的时候，大概是为 ferris.love 的搭建取材，在 [rustacean.net](https://rustacean.net) 上看到了 edunham 的 Ferris 毛绒玩偶制作教程。（《[Plushie Rustacean Pattern](https://edunham.net/2016/04/11/plushie_rustacean_pattern.html)》）
 
 于是十分心动。正好趁朋友的生日打算制作一个。
 
@@ -54,6 +54,7 @@ Rust 的非官方吉祥物 Ferris 真的非！常！可！爱！！
     - 如果你想绣上去的话，那么你需要准备：
       - 刺绣圈。
       - 白色和黑色的线。
+  - Ferris 图样。
 - Misc
   - 缝纫技术。
   - 如果你感兴趣的话，可以买一些气囊哨子。
@@ -65,7 +66,10 @@ Rust 的非官方吉祥物 Ferris 真的非！常！可！爱！！
 ## 步骤
 
 1. 采购材料。
-2. 学习缝纫技术。下面是我学习的视频，你也可以自己寻找其他的。
+2. 获取 Ferris 的图样。
+   ![图案](/img/plushieferris/ferris-pattern-color.webp)
+   这是原作者提供的图案。我根据这个图案制作了一个 PDF，矢量化并已经调整好尺寸，直接打印在 A4 纸上即可。[点此下载](/assets/plushie-ferris-pattern.pdf)。
+3. 学习缝纫技术。下面是我学习的视频，你也可以自己寻找其他的。
    {# <!-- markdownlint-disable-next-line MD033 --> #}
    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=456031984&bvid=BV1p5411W7ee&cid=204759192&p=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width: 100%; aspect-ratio: 16/9;"></iframe>
 
