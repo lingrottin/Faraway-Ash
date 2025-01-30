@@ -121,19 +121,19 @@ WIP
 
 ```javascript
 class Foo {
-  function will_be_tampered(){
+  will_be_tampered() {
     console.log(this);
   }
 
-  const wont_be_tampered=()=>{
+  wont_be_tampered = () => {
     console.log(this);
-  }
+  };
 
-  constructor(){}
+  constructor() {}
 }
 
-let foo=new Foo();
-let a={tampered:true};
+let foo = new Foo();
+let a = { tampered: true };
 
 foo.will_be_tampered.call(a); // {tampered: true}
 foo.wont_be_tampered.call(a); // Foo {wont_be_tampered: ƒ}
