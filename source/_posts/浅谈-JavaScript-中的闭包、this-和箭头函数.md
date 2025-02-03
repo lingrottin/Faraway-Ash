@@ -110,7 +110,7 @@ document.getElemenyById("some-element").onclick = foo.foo_func;
 
 原因在于，当 `foo.foo_func` 被赋值给 `onclick` 时，`this` 被篡改了。
 
-理论上，`foo_func` 该是个闭包。它应该携带了父作用域，尤其是这个 `a`。然而，在它作为值被传递给 `onclick` 时，它的 `this` 被篡改了，变成了 `document`。`document` 上显然没有 `a` 这个东西，所以返回了 `undefined`。
+理论上，`foo_func` 该是个闭包。它应该携带了父作用域，尤其是这个 `a`。然而，在它作为值被传递给 `onclick` 时，它的 `this` 被篡改了，变成了 `some-element`。`some-element` 上显然没有 `a` 这个东西，所以返回了 `undefined`。
 
 ## 箭头函数
 
