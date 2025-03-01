@@ -70,11 +70,15 @@ layout: about
 
 ## 关于图标
 
-这个图标是用 [Magicavoxel](https://www.voxelmade.com/magicavoxel/) 制作和渲染的。
+~~这个图标是用 [Magicavoxel](https://www.voxelmade.com/magicavoxel/) 制作和渲染的。~~
 
-图标左右的“FA”即是 Faraway Ash 。而顶面的黑红色图案我也不知道是什么。
+~~图标左右的“FA”即是 Faraway Ash 。而顶面的黑红色图案我也不知道是什么。~~
 
-使用 Magicavoxel 制作像素风格图标的创意来自好友的博客 [Evershifting Fountain](https://akyuu.cn/post/22062001/) ，向他致谢。
+~~使用 Magicavoxel 制作像素风格图标的创意来自好友的博客 [Evershifting Fountain](https://akyuu.cn/post/22062001/) ，向他致谢。~~
+
+现在的这个图标是我自己绘制的（）很好看吧（？）
+
+因为[自称一名小猫](https://uof.edu.kg/iamacat)啦，所以图标的主题元素是一只可爱的灰色的猫（）
 
 ## 关于配色
 
