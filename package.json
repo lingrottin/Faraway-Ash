@@ -27,7 +27,7 @@
     "hexo-theme-landscape": "^1.0.0",
     "hexo-util": "^3.3.0",
     "highlight.js": "^11.11.1",
-    "jsdom": "^26.0.0",
+    "jsdom": "^26.1.0",
     "moment": "^2.30.1",
     "typed.js": "^2.1.0"
   },
