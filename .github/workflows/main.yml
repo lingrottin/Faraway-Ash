@@ -51,4 +51,4 @@ jobs:
         REMOTE_HOST: ${{ secrets.SERVER_IP }}
         REMOTE_PORT: ${{ secrets.SERVER_PORT }}
         REMOTE_USER: ${{ secrets.SERVER_USER }}
-        TARGET: '/usr/share/nginx/html'
+        TARGET: '/usr/share/nginx/enita.cn.d'
