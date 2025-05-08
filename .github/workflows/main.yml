@@ -1,5 +1,5 @@
 name: Hexo Deployment
-# Thanks ltfjx
+# Thank ltfjx
 
 on:
   push:
@@ -7,20 +7,20 @@ on:
 
 jobs:
   hexo-deployment:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     env:
       TZ: Asia/Shanghai
 
     steps:
     - name: Checkout source
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         submodules: true
 
     - name: Setup Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
-        node-version: '22.12.0'
+        node-version: 'latest'
 
     - name: Install dependencies & Generate static files
       run: |
