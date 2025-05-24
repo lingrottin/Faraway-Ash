@@ -9,6 +9,6 @@ div.code-widget {
 	font-weight: 400;
 }
 
-html[data-user-color-scheme=dark] .highlight table {
-	background-color: #222222 !important;
+figure.highlight>table>tbody>tr :is(td, pre, code) {
+	background-color:rgb(48,48,48)!important;
 }

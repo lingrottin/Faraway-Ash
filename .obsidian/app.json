@@ -1,0 +1,13 @@
+{
+  "userIgnoreFilters": [
+    "scaffolds/",
+    "scripts/",
+    "node_modules",
+    "themes/"
+  ],
+  "newFileLocation": "folder",
+  "newFileFolderPath": "source/_posts",
+  "useMarkdownLinks": true,
+  "newLinkFormat": "relative",
+  "attachmentFolderPath": "source/img"
+}

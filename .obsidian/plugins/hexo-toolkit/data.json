@@ -1,0 +1,11 @@
+{
+  "hexoFrontMatterProperties": "title,date,updated,tags,categories",
+  "hexoRendererType": "HexoRendererMarked",
+  "imageServiceConfigs": [
+    {
+      "type": "Local",
+      "name": "Local",
+      "filePath": "/source/img"
+    }
+  ]
+}
