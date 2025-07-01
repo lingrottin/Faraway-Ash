@@ -5,10 +5,9 @@ code.hljs {
 }
 
 div.code-widget {
-	font-family: 'Red Hat Display';
 	font-weight: 400;
 }
 
 figure.highlight>table>tbody>tr :is(td, pre, code) {
-	background-color:rgb(48,48,48)!important;
+	background-color: rgb(48, 48, 48) !important;
 }

@@ -1,2 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&family=Noto+Serif+SC&family=Red+Hat+Display&display=swap');
-@import url('/css/cascadia-code.css');
+@font-face {
+  font-family: "Cascadia Code";
+  src: url("/css/fonts/CascadiaCode.woff2");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cascadia Code";
+  src: url("/css/fonts/CascadiaCodeItalic.woff2");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "OPPO Sans 4.0";
+  src: url("/css/fonts/OPPOSans4.0.woff2");
+  font-style: normal;
+}

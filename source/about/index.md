@@ -111,12 +111,13 @@ The contents listed below is copyrighted by the authors of the contents.
 - 首页大图来自[Pixiv](https://www.pixiv.net/artworks/89991203)
 - 本页大图来自 [GNOME 默认壁纸](https://gitlab.gnome.org/GNOME/gnome-backgrounds/-/blob/main/backgrounds/blobs-d.svg)，以 GNU 公共许可协议 2.0 向外界授权
 - [404 页](/404)大图来自 [GNOME 默认壁纸](https://gitlab.gnome.org/GNOME/gnome-backgrounds/-/blob/main/backgrounds/drool-d.svg)，以 GNU 公共许可协议 2.0 向外界授权
+- 网站字体是 [OPPO Sans 4.0](https://www.coloros.com/article/A00000074/)，版权归 OPPO 所有，遵循 *[OPPO Sans Fonts License Agreement](/assets/OPPO%20Sans%204.0%20License%20Notice.txt)* 向外界授权。
 
 侵删。
 
 Dear creator, if you do not want me to use your artworks, plz. contact me to remove it.
 
-我的邮箱：[llistwooten8269@outlook.com](mailto:ellistwooten8269@outlook.com)
+我的邮箱：[enitanureya@outlook.com](mailto:enitanureya@outlook.com)
 
 剩余未在此列出的作品，若未在作品出现的页面内单独列出，则版权均归于我。
 

@@ -1,7 +1,11 @@
+:root,
 html,
 body,
 .markdown-body {
 	font-weight: 500;
+	font-family: "OPPO Sans 4.0", sans-serif;
+	font-feature-settings: 'liga' 1, 'calt' 1;
+
 }
 
 div.banner-text div.h2 span#subtitle,
@@ -12,7 +16,6 @@ div.markdown-body h4,
 div.markdown-body h5,
 div.markdown-body h6,
 div.index-card h1.index-header {
-	font-family: 'Red Hat Display', 'Noto Sans SC';
 	font-weight: 700;
 	transition: color 0.2s ease-in-out;
 }
@@ -31,7 +34,6 @@ div.markdown-body h3:focus,
 div.markdown-body h4:focus,
 div.markdown-body h5:focus,
 div.markdown-body h6:focus {
-	font-family: 'Red Hat Display', 'Noto Sans SC';
 	font-weight: 700;
 	transition: color 0.2s ease-in-out;
 	color: var(--link-hover-color);
@@ -39,7 +41,6 @@ div.markdown-body h6:focus {
 
 li.about-category-name b:focus,
 li.about-category-name b:hover {
-	font-family: 'Noto Serif SC';
 	font-weight: 900;
 	transition: color 0.2s ease-in-out;
 	color: var(--link-hover-color);
@@ -47,7 +48,6 @@ li.about-category-name b:hover {
 
 li.about-category-name b,
 li.about-category-name b {
-	font-family: 'Noto Serif SC';
 	font-weight: 900;
 	transition: color 0.2s ease-in-out;
 	color: var(--post-text-color);
@@ -58,12 +58,10 @@ p.about-category-saying {
 }
 
 div#toc a.tocbot-link {
-	font-family: 'Red Hat Display', 'Noto Sans SC';
 	font-weight: 500;
 }
 
 div.category-collapse {
-	font-family: 'Red Hat Display', 'Noto Sans SC';
 	font-weight: normal;
 }
 
