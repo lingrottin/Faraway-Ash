@@ -4,16 +4,13 @@ date: 2022-07-10 13:21:35
 layout: about
 ---
 
-# Faraway Ash
-
 这里是 Enita Nureya 的私人博客，欢迎！
 
-## 我的~~亮点~~
+## 我的介绍
 
-- 在超残暴学校忙于准备 CEE 的苦逼高三牲（
-- Rust 狂热爱好者 ~~（Ferris 厨~~
+- 上海交通大学 2025 级本科新生（船舶海洋与建筑工程学院）
+- Rust 狂热爱好者 ~~（Ferris 厨）~~
 - 超菜鸟开发者
-- New-beginner Christian & Spiritual (Non-practical) MTF
 - ~~很可爱~~
 - [有两个比我可爱的朋友](#关于朋友)
 
@@ -24,7 +21,6 @@ layout: about
 - C# · Rust · TypeScript
 - 服务器运营与维护
 - 汉语 · 英语 · 俄语（仅认读） · 谚文（仅认读）
-- 语文 · 数学 · 英语 · 物理 · 化学 · 生物
 - Theology（超新手入门）
 - 语言学（入门）
 - ~~节奏游戏游玩学~~（资深新手）
@@ -68,7 +64,19 @@ layout: about
 
 网站首页的字符是和 Enita 听起来很像人名有关：“埃妮塔将消逝在远方灰烬当中”。而且听起来也很有诗意。
 
-## 关于图标
+## 关于本站外观
+
+### 网页布局和字体
+
+主题是 [Fluid](https://github.com/fluid-dev/hexo-theme-fluid)，不过是[我的改版](https://github.com/lingrottin/hexo-theme-fluid)。部分页面上的东西（如[友情链接](/links)）是我自己写的。
+
+字体是 [OPPO Sans 4.0](https://www.coloros.com/article/A00000074/)，因为它很优雅美观，有一点 SF 的风格（？）。
+
+*btw. 本站本来是使用衬线字体如 Noto Serif 的，但是后来发现在低分屏上衬线字体确实会晃眼睛。*
+
+点击查看[字体的使用协议](/assets/OPPO%20Sans%204.0%20License%20Notice.txt)。
+
+### 图标
 
 ~~这个图标是用 [Magicavoxel](https://www.voxelmade.com/magicavoxel/) 制作和渲染的。~~
 
@@ -82,22 +90,23 @@ layout: about
 
 ## 关于配色
 
-喜欢粉色是我的优良传统哦。  
+喜欢粉色是我的优良传统哦。
+
 并且...这套色系看起来大方活泼和梦幻。
 
 ## 关于版权
 
 无特别声明，本站所有文章都按照[知识共享协议 署名-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-sa/4.0/)（CC BY-SA 4.0）对外界许可。
 
-本站部分文章被我本人搬运自/搬运至[University of Fool](https://uof.edu.kg/)，UOF 采用[知识共享协议 署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/)（CC BY-NC-SA 4.0）对外界许可。
+本站部分文章被我本人搬运自/搬运至[University of Fool](https://uof.edu.kg/)。
 
 ## 关于 [University of Fool](https://uof.edu.kg/)
 
-这不是真正的大学，只是我和朋友们联手建立的博客站。（现在几乎只有我自己了）
-
-将来可能会以 UOF 的名义做一些项目吧。至少不是我个人临近 CEE 的现在（）
+这不是真正的大学，只是我和朋友们联手建立的博客站。
 
 “大学”的由来只是这个 .edu.kg 的域名，我们并不具备任何教育资质，请千万不要误会。
+
+UOF 成员会以 UOF 的名义产出一些优秀的开源软件，如 [Spectra 短链接软件](https://github.com/University-Of-Fool/Spectra)等，欢迎前来围观和支持（
 
 我，Enita，作为 UOF 的校长，如是说。（
 
@@ -134,3 +143,9 @@ Dear creator, if you do not want me to use your artworks, plz. contact me to rem
 网站目前在我个人位于美国的一台 VPS 上，网络条件应该是比较优越的（）。服务器仍然由[雨云](https://www.rainyun.com/)提供，感谢（？
 
 网站统计和评论服务是在 2024/11/4 配置的，基于 [LeanCloud 国际版](https://leancloud.app/)。信息统计遵循浏览器的 DNT (Do Not Track) 请求，请放心。
+
+## 结束
+
+感谢阅读，同时欢迎和我交朋友！
+
+（我的联系方式在页面顶部的头像下方）

@@ -985,8 +985,8 @@ about:
   icons:
     - { class: "iconfont icon-github-fill", link: "https://github.com/lingrottin", tip: "GitHub" }
     - { class: "iconfont icon-telegram-fill", link: "https://t.me/lingrottin", tip: "Telegram" }
-    - { class: "iconfont icon-twitter-fill", link: "https://x.com/EnitaNureya", tip: "X" }
-    - { class: "iconfont icon-qq-fill", qrcode: "/img/special/qq_qrcode.webp" }
+    - { class: "iconfont icon-twitter-fill", link: "https://x.com/enita8601", tip: "X" }
+    - { class: "iconfont icon-qq-fill", link: "https://im.qq.com/", qrcode: "/img/special/qq_qrcode.webp" }
 
 
 #---------------------------
