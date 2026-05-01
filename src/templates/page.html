@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}{{page.title | default(value="Untitled")}} - {{config.title}}{%endblock title%}
+{% block content %} {% if config.extra.banner_img %}
+<div class="">
+    <style>
+        #banner-img {
+            background-image: url("{{ config.extra.banner_img | replace(from="$BASE_URL", to=config.base_url) |safe}}");
+            background-size: cover;
+            background-position: center;
+        }
+        #banner-img:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse 200% 100% at top,
+                transparent,
+                transparent 85%,
+                var(--background)
+            );
+        }
+    </style>
+    <div
+        id="banner-img"
+        class="h-[60dvh] w-screen relative overflow-hidden flex justify-center items-center"
+    >
+        <div class="flex flex-col items-start not-md:*:mx-4">
+            <div
+                class="font-bold text-3xl backdrop-blur-lg bg-background/50 py-3 px-5 not-md:px-3"
+            >
+                {{page.title | default(value="No Title")}}
+            </div>
+            <div
+                class="flex flex-row items-center not-md:items-start font-semibold text-lg mt-5 backdrop-blur-lg bg-background/50 my-1 px-3"
+            >
+                <i data-lucide="calendar" class="size-5 mr-2 -mt-0.5 not-md:mt-1"></i>
+                <div>创建日期 {{page.date}}</div>
+                <div class="border-l border-foreground mx-2 self-stretch"></div>
+                <i data-lucide="clock" class="size-5 mr-2 -mt-0.5 not-md:mt-1"></i>
+                <div>阅读时间 {{page.reading_time}}min</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div
+    class="{%if not config.extra.banner_img %}mt-19 {%else%}mt-4 {%endif%}container mx-auto flex flex-col not-md:px-4"
+>
+    {% if page.description %}
+    <div class="p-4 mb-4 rounded-lg border bg-muted/20">
+        <div class="text-xl font-bold mb-4 text-foreground">文章简介</div>
+        <div class="text-muted-foreground">{{page.description}}</div>
+    </div>
+    {%endif%}
+    {% if page.toc %}
+    <div class="toc mb-4 py-4 border-border border rounded-lg bg-muted/20">
+        <div class="text-xl px-4 font-semibold text-foreground pb-2 mb-2 border-b border-border">Table of Contents</div>
+        <ul class="text-lg text-muted-foreground mx-4">
+        {% for h1 in page.toc %}
+            <li>
+                <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+                {% if h1.children %}
+                    <ul>
+                        {% for h2 in h1.children %}
+                            <li>
+                                <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <div class="content">{{-page.content | safe-}}</div>
+    {% if page.taxonomies.tags %}
+    <div class="border-border border-b my-4"></div>
+        <div class="font-mono [&_a]:hover:underline">
+            <span class="font-bold font-sans">Tags:</span>
+            {% for tag in page.taxonomies.tags %}
+                <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">#{{ tag }}</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div
+        class="flex flex-col md:flex-row *:flex-1 *:p-4 rounded-lg border bg-muted/70 mt-4"
+    >
+        <div class="text-xl not-md:border-b md:border-r border-border">
+            <span class="font-bold italic"
+                >{{page.title | default(value="No Title")}}</span
+            >
+            by
+            <span>
+                {%- if not page.authors | length == 0 -%} {{-page.authors |
+                join(sep=", ")-}} {%-else-%} {{-config.author-}} {%-endif-%}
+            </span>
+        </div>
+        <div class="text-lg not-md:border-b md:border-r border-border md:text-center">
+            本文以 Creative Commons {{config.extra.creative_commons |
+            join(sep="-")}} 4.0 协议公开发布并授权。
+        </div>
+        <div
+            class="text-lg not-md:underline md:text-end not-md:bg-muted hover:bg-muted md:rounded-r-lg not-md:rounded-b-lg transition-colors duration-200 hover:underline cursor-pointer"
+            data-share-link="{{page.permalink | safe}}"
+            id="share_this_page"
+        >
+            分享此页面
+        </div>
+    </div>
+    <a
+        href="/"
+        class="mt-6 text-muted-foreground hover:underline hover:text-foreground flex flex-row items-center"
+    >
+        <i data-lucide="arrow-left" class="mr-2"></i>
+        <div>回到主页</div>
+    </a>
+</div>
+{%endblock%}

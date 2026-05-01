@@ -1,0 +1,123 @@
+.content {
+    @apply flex flex-col items-stretch md:text-lg gap-4 text-soft-foreground;
+    text-autospace: normal;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-semibold mt-4 relative text-foreground;
+
+        .heading-anchor {
+            @apply inline-block size-5 ml-2 opacity-0 transition-all duration-200 ease-out cursor-pointer text-muted-foreground align-middle hover:text-strong-accent;
+        }
+
+        &:hover .heading-anchor,
+        .heading-anchor:focus-visible {
+            @apply opacity-100;
+        }
+    }
+    h1,
+    h2,
+    h3 {
+        @apply border-border border-b pb-2;
+    }
+    h1 {
+        @apply text-3xl;
+    }
+    h2 {
+        @apply text-2xl;
+    }
+    h3 {
+        @apply text-xl;
+    }
+    pre {
+        @apply p-4 rounded-lg overflow-x-auto;
+        background-color: light-dark(#f8f8f8, #1e1e1e) !important;
+        code {
+            @apply bg-transparent px-0 border-0;
+        }
+    }
+
+    code {
+        @apply font-mono bg-muted/70 px-2 rounded-sm border;
+    }
+    ul {
+        list-style-type: disc;
+    }
+    ol {
+        list-style-type: decimal;
+    }
+    ul,
+    ol {
+        @apply my-2;
+        list-style-position: outside;
+        padding-inline-start: 1em;
+    }
+    table {
+        thead {
+            @apply border-t-2 bg-muted;
+        }
+        tr {
+            @apply border-b-2;
+        }
+        th,
+        td {
+            @apply py-2 px-4 border-x-2 border-border;
+        }
+        tr:nth-child(even) {
+            @apply bg-muted/50;
+        }
+    }
+    a {
+        @apply underline text-foreground hover:text-strong-accent;
+    }
+
+    blockquote {
+        @apply py-4 pl-8 pr-4 rounded-lg;
+        background-image: linear-gradient(
+            to right,
+            var(--muted),
+            var(--muted) 14px,
+            color-mix(in oklab, var(--muted), transparent 50%) 14px
+        );
+    }
+
+    img {
+        @apply rounded-lg;
+    }
+
+    .footnote-definition {
+        sup::before {
+            content: "脚注";
+        }
+        * {
+            @apply inline;
+        }
+    }
+
+    .footnote-definition:first-of-type::before {
+        content: "脚注";
+        @apply block pb-2 my-4 border-border border-b text-xl font-semibold;
+    }
+}
+
+.toc {
+    a {
+        @apply hover:underline hover:text-foreground;
+    }
+
+    & > ul {
+        list-style-type: decimal;
+    }
+
+    & > ul ul {
+        list-style-type: lower-roman;
+    }
+
+    ul {
+        padding-inline-start: 2em;
+    }
+}

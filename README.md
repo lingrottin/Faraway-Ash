@@ -2,9 +2,13 @@
 
 我的个人博客“[遥尘](https://enita.cn)”的源文件。
 
+## Builder
+
+使用 [Zola](https://getzola.org) 倾情构建。
+
 ## Theme
 
-主题是[Fluid](https://github.com/fluid-dev/hexo-theme-fluid)，但是是[我的魔改版本](https://github.com/lingrottin/hexo-theme-fluid-ling)。
+[模板](./src/templates)全是我自己写的，95% AI-free。
 
 ## License
 

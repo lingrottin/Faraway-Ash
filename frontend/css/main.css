@@ -1,0 +1,138 @@
+@import "tailwindcss";
+@source "../src/";
+@source "../../src/templates/";
+
+@import "./content.css";
+@import "../../node_modules/overlayscrollbars/styles/overlayscrollbars.css";
+
+@font-face {
+    font-family: "Adwaita Sans";
+    src:
+        local("Adwaita Sans"),
+        url("/fonts/AdwaitaSans-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Adwaita Sans";
+    src: url("/fonts/AdwaitaSans-Italic.ttf") format("truetype");
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Adwaita Mono";
+    src:
+        local("Adwaita Mono"),
+        url("/fonts/AdwaitaMono-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Adwaita Mono";
+    src:
+        local("Adwaita Mono"),
+        url("/fonts/AdwaitaMono-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Adwaita Mono";
+    src: url("/fonts/AdwaitaMono-Italic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: "Adwaita Mono";
+    src: url("/fonts/AdwaitaMono-BoldItalic.ttf") format("truetype");
+    font-weight: 700;
+    font-style: italic;
+}
+
+@theme {
+    --font-sans:
+        "Adwaita Sans", "Inter", "Noto Sans SC", "Noto Sans CJK SC",
+        "Microsoft YaHei UI", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+    --font-mono:
+        "Adwaita Mono", "Iosevka", "Monaco", "Cascadia Mono", "Zed Mono",
+        "JetBrains Mono", "Fira Code", "Hack", "Consolas", monospace;
+}
+
+:root {
+    @apply font-sans overflow-x-hidden scroll-pt-30 scroll-smooth;
+    --strong-accent: #ff5c8d;
+}
+@layer base {
+    a,
+    button,
+    input,
+    textarea,
+    select,
+    [role="button"],
+    [role="link"] {
+        @apply transition-colors duration-200 ease-out;
+    }
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-border: var(--border);
+    --color-ring: var(--ring);
+    --color-strong-accent: var(--strong-accent);
+    --color-soft-foreground: var(--soft-foreground);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+}
+
+:root {
+    --radius: 0.625rem;
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --border: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --soft-foreground: rgb(31, 35, 40);
+}
+
+.dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --border: oklch(1 0 0 / 10%);
+    --ring: oklch(0.556 0 0);
+    --soft-foreground: rgb(209, 215, 224);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* OverlayScrollbars Custom Theme */
+.os-theme-custom {
+    --os-size: 8px;
+    --os-padding-perpendicular: 0px;
+    --os-padding-axis: 0px;
+    --os-track-border-radius: 0px;
+    --os-handle-interactive-area-offset: 0px;
+    --os-handle-border-radius: 4px;
+    --os-handle-bg: var(--muted-foreground);
+    --os-handle-bg-hover: var(--muted-foreground);
+    --os-handle-bg-active: var(--strong-accent);
+    --os-track-bg: transparent;
+    --os-track-bg-hover: transparent;
+    --os-track-bg-active: transparent;
+    --os-handle-max-size: 100%;
+}

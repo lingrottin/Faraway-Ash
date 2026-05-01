@@ -1,54 +1,62 @@
-name: Hexo Deployment
+name: Zola Deployment
 # Thank ltfjx
 
 on:
-  push:
-    branches: [main]
+    push:
+        branches: [main]
 
 jobs:
-  hexo-deployment:
-    runs-on: ubuntu-latest
-    env:
-      TZ: Asia/Shanghai
+    zola-deployment:
+        runs-on: ubuntu-latest
+        env:
+            TZ: Asia/Shanghai
 
-    steps:
-    - name: Checkout source
-      uses: actions/checkout@v4
-      with:
-        submodules: true
+        steps:
+            - name: Checkout source
+              uses: actions/checkout@v4
+              with:
+                  submodules: true
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 'latest'
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "latest"
 
-    - name: Install dependencies & Generate static files
-      run: |
-        npx pnpm install
-        npx hexo clean
-        npx hexo generate
-      
-    - name: Deploy to Cloudflare Pages
-      env:
-        GIT_NAME: FA
-        GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
-        REPO: github.com/lingrottin/FarawayAsh.git
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: |
-        git config --global init.defaultBranch cf_web
-        cd ./public && git init && git add -A
-        git config --global user.name $GIT_NAME
-        git config --global user.email $GIT_EMAIL
-        git commit -m "Site deployed by GitHub Actions"
-        git push --force "https://$GH_TOKEN@$REPO" cf_web:cf_web
-        
-    - name: Deploy to server
-      uses: easingthemes/ssh-deploy@main
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIV_KEY }}
-        ARGS: '-avz -u --chown=root:root'
-        SOURCE: "public/"
-        REMOTE_HOST: ${{ secrets.SERVER_IP }}
-        REMOTE_PORT: ${{ secrets.SERVER_PORT }}
-        REMOTE_USER: ${{ secrets.SERVER_USER }}
-        TARGET: '/usr/share/nginx/enita.cn.d'
+            - name: Install frontend dependencies & Build
+              run: |
+                  npx pnpm install
+                  npx pnpm frontend-build
+
+            - name: Install Zola
+              uses: taiki-e/install-action@v2
+              with:
+                  tool: zola
+
+            - name: Generate static files
+              run: |
+                  zola -r src/ build
+
+            - name: Deploy to Cloudflare Pages
+              env:
+                  GIT_NAME: FA
+                  GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+                  REPO: github.com/lingrottin/FarawayAsh.git
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+              run: |
+                  git config --global init.defaultBranch cf_web
+                  cd ./src/public && git init && git add -A
+                  git config --global user.name $GIT_NAME
+                  git config --global user.email $GIT_EMAIL
+                  git commit -m "Site deployed by GitHub Actions"
+                  git push --force "https://$GH_TOKEN@$REPO" cf_web:cf_web
+
+            - name: Deploy to server
+              uses: easingthemes/ssh-deploy@main
+              env:
+                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIV_KEY }}
+                  ARGS: "-avz -u --chown=root:root"
+                  SOURCE: "src/public/"
+                  REMOTE_HOST: ${{ secrets.SERVER_IP }}
+                  REMOTE_PORT: ${{ secrets.SERVER_PORT }}
+                  REMOTE_USER: ${{ secrets.SERVER_USER }}
+                  TARGET: "/usr/share/nginx/enita.cn.d"

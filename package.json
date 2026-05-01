@@ -1,35 +1,28 @@
 {
-  "name": "hexo-site",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "build": "hexo generate",
-    "clean": "hexo clean",
-    "deploy": "hexo deploy",
-    "server": "hexo server"
-  },
-  "hexo": {
-    "version": "7.3.0"
-  },
-  "dependencies": {
-    "@adobe/css-tools": "^4.4.2",
-    "hexo": "^7.3.0",
-    "hexo-generator-archive": "^2.0.0",
-    "hexo-generator-category": "^2.0.0",
-    "hexo-generator-index": "^4.0.0",
-    "hexo-generator-sitemap": "^3.0.1",
-    "hexo-generator-tag": "^2.0.0",
-    "hexo-pagination": "^4.0.0",
-    "hexo-renderer-ejs": "^2.0.0",
-    "hexo-renderer-marked": "^7.0.0",
-    "hexo-renderer-stylus": "^3.0.1",
-    "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^1.0.0",
-    "hexo-util": "^4.0.0",
-    "highlight.js": "^11.11.1",
-    "jsdom": "^26.1.0",
-    "moment": "^2.30.1",
-    "typed.js": "^2.1.0"
-  },
-  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
+    "name": "faraway-ash",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "tmux new -s frontend -d 'pnpm rolldown -c -w' && tmux split-window -h 'pnpm tailwindcss -i frontend/css/main.css -o src/static/app.css --watch' && tmux attach-session -t frontend",
+        "frontend-build": "tailwindcss -i frontend/css/main.css -o src/static/app.css && rolldown -c"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "packageManager": "pnpm@10.27.0",
+    "devDependencies": {
+        "@tailwindcss/cli": "^4.2.4",
+        "rolldown": "1.0.0-rc.18",
+        "tailwindcss": "^4.2.4",
+        "typescript": "^6.0.3"
+    },
+    "type": "module",
+    "dependencies": {
+        "clsx": "^2.1.1",
+        "flexsearch": "^0.8.212",
+        "lucide": "^1.14.0",
+        "overlayscrollbars": "^2.15.1",
+        "tailwind-merge": "^3.5.0"
+    }
 }

@@ -1,0 +1,32 @@
+# The URL the site will be built for
+base_url = "https://enita.cn"
+compile_sass = false
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = true
+title="Faraway Ash"
+generate_feeds=true
+taxonomies = [
+    {name = "categories", feed = true, paginate_by=5},
+    {name = "tags", feed = true,paginate_by=5},
+]
+author="Enita Nureya"
+default_language="zh"
+
+[markdown]
+[markdown.highlighting]
+light_theme = "catppuccin-latte"
+dark_theme = "catppuccin-mocha"
+
+[search]
+index_format = "fuse_json"
+
+[extra]
+# Put all your custom variables here
+# Menu items
+menu = [
+    {url = "$BASE_URL", name = "主页"},
+    {url = "$BASE_URL/categories", name = "分类"},
+    {url = "$BASE_URL/about", name = "关于"},
+]
+banner_img = "$BASE_URL/imgs/banner.webp"
+creative_commons = ["BY"]
