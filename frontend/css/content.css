@@ -1,5 +1,5 @@
 .content {
-    @apply flex flex-col items-stretch md:text-lg gap-4 text-soft-foreground;
+    @apply flex flex-col items-stretch gap-4 text-soft-foreground;
     text-autospace: normal;
 
     h1,
@@ -25,13 +25,13 @@
         @apply border-border border-b pb-2;
     }
     h1 {
-        @apply text-3xl;
-    }
-    h2 {
         @apply text-2xl;
     }
-    h3 {
+    h2 {
         @apply text-xl;
+    }
+    h3 {
+        @apply text-lg;
     }
     pre {
         @apply p-4 rounded-lg overflow-x-auto;
@@ -89,9 +89,14 @@
         @apply rounded-lg;
     }
 
+    sup.footnote-reference {
+        a::before {
+            content: "注";
+        }
+    }
     .footnote-definition {
         sup::before {
-            content: "脚注";
+            content: "注";
         }
         * {
             @apply inline;

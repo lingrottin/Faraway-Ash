@@ -5,6 +5,12 @@
 @import "./content.css";
 @import "../../node_modules/overlayscrollbars/styles/overlayscrollbars.css";
 
+.search-result-item {
+    .search-match {
+        @apply text-strong-accent;
+    }
+}
+
 @font-face {
     font-family: "Adwaita Sans";
     src:

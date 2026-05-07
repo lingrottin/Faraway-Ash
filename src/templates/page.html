@@ -58,7 +58,7 @@
     {% if page.toc %}
     <div class="toc mb-4 py-4 border-border border rounded-lg bg-muted/20">
         <div class="text-xl px-4 font-semibold text-foreground pb-2 mb-2 border-b border-border">Table of Contents</div>
-        <ul class="text-lg text-muted-foreground mx-4">
+        <ul class="text-muted-foreground mx-4">
         {% for h1 in page.toc %}
             <li>
                 <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
