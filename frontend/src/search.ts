@@ -86,7 +86,12 @@ function search(query: string): SearchItem[] {
     let body = "";
     let b_offset = 0;
     const b_replacer = (match: string, offset: number, str: string): string => {
-      body += str.substring(b_offset, offset);
+      if (b_offset === 0) {
+        if (offset - 10 > 0) body += "...";
+        body += str.substring(Math.max(offset - 10, 0), offset);
+      } else {
+        body += str.substring(b_offset, offset);
+      }
       body += `<span class="search-match">`;
       body += match;
       b_offset = offset + match.length;
