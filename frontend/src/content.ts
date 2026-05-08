@@ -71,3 +71,11 @@ function injectHeadingAnchors() {
 }
 
 document.addEventListener("DOMContentLoaded", injectHeadingAnchors);
+
+const page_type = document.getElementById("page-type") as
+  | HTMLScriptElement
+  | undefined;
+if (page_type && JSON.parse(page_type?.innerText).page_type === "content") {
+  const { default: GLightbox } = await import("glightbox");
+  GLightbox({ selector: ".content img" });
+}

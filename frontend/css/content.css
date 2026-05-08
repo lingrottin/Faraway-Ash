@@ -137,7 +137,7 @@
   }
 
   img {
-    @apply rounded-lg max-w-3/5 max-h-[40dvh] my-2 mx-auto;
+    @apply rounded-lg max-w-3/5 max-h-[40dvh] my-2 mx-auto cursor-pointer;
   }
 
   sup.footnote-reference {
@@ -175,5 +175,14 @@
 
   ul {
     padding-inline-start: 2em;
+  }
+}
+
+#glightbox-body {
+  .gdesc-inner {
+    @apply bg-background;
+    & * {
+      @apply text-foreground;
+    }
   }
 }

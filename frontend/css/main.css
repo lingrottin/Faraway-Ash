@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./content.css";
 @import "../../node_modules/overlayscrollbars/styles/overlayscrollbars.css";
+@import "../../node_modules/glightbox/dist/css/glightbox.css";
 @source "../src/";
 @source "../../src/templates/";
 

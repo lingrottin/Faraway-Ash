@@ -22,6 +22,7 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "core-js": "^3.49.0",
+    "glightbox": "^3.3.1",
     "lucide": "^1.14.0",
     "overlayscrollbars": "^2.15.1",
     "tailwind-merge": "^3.5.0"
