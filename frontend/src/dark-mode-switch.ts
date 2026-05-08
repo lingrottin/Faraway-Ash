@@ -2,7 +2,7 @@ const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 // Infer dark mode preference and enable
 function setDarkMode() {
   let dark_mode = false;
-  let dm_setting = localStorage.getItem("dark_mode");
+  const dm_setting = localStorage.getItem("dark_mode");
   switch (dm_setting) {
     case "dark":
       dark_mode = true;

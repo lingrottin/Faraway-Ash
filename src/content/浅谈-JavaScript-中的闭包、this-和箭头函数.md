@@ -365,4 +365,4 @@ console.log(func.bind(a) === func.bind(b)); // false
 
 ## 后记
 
-感谢来到 Enita 的猫猫课堂听讲 ^^（？？？？）
+感谢来到 Enita 的猫猫课堂听讲 ^^（？？？）

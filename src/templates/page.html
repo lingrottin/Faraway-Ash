@@ -29,12 +29,12 @@
     >
         <div class="flex flex-col items-start not-md:*:mx-4">
             <div
-                class="font-bold text-3xl backdrop-blur-lg bg-background/50 py-3 px-5 not-md:px-3"
+                class="font-bold text-3xl backdrop-blur-lg not-dark:bg-background/80 dark:bg-background/50 py-3 px-5 not-md:px-3"
             >
                 {{page.title | default(value="No Title")}}
             </div>
             <div
-                class="flex flex-row items-center not-md:items-start font-semibold text-lg mt-5 backdrop-blur-lg bg-background/50 my-1 px-3"
+                class="flex flex-row items-center not-md:items-start font-semibold text-lg mt-5 backdrop-blur-lg not-dark:bg-background/80 dark:bg-background/50 my-1 px-3"
             >
                 <i data-lucide="calendar" class="size-5 mr-2 -mt-0.5 not-md:mt-1"></i>
                 <div>创建日期 {{page.date}}</div>

@@ -20,7 +20,9 @@
         {% block icon %}<link rel="icon" href="/img/special/favicon.png">{%endblock icon%}
 
         {%block css%}
-        <link rel="stylesheet" href="/app.css" />
+        <link rel="stylesheet" href="/app.css?version={{config.extra.version}}" />
+        <link rel="stylesheet" href="/giallo-dark.css?version={{config.extra.version}}" />
+        <link rel="stylesheet" href="/giallo-light.css?version={{config.extra.version}}" />
         {%endblock css%}
 
         {% block extra_head %}
@@ -29,9 +31,9 @@
 
     <body data-overlayscrollbars-initialize>
         {# Top navigation bar #}
-        <div id="topbar" class="fixed top-0 z-1 backdrop-blur-sm bg-background/50 w-full h-15 text-lg flex flex-row px-6 border-b border-border items-center">
+        <div id="topbar" class="fixed top-0 z-1 backdrop-blur-sm not-dark:bg-background/80 dark:bg-background/50 w-full h-15 text-lg flex flex-row px-6 border-b border-border items-center">
             <nav class="flex flex-row items-center gap-4">
-            <a class="block font-semibold hover:text-strong-accent" href="{{config.base_url}}">Faraway Ash</a>
+            <a class="block font-semibold hover:text-strong-accent hover:underline" href="{{config.base_url}}">Faraway Ash</a>
               <ul class="flex flex-row items-center gap-4 text-base">
                 {% for item in config.extra.menu %}
                     <li class="text-foreground hover:underline">
@@ -82,11 +84,14 @@
     </body>
 
     {%block js%}
-    <script type="module" src="/app.js"></script>
+    <script type="module" src="/app.js?version={{config.extra.version}}"></script>
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8792e91a650f424aada77def6f7a4bcd"}'></script>
     {%endblock js%}
+
     {% block footer %}
     <div class="w-full text-center mt-16 mb-16">
-        ©Enita Nureya 2022-2026. 自豪地使用 <a class="hover:text-strong-accent underline" href="https://getzola.org">Zola</a>.
+        <p>©Enita Nureya 2022-2026. 自豪地使用 <a class="hover:text-strong-accent underline" href="https://getzola.org">Zola</a>.</p>
+        <p>本站使用 <a href="https://developers.cloudflare.com/web-analytics/" class="underline hover:text-strong-accent">Cloudflare Web Analytics</a>. 您的访问可能会被记录.</p>
     </div>
     {% endblock footer %}
 </html>

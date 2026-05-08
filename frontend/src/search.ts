@@ -1,4 +1,4 @@
-import { createIcons, Newspaper, ArrowRight } from "lucide";
+import { ArrowRight, createIcons, Newspaper } from "lucide";
 import "core-js/actual/regexp/escape";
 
 type SearchItem = {
@@ -56,17 +56,18 @@ function search(query: string): SearchItem[] {
   const words_arr = Array.from(words_iter)
     .filter((i) => !!i.isWordLike)
     .map((i) => i.segment);
+  const regex = new RegExp(
+    // @ts-expect-error: we already imported polyfill for this
+    words_arr.map((i) => RegExp.escape(i)).join("|"),
+    "gi",
+  );
 
   // 搜索
   const result = [];
   for (const item of searchIndex) {
     const item_clone = structuredClone(item);
-    const regex = new RegExp(
-      // @ts-expect-error: we already imported polyfill for this
-      words_arr.map((i) => RegExp.escape(i)).join("|"),
-      "gi",
-    );
     let matches = false;
+
     let title = "";
     let t_offset = 0;
     const t_replacer = (match: string, offset: number, str: string): string => {
@@ -103,6 +104,7 @@ function search(query: string): SearchItem[] {
     if (b_offset !== item.body.length - 1)
       body += item.body.substring(b_offset, item.body.length);
     item_clone.body = body;
+
     if (matches) {
       result.push(item_clone);
     }
@@ -120,7 +122,8 @@ async function initializeSearchIndex() {
       const resp = await fetch("/search_index.zh.json");
       if (!resp.ok)
         throw new Error(`Failed to fetch search index: ${resp.status}`);
-      searchIndex = (await resp.json()) as typeof searchIndex;
+      const searchIndex_tmp = (await resp.json()) as typeof searchIndex;
+      searchIndex = searchIndex_tmp.filter((i) => !!i.body);
       initDone = true;
     } catch (err) {
       console.error("Failed to initialize search index:", err);
@@ -166,7 +169,7 @@ function renderResults(results: SearchItem[]) {
             <i data-lucide="newspaper" class="self-start mt-0.5 size-5 mr-2 shrink-0"></i>
             <div class="flex flex-col min-w-0">
                 <div class="text-xl font-semibold truncate">${r.title}</div>
-                  ${`<div class="text-base text-foreground font-light line-clamp-2">${r.body}</div>`}
+                  <div class="text-base text-foreground dark:font-light line-clamp-2">${r.body}</div>
             </div>
             <div class="flex-1"></div>
             <i data-lucide="arrow-right" class="ml-4 shrink-0"></i>
@@ -184,14 +187,6 @@ function renderResults(results: SearchItem[]) {
   createIcons({
     icons: { Newspaper, ArrowRight },
   });
-}
-
-function escapeHTML(text: string): string {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
 }
 
 // Debounce

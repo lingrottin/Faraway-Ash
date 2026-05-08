@@ -124,9 +124,9 @@ Dear creator, if you do not want me to use your artworks, plz. contact me to rem
 
 ## 关于访问
 
-~~该网站采用了 Cloudflare Pages 和 Cloudflare CDN 加速，对大陆用户可能不友好。~~
+该网站采用了 Cloudflare CDN 加速，对大陆用户可能不友好。
 
-~~有条件建议搭配梯子访问。~~
+有条件建议搭配梯子访问。
 
 ~~博客已经随 University of Fool 搬迁到了中国香港~~ 但仍然保留在 Cloudflare Pages 上的[备用链接](https://lingrottin.pages.dev)
 
@@ -138,7 +138,7 @@ Dear creator, if you do not want me to use your artworks, plz. contact me to rem
 
 ~~网站统计和评论服务是在 2024/11/4 配置的，基于 [LeanCloud 国际版](https://leancloud.app/)。信息统计遵循浏览器的 DNT (Do Not Track) 请求，请放心。~~
 
-网站现在没有统计和评论功能了。
+网站使用 [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/) 来跟踪访问数据。但是别担心！该服务是隐私优先的。
 
 ## 结束
 

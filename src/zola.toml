@@ -13,7 +13,12 @@ author="Enita Nureya"
 default_language="zh"
 
 [markdown]
+external_links_target_blank=true
+# lazy_async_image=true # This would cause error
+github_alerts = true
+
 [markdown.highlighting]
+style = "class"
 light_theme = "catppuccin-latte"
 dark_theme = "catppuccin-mocha"
 
@@ -30,3 +35,4 @@ menu = [
 ]
 banner_img = "$BASE_URL/imgs/banner.webp"
 creative_commons = ["BY"]
+version = "1"

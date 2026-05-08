@@ -1,128 +1,179 @@
 .content {
-    @apply flex flex-col items-stretch gap-4 text-soft-foreground;
-    text-autospace: normal;
+  @apply flex flex-col items-stretch gap-4 text-soft-foreground;
+  text-autospace: normal;
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        @apply font-semibold mt-4 relative text-foreground;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold mt-4 relative text-foreground;
 
-        .heading-anchor {
-            @apply inline-block size-5 ml-2 opacity-0 transition-all duration-200 ease-out cursor-pointer text-muted-foreground align-middle hover:text-strong-accent;
-        }
+    .heading-anchor {
+      @apply inline-block size-5 ml-2 opacity-0 transition-all duration-200 ease-out cursor-pointer text-muted-foreground align-middle hover:text-strong-accent;
+    }
 
-        &:hover .heading-anchor,
-        .heading-anchor:focus-visible {
-            @apply opacity-100;
-        }
+    &:hover .heading-anchor,
+    .heading-anchor:focus-visible {
+      @apply opacity-100;
     }
-    h1,
-    h2,
-    h3 {
-        @apply border-border border-b pb-2;
-    }
-    h1 {
-        @apply text-2xl;
-    }
-    h2 {
-        @apply text-xl;
-    }
-    h3 {
-        @apply text-lg;
-    }
-    pre {
-        @apply p-4 rounded-lg overflow-x-auto;
-        background-color: light-dark(#f8f8f8, #1e1e1e) !important;
-        code {
-            @apply bg-transparent px-0 border-0;
-        }
-    }
+  }
+  h1,
+  h2,
+  h3 {
+    @apply border-border border-b pb-2;
+  }
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+
+  code {
+    @apply font-mono bg-muted/70 px-2 rounded-sm border;
+  }
+
+  .dark pre {
+    /* biome-ignore lint/complexity/noImportantStyles: we want to override the background color of code blocks so have to !important this */
+    background-color: #1e1e1e !important;
+  }
+  .light pre {
+    /* biome-ignore lint/complexity/noImportantStyles: we want to override the background color of code blocks so have to !important this */
+    background-color: #f8f8f8 !important;
+  }
+  pre {
+    @apply p-4 rounded-lg overflow-x-auto;
 
     code {
-        @apply font-mono bg-muted/70 px-2 rounded-sm border;
+      @apply bg-transparent px-0 border-0;
     }
-    ul {
-        list-style-type: disc;
-    }
-    ol {
-        list-style-type: decimal;
-    }
-    ul,
-    ol {
-        @apply my-2;
-        list-style-position: outside;
-        padding-inline-start: 1em;
-    }
-    table {
-        thead {
-            @apply border-t-2 bg-muted;
-        }
-        tr {
-            @apply border-b-2;
-        }
-        th,
-        td {
-            @apply py-2 px-4 border-x-2 border-border;
-        }
-        tr:nth-child(even) {
-            @apply bg-muted/50;
-        }
-    }
-    a {
-        @apply underline text-foreground hover:text-strong-accent;
-    }
+  }
 
-    blockquote {
-        @apply py-4 pl-8 pr-4 rounded-lg;
-        background-image: linear-gradient(
-            to right,
-            var(--muted),
-            var(--muted) 14px,
-            color-mix(in oklab, var(--muted), transparent 50%) 14px
-        );
-    }
+  ul {
+    list-style-type: disc;
+  }
+  ol {
+    list-style-type: decimal;
+  }
+  ul,
+  ol {
+    @apply my-2;
+    list-style-position: outside;
+    padding-inline-start: 1em;
+  }
 
-    img {
-        @apply rounded-lg;
+  table {
+    thead {
+      @apply border-t-2 bg-muted;
     }
+    tr {
+      @apply border-b-2;
+    }
+    th,
+    td {
+      @apply py-2 px-4 border-x-2 border-border;
+    }
+    tr:nth-child(even) {
+      @apply bg-muted/50;
+    }
+  }
+  a {
+    @apply underline text-foreground hover:text-strong-accent;
+  }
 
-    sup.footnote-reference {
-        a::before {
-            content: "注";
-        }
+  blockquote {
+    @apply py-4 pl-8 pr-4 rounded-lg;
+    background-image: linear-gradient(
+      to right,
+      var(--muted),
+      var(--muted) 14px,
+      color-mix(in oklab, var(--muted), transparent 50%) 14px
+    );
+    &.markdown-alert-note {
+      ::before {
+        content: "注意";
+        @apply block font-semibold text-lg;
+      }
+      @apply pl-4 border bg-cyan-100 border-cyan-200 text-cyan-700 dark:bg-cyan-950 dark:border-cyan-700 dark:text-cyan-300;
+      background-image: none;
     }
-    .footnote-definition {
-        sup::before {
-            content: "注";
-        }
-        * {
-            @apply inline;
-        }
+    &.markdown-alert-tip {
+      ::before {
+        content: "提示";
+        @apply block font-semibold text-lg;
+      }
+      @apply pl-4 border bg-teal-100 border-teal-200 text-teal-700 dark:bg-teal-950 dark:border-teal-700 dark:text-teal-300;
+      background-image: none;
     }
+    &.markdown-alert-important {
+      ::before {
+        content: "重要";
+        @apply block font-semibold text-lg;
+      }
+      @apply pl-4 border bg-fuchsia-100 border-fuchsia-200 text-fuchsia-700 dark:bg-fuchsia-950 dark:border-fuchsia-700 dark:text-fuchsia-300;
+      background-image: none;
+    }
+    &.markdown-alert-warning {
+      ::before {
+        content: "警告";
+        @apply block font-semibold text-lg;
+      }
+      @apply pl-4 border bg-orange-100 border-orange-200 text-orange-700 dark:bg-orange-950 dark:border-orange-700 dark:text-orange-300;
+      background-image: none;
+    }
+    &.markdown-alert-caution {
+      ::before {
+        content: "注意！";
+        @apply block font-semibold text-lg;
+      }
+      @apply pl-4 border bg-rose-100 border-rose-200 text-rose-700 dark:bg-rose-950 dark:border-rose-700 dark:text-rose-300;
+      background-image: none;
+    }
+  }
 
-    .footnote-definition:first-of-type::before {
-        content: "脚注";
-        @apply block pb-2 my-4 border-border border-b text-xl font-semibold;
+  img {
+    @apply rounded-lg max-w-3/5 max-h-[40dvh] my-2 mx-auto;
+  }
+
+  sup.footnote-reference {
+    a::before {
+      content: "注";
     }
+  }
+  .footnote-definition {
+    sup::before {
+      content: "注";
+    }
+    * {
+      @apply inline;
+    }
+  }
+
+  .footnote-definition:first-of-type::before {
+    content: "脚注";
+    @apply block pb-2 my-4 border-border border-b text-xl font-semibold;
+  }
 }
 
 .toc {
-    a {
-        @apply hover:underline hover:text-foreground;
-    }
+  a {
+    @apply hover:underline hover:text-foreground;
+  }
 
-    & > ul {
-        list-style-type: decimal;
-    }
+  & > ul {
+    list-style-type: decimal;
+  }
 
-    & > ul ul {
-        list-style-type: lower-roman;
-    }
+  & > ul ul {
+    list-style-type: lower-roman;
+  }
 
-    ul {
-        padding-inline-start: 2em;
-    }
+  ul {
+    padding-inline-start: 2em;
+  }
 }

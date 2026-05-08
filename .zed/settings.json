@@ -11,6 +11,10 @@
         "!vscode-css-language-server",
         "...",
       ],
+      "formatter": "language_server",
+    },
+    "JavaScript": {
+      "formatter": "language_server",
     },
   },
   "lsp": {
