@@ -1,6 +1,5 @@
 import "./dark-mode-switch";
 import "./content";
-import "./clarity";
 import "./overlay-scrollbars";
 import "./search";
 import {
