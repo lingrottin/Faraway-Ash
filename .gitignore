@@ -6,5 +6,3 @@ node_modules/
 public/
 .deploy*/
 package-lock.json
-./src/static/app.js
-./src/static/app.css
