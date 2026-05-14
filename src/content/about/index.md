@@ -75,8 +75,6 @@ date="2022-07-10"
 
 *btw. 本站本来是使用衬线字体如 Noto Serif 的，但是后来发现在低分屏上衬线字体确实会晃眼睛。*
 
-点击查看[字体的使用协议](/assets/OPPO%20Sans%204.0%20License%20Notice.txt)。
-
 ### 图标
 
 ~~这个图标是用 [Magicavoxel](https://www.voxelmade.com/magicavoxel/) 制作和渲染的。~~

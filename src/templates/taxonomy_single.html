@@ -2,7 +2,7 @@
 {% block content %}
 {% include "banner_img.html" %}
 <div
-    class="{%if not config.extra.banner_img %}mt-19 {%else%}mt-4 {%endif%}container mx-auto flex flex-col not-md:px-4"
+    class="{%if not config.extra.banner_img %}mt-19 {%else%}mt-4 {%endif%}fa-container mx-auto flex flex-col not-md:px-4"
 >
     <div class="text-2xl my-4 font-bold text-center pb-4 border-border border-b">标记为“{{term.name}}”的文章列表</div>
     <ul>
@@ -54,7 +54,7 @@
         {% set_global first_page_rendered = True %} {% endfor %}
     </ul>
 </div>
-<nav class="container mx-auto mt-8 flex flex-row items-center justify-center text-lg *:py-4 text-muted-foreground *:hover:text-foreground *:hover:underline not-md:px-4">
+<nav class="fa-container mx-auto mt-8 flex flex-row items-center justify-center text-lg *:py-4 text-muted-foreground *:hover:text-foreground *:hover:underline not-md:px-4">
     <a class="pr-10 {% if not paginator.previous%}text-muted-foreground/20!{%endif%}" href="{{paginator.first}}"><i data-lucide="chevrons-left" class="size-8"></i></a>
     <div class="flex-1"></div>
     <a class="flex flex-row items-center *:block px-5 {% if not paginator.previous%}text-muted-foreground/20!{%endif%}" {% if paginator.previous -%}href="{{ paginator.previous }}"{%- endif -%}><i class="size-8" data-lucide="chevron-left"></i><span class="not-md:hidden">上一页</span></a>

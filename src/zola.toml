@@ -16,6 +16,7 @@ default_language="zh"
 external_links_target_blank=true
 # lazy_async_image=true # This would cause error
 github_alerts = true
+bottom_footnotes = true
 
 [markdown.highlighting]
 style = "class"

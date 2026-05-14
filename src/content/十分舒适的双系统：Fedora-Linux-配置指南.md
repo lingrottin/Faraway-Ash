@@ -74,7 +74,7 @@ menuentry "Start Fedora-Workstation-Live" --class fedora --class gnu-linux --cla
 }
 ```
 
-> **提示**
+> [!TIP]
 > 如果你想让加载程序在启动时自动校验文件，可以将下面的项（`Test this media & start Fedora-Workstation-Live`）也按照同样的方式修改。
 
 ### 启动 Fedora Live
@@ -269,7 +269,7 @@ sudo dnf install rEFInd rEFInd-tools
 sudo refind-install --shim /boot/efi/EFI/fedora/shimx64.efi
 ```
 
-> **注意**
+> [!NOTE] 
 > 这两个命令会直接把 rEFInd 安装进你的 EFI 分区（第一个下载，第二个安装）。无需禁用安全启动，因为我们使用 `--shim` 参数指定了 [shim](https://github.com/rhboot/shim) 文件的位置，此时 `refind-install` 脚本会自动为 rEFInd 配置基于 shim 的安全启动。
 
 然后重启测试。
@@ -304,8 +304,7 @@ sudo git clone https://github.com/catppuccin/refind.git /boot/efi/EFI/refind/the
 sudo sed -i '1iinclude themes/catppucin/mocha.conf' /boot/efi/EFI/refind/refind.conf # 请把 mocha 换成你喜欢的 flavor
 ```
 
-> **提示**
->
+> [!NOTE]
 > 如果使用 Catppuccin 主题的话，你也许会想要把背景色替换成黑色，不然启动 Windows 的时候会非常丑。
 > 下载[这个黑色的像素点](/img/fedora-guide/background.png)，把它放到 `/boot/efi/EFI/refind/themes/catppuccin/assets/mocha/background.png` 即可。同样记得把 mocha 换成你使用的 flavor。
 

@@ -34,7 +34,7 @@
     @apply text-lg;
   }
 
-  code {
+  :not(pre)>code {
     @apply font-mono bg-muted/70 px-2 rounded-sm border wrap-anywhere break-all;
   }
 
@@ -82,8 +82,16 @@
       @apply bg-muted/50;
     }
   }
+
   a {
-    @apply underline text-foreground hover:text-strong-accent;
+    @apply underline hover:text-strong-accent;
+  }
+  :not(blockquote.markdown-alert-note)
+  :not(blockquote.markdown-alert-tip)
+  :not(blockquote.markdown-alert-important)
+  :not(blockquote.markdown-alert-warning)
+  :not(blockquote.markdown-alert-caution) a {
+       @apply text-foreground;
   }
 
   blockquote {
@@ -95,23 +103,23 @@
       color-mix(in oklab, var(--muted), transparent 50%) 14px
     );
     &.markdown-alert-note {
-      ::before {
+      &::before {
         content: "注意";
         @apply block font-semibold text-lg;
       }
-      @apply pl-4 border bg-cyan-100 border-cyan-200 text-cyan-700 dark:bg-cyan-950 dark:border-cyan-700 dark:text-cyan-300;
+      @apply pl-4 border bg-cyan-50 border-cyan-100 text-cyan-700 dark:bg-cyan-950 dark:border-cyan-700 dark:text-cyan-300;
       background-image: none;
     }
     &.markdown-alert-tip {
-      ::before {
+      &::before {
         content: "提示";
         @apply block font-semibold text-lg;
       }
-      @apply pl-4 border bg-teal-100 border-teal-200 text-teal-700 dark:bg-teal-950 dark:border-teal-700 dark:text-teal-300;
+      @apply pl-4 border bg-teal-50 border-teal-100 text-teal-700 dark:bg-teal-950 dark:border-teal-700 dark:text-teal-300;
       background-image: none;
     }
     &.markdown-alert-important {
-      ::before {
+      &::before {
         content: "重要";
         @apply block font-semibold text-lg;
       }
@@ -119,7 +127,7 @@
       background-image: none;
     }
     &.markdown-alert-warning {
-      ::before {
+      &::before {
         content: "警告";
         @apply block font-semibold text-lg;
       }
@@ -127,7 +135,7 @@
       background-image: none;
     }
     &.markdown-alert-caution {
-      ::before {
+      &::before {
         content: "注意！";
         @apply block font-semibold text-lg;
       }
@@ -145,16 +153,8 @@
       content: "注";
     }
   }
-  .footnote-definition {
-    sup::before {
-      content: "注";
-    }
-    * {
-      @apply inline;
-    }
-  }
 
-  .footnote-definition:first-of-type::before {
+  section.footnotes::before {
     content: "脚注";
     @apply block pb-2 my-4 border-border border-b text-xl font-semibold;
   }

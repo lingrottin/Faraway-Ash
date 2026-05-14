@@ -10,6 +10,29 @@
     @apply text-strong-accent;
   }
 }
+@layer components {
+  .fa-container {
+    width: 100%;
+  }
+
+  @media (width >= 40rem) {
+    .fa-container {
+      max-width: 36rem; /* 576px */
+    }
+  }
+
+  @media (width >= 48rem) {
+    .fa-container {
+      max-width: 42rem; /* 672px */
+    }
+  }
+
+  @media (width >= 64rem) {
+    .fa-container {
+      max-width: 56rem; /* 896px */
+    }
+  }
+}
 
 @font-face {
   font-family: "Adwaita Sans";
