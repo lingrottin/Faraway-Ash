@@ -251,8 +251,8 @@ sudo dnf install gnome-extensions-app
 #### 杂项
 
 * 你可以安装 `fastfetch` 来实现一个漂亮的截图。
-* 如果你需要 QQ，尽量到[官网](https://im.qq.com/linuxqq/index.shtml)下载（请下载 rpm 版），而不是应用商店。Flatpak 上的安装包不是腾讯官方维护，且会出问题（截止本文发布时，在 Flatpak 安装的 QQ 上复制内容会导致崩溃）。
-* 如果你找到了一些 AppImage 格式的应用，建议使用 [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher/wiki) 来统一管理。
+* ~~如果你需要 QQ，尽量到[官网](https://im.qq.com/linuxqq/index.shtml)下载（请下载 rpm 版），而不是应用商店。Flatpak 上的安装包不是腾讯官方维护，且会出问题（截止本文发布时，在 Flatpak 安装的 QQ 上复制内容会导致崩溃）。~~ 2026/5/8 更新：问题已修复。
+* 如果你找到了一些 AppImage 格式的应用，建议使用 [Gear Lever](https://github.com/mijorus/gearlever) 来统一管理。
 
 ### 引导加载程序
 
