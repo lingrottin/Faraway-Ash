@@ -38,4 +38,4 @@ menu = [
 ]
 banner_img = "$BASE_URL/imgs/banner.webp"
 creative_commons = ["BY"]
-version = "1"
+version = "2"
