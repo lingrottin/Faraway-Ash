@@ -151,7 +151,7 @@
 
   section.footnotes::before {
     content: "脚注";
-    @apply block pb-2 my-4 border-border border-b text-xl font-semibold;
+    @apply block pb-2 my-4 border-border border-b text-xl font-semibold text-foreground;
   }
 
   section.footnotes ol li p a:last-of-type {
@@ -177,15 +177,15 @@
     @apply hover:underline hover:text-foreground;
   }
 
-  & > ul {
+  & > ol {
     list-style-type: decimal;
   }
 
-  & > ul ul {
+  & > ol ol {
     list-style-type: lower-roman;
   }
 
-  ul {
+  ol {
     padding-inline-start: 2em;
   }
 }

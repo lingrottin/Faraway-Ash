@@ -28,7 +28,7 @@ rpm-ostree 则是基于 libostree 和 RPM 构建的一个用 OSTree 管理红帽
 - **状态可回滚**。OSTree 有能力保留当前和上一次两个系统状态。要是系统真的崩溃了或是你不喜欢更新的内容，则随时可以回滚到上一个系统状态。这里还支持固定某一个特定的系统状态，永久保留。
 - **系统目录只读**[^1]。这意味着你的系统不会被随便哪来的病毒或你自己手贱（`sudo rm -rf /*`）弄崩坏。
 
-[^1]: 严格来说，“原子化”并不强调系统只读。也有“原子化但系统可写”的发行版，如 NixOS（NixOS 并不标榜自己“原子化”，但它是符合定义的）。但至少对于基于 OSTree 的原子发行版而言，[系统必须是只读的](https://github.com/ostreedev/ostree#:~:text=It%27s%20unlike%20git%20in%20that%20it%20%22checks%20out%22%20the%20files%20via%20hardlinks%2C%20and%20they%20thus%20need%20to%20be%20immutable%20to%20prevent%20corruption)。
+[^1]: 严格来说，“原子化”并不强调系统只读。也有“原子化但系统可写”的发行版，如 NixOS（原子化并不是 NixOS 的核心卖点，但它[确实是原子化的](https://nixos.org/guides/how-nix-works/#atomic)）。但至少对于基于 OSTree 的原子发行版而言，[系统必须是只读的](https://github.com/ostreedev/ostree#:~:text=It%27s%20unlike%20git%20in%20that%20it%20%22checks%20out%22%20the%20files%20via%20hardlinks%2C%20and%20they%20thus%20need%20to%20be%20immutable%20to%20prevent%20corruption)。
 
 ### 坏处
 
@@ -42,7 +42,7 @@ rpm-ostree 则是基于 libostree 和 RPM 构建的一个用 OSTree 管理红帽
 下面是这篇文章会提到的名词列表。为避免混乱，先在此处澄清。
 
 Fedora Atomic
-: 指 Fedora Atomic Desktops（见下）、Fedora CoreOS 和 Fedora IoT。这这些 Fedora 变体都是基于 `rpm-ostree` 构建的原子化操作系统。注意，虽然这个词在 Fedora 官方文档中有提及，但这不是官方术语。
+: 指 Fedora Atomic Desktops（见下）、Fedora CoreOS 和 Fedora IoT。这些 Fedora 变体都是基于 `rpm-ostree` 构建的原子化操作系统。注意，虽然这个词在 Fedora 官方文档中有提及，但这不是官方术语。
 
 Fedora Atomic Desktops
 : 指 Fedora 原子化变体中**面向桌面用户**的几个，即 Fedora Silverblue (GNOME), Fedora Kinoite (KDE Plasma), Fedora Sway Atomic, Fedora Budgie Atomic 和 Fedora COSMIC Atomic。这些变体间除了桌面环境和预装的桌面软件（如 GDM for Silverblue 和 SDDM for Kinoite）之外并没有什么区别。
@@ -56,13 +56,13 @@ rpm-ostree
 Toolbx, Toolbox[^2]
 : 一个基于容器化技术（主要是 Buildah 和 Podman）打造的“开发容器”方案，[主要目的是在原子化系统里提供可变根目录](https://github.com/containers/toolbox/commit/c6b5a4836fe63601#:~:text=this%20project%20was%20specifically%0Aincubated%20to%20make%20it%20easier%20to%20hack%20on%20Fedora%20Silverblue)。其主打特点是，在容器内也能无缝和主机交互，容器内的电脑设备、用户和权限以及家目录和主机都是共通的。
 
-[^2]: Toolbox 是它的旧称。尽管在很多地方（如 `toolbox` 二进制文件）仍在使用 Toolbox 这一名字，该项目本身已经改名成了 Toolbx。见[官方陈述](https://github.com/containers/toolbox#:~:text=Toolbx%20was%20previously%20known%20as%20Toolbox%2C%20and%20even%20before%20that%20as%20Fedora%20Toolbox.%20Work%20is%20in%20progress%20to%20update%20the%20name%20to%20Toolbx%20in%20various%20places.%20Thus%20this%20Git%20repository%20and%20the%20binary%20are%20still%20toolbox%20and%20the%20package%20may%20still%20be%20toolbox%20on%20various%20systems)。
-
 Flatpak
 : 一个基于容器化技术和 OSTree 构建的桌面应用包管理器，具有完善的沙箱隔离机制和“一次打包、到处运行”的特点。和臭名昭著的 Snap 类似，但是比 Snap 更节省空间、性能更好、更自由。
 
 部署（Deployment）
 : 在这里的语境下，指文件系统的一个“状态”，即一个可启动的“系统快照”。这非常类似于 Git 的提交（Commit），只是 OSTree 不把它叫作“提交”这个名字而已。
+
+[^2]: Toolbox 是它的旧称。尽管在很多地方（如 `toolbox` 二进制文件）仍在使用 Toolbox 这一名字，该项目本身已经改名成了 Toolbx。见[官方陈述](https://github.com/containers/toolbox#:~:text=Toolbx%20was%20previously%20known%20as%20Toolbox%2C%20and%20even%20before%20that%20as%20Fedora%20Toolbox.%20Work%20is%20in%20progress%20to%20update%20the%20name%20to%20Toolbx%20in%20various%20places.%20Thus%20this%20Git%20repository%20and%20the%20binary%20are%20still%20toolbox%20and%20the%20package%20may%20still%20be%20toolbox%20on%20various%20systems)。
 
 ## 安装
 

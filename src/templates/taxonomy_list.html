@@ -1,19 +1,25 @@
-{% extends "base.html" %} {% block content %} {% include "banner_img.html" %}
-    <div
-        class="{%if not config.extra.banner_img %}mt-19 {%else%}mt-4 {%endif%} container mx-auto flex flex-col relative not-md:px-4"
+{% extends "base.html" %}
+{% block content %}
+    {% include "banner_img.html" %}
+    <section
+        class="{%if not config.extra.banner_img %}mt-19 {%else%}mt-4 {%endif%}container mx-auto flex flex-col relative not-md:px-4"
     >
-        <div class="text-2xl my-4 font-bold text-center">{{taxonomy.name}}</div>
-        <div class="grid gap-4 md:grid-cols-3 sm:grid-cols-2">
+        <header class="text-2xl my-4 font-bold text-center">
+            <h1>{{taxonomy.name}}</h1>
+        </header>
+        <section class="grid gap-4 md:grid-cols-3 sm:grid-cols-2" aria-label="{{taxonomy.name}} 列表">
             {% for category in terms %}
-                <a
-                    class="block p-4 bg-muted/50 hover:bg-muted border-border border rounded-lg"
-                    href="{{ category.permalink }}"
-                >
-                    <div class="text-xl font-semibold">{{ category.name }}</div>
-                    <div class="count">{{ category.pages | length }} 个页面</div>
-                </a>
+                <article>
+                    <a
+                        class="block p-4 bg-muted/50 hover:bg-muted border-border border rounded-lg"
+                        href="{{ category.permalink }}"
+                    >
+                        <h2 class="text-xl font-semibold">{{ category.name }}</h2>
+                        <p class="count">{{ category.pages | length }} 个页面</p>
+                    </a>
+                </article>
             {% endfor %}
-        </div>
-    </div>
+        </section>
+    </section>
 {% endblock content %}
 {%- block title %}List of {{taxonomy.name}} - {{config.title}}{% endblock title %}

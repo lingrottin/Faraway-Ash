@@ -1,58 +1,66 @@
 {% extends "base.html" %}
 {% block content %}
     {% include "banner_img.html" %}
-    <div
+    <section
         class="{%if not config.extra.banner_img %}mt-19 {%else%}mt-4 {%endif%}fa-container mx-auto flex flex-col not-md:px-4"
     >
         <ul>
-            {% for post in paginator.pages %} {% if first_page_rendered %}
-                <div class="border-b border-border my-4"></div>
-            {%endif%}
+            {% for post in paginator.pages %}
+                {% if first_page_rendered %}
+                    <li aria-hidden="true" class="border-b border-border my-4"></li>
+                {% endif %}
                 <li class="block">
-                    <a
-                        href="{{post.permalink}}"
-                        class="text-2xl font-semibold mb-2 block hover:underline hover:text-foreground cursor-pointer"
-                    >
-                        {{ post.title | default(value=post.path) }}
-                    </a>
-                    <a
-                        href="{{post.permalink}}"
-                        class="text-muted-foreground hover:text-foreground cursor-pointer mb-2 block"
-                    >
-                        <div>
-                            {{post.description | default(value="No description
-                            provided.")}}
-                        </div>
-                    </a>
-                    <div class="flex flex-row items-center text-muted-foreground">
-                        <i data-lucide="clock" class="size-4 mr-2"></i>
-                        <span>{{post.date | default(value="1970-01-01")}}</span>
-                        {% if post.taxonomies.categories %}
-                            <i data-lucide="shapes" class="size-4 mx-2"></i>
-                            <span>
-                                {%for category in post.taxonomies.categories -%}
-                                    {%- if categories_first%}, {%endif%}<a class="underline hover:text-foreground" href="{{get_taxonomy_url(kind="categories", name=category)}}">{{category}}</a>
-                                    {%- set_global categories_first=True -%}
-                                {%- endfor%}
+                    <article class="flex flex-col">
+                        <header>
+                            <a
+                                href="{{post.permalink}}"
+                                class="text-2xl font-semibold mb-2 block hover:underline hover:text-foreground cursor-pointer"
+                            >
+                                {{ post.title | default(value=post.path) }}
+                            </a>
+                        </header>
+                        <section>
+                            <a
+                                href="{{post.permalink}}"
+                                class="text-muted-foreground hover:text-foreground cursor-pointer mb-2 block"
+                            >
+                                <p>
+                                    {{post.description | default(value="No description
+                                    provided.")}}
+                                </p>
+                            </a>
+                        </section>
+                        <footer class="flex flex-row items-center text-muted-foreground">
+                            <i data-lucide="clock" class="size-4 mr-2"></i>
+                            <span>{{post.date | default(value="1970-01-01")}}</span>
+                            {% if post.taxonomies.categories %}
+                                <i data-lucide="shapes" class="size-4 mx-2"></i>
+                                <span>
+                                    {%for category in post.taxonomies.categories -%}
+                                        {%- if categories_first%}, {%endif%}<a class="underline hover:text-foreground" href="{{get_taxonomy_url(kind="categories", name=category)}}">{{category}}</a>
+                                        {%- set_global categories_first=True -%}
+                                    {%- endfor%}
                     {# prevent the next post's comma being put incorrectly #}
-                                {%set_global categories_first=False%}
-                            </span>
-                        {% endif %}
-                        <div class="flex-1"></div>
-                        <a
-                            href="{{post.permalink}}"
-                            class="hover:underline group text-muted-foreground hover:text-foreground font-semibold cursor-pointer flex flex-row items-center"
-                        ><span class="underline">Read more</span
-                            ><i
-                                data-lucide="chevron-right"
-                                class="size-6 group-hover:text-strong-accent transition-colors duration-200 ease-out"
-                            ></i
-                                ></a>
-                        </div>
+                                    {%set_global categories_first=False%}
+                                </span>
+                            {% endif %}
+                            <div class="flex-1"></div>
+                            <a
+                                href="{{post.permalink}}"
+                                class="hover:underline group text-muted-foreground hover:text-foreground font-semibold cursor-pointer flex flex-row items-center"
+                            ><span class="underline">Read more</span
+                                ><i
+                                    data-lucide="chevron-right"
+                                    class="size-6 group-hover:text-strong-accent transition-colors duration-200 ease-out"
+                                ></i
+                                    ></a>
+                            </footer>
+                            </article>
                         </li>
-                        {% set_global first_page_rendered = True %} {% endfor %}
+                        {% set_global first_page_rendered = True %}
+            {% endfor %}
         </ul>
-    </div>
+    </section>
     <nav class="fa-container mx-auto mt-8 flex flex-row items-center justify-center text-lg *:py-4 text-muted-foreground *:hover:text-foreground *:hover:underline not-md:px-4">
         <a class="pr-10 {% if not paginator.previous%}text-muted-foreground/20!{%endif%}" href="{{paginator.first}}"><i data-lucide="chevrons-left" class="size-8"></i></a>
         <div class="flex-1"></div>

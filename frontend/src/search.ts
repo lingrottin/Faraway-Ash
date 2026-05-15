@@ -6,7 +6,7 @@ type SearchItem = {
   title: string;
   body: string;
 };
-
+const isMac = navigator.platform.toLowerCase().indexOf("mac") >= 0;
 let searchIndex: SearchItem[] = [];
 let initDone = false;
 let initPromise: Promise<void> | null = null;
@@ -117,6 +117,9 @@ async function initializeSearchIndex() {
   if (initDone) return;
   if (initPromise) return initPromise;
 
+  const shortcut_hint = document.getElementById("search-shortcut-hint");
+  if (isMac && shortcut_hint) shortcut_hint.innerHTML = "⌘K";
+
   initPromise = (async () => {
     try {
       const resp = await fetch("/search_index.zh.json");
@@ -224,9 +227,8 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Close on Escape globally when overlay is open
 document.addEventListener("keydown", (e) => {
-  if (e.key === "k" && (e.ctrlKey || e.metaKey)) {
+  if (e.key === "k" && (isMac ? e.metaKey : e.ctrlKey)) {
     e.preventDefault();
     if (overlay?.hasAttribute("data-shown")) {
       closeSearch();
@@ -236,6 +238,7 @@ document.addEventListener("keydown", (e) => {
     return;
   }
 
+  // Close on Escape globally when overlay is open
   if (e.key === "Escape" && overlay?.hasAttribute("data-shown")) {
     if (document.activeElement === input) return;
     closeSearch();

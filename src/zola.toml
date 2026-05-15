@@ -38,4 +38,8 @@ menu = [
 ]
 banner_img = "$BASE_URL/imgs/banner.webp"
 creative_commons = ["BY"]
-version = "2"
+
+# "version" is appended onto the URLs of JavaScript and CSS files
+# like: https://yoursite.com/app.js?version=2
+# this is used to prevent browser cache from corrupting updated styles
+version = "3"

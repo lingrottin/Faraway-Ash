@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block content %} {% if config.extra.banner_img %}
-    <div class="">
+    <header>
         <style>
             #banner-img {
                 background-image: url("{{ config.extra.banner_img | replace(from="$BASE_URL", to=config.base_url) |safe}}");
@@ -26,25 +26,27 @@
             class="h-[60lvh] w-screen relative overflow-hidden flex justify-center items-center"
         >
             <div class="flex flex-col items-start">
-                <div
+                <h1
                     class="font-bold text-3xl backdrop-blur-lg bg-background/50 py-3 px-5"
                 >
                     404 Not Found
-                </div>
+                </h1>
             </div>
         </div>
-    </div>
+    </header>
 {% endif %}
-    <div
+    <section
         class="{%if not config.extra.banner_img %}mt-19 {%else%}mt-4 {%endif%}fa-container mx-auto flex flex-col not-md:px-4"
     >
-        <div class="content"><p>您访问的页面不存在或已被移除。</p></div>
-        <a
-            href="/"
-            class="mt-6 text-muted-foreground hover:underline hover:text-foreground flex flex-row items-center"
-        >
-            <i data-lucide="arrow-left" class="mr-2"></i>
-            <div>回到主页</div>
-        </a>
-    </div>
+        <article class="content"><p>您访问的页面不存在或已被移除。</p></article>
+        <nav aria-label="返回主页">
+            <a
+                href="/"
+                class="mt-6 text-muted-foreground hover:underline hover:text-foreground flex flex-row items-center"
+            >
+                <i data-lucide="arrow-left" class="mr-2"></i>
+                <div>回到主页</div>
+            </a>
+        </nav>
+    </section>
 {%endblock%}
