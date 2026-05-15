@@ -24,29 +24,23 @@
   h3 {
     @apply border-border border-b pb-2;
   }
-  h1 {
+  /* 在博客中 front-matter 接替了 h1 的职责，所以不太可能出现 h1；章节标题应该都是 h2。所以这里将标题强调程度上移一位。*/
+  h1,
+  h2 {
     @apply text-2xl;
   }
-  h2 {
+  h3 {
     @apply text-xl;
   }
-  h3 {
+  h4 {
     @apply text-lg;
   }
 
-  :not(pre)>code {
+  :not(pre) > code {
     @apply font-mono bg-muted/70 px-2 rounded-sm border wrap-anywhere break-all;
   }
 
-  .dark pre {
-    /* biome-ignore lint/complexity/noImportantStyles: we want to override the background color of code blocks so have to !important this */
-    background-color: #1e1e1e !important;
-  }
-  .light pre {
-    /* biome-ignore lint/complexity/noImportantStyles: we want to override the background color of code blocks so have to !important this */
-    background-color: #f8f8f8 !important;
-  }
-  pre {
+  pre:has(code) {
     @apply p-4 rounded-lg overflow-x-auto;
 
     code {
@@ -84,14 +78,7 @@
   }
 
   a {
-    @apply underline hover:text-strong-accent;
-  }
-  :not(blockquote.markdown-alert-note)
-  :not(blockquote.markdown-alert-tip)
-  :not(blockquote.markdown-alert-important)
-  :not(blockquote.markdown-alert-warning)
-  :not(blockquote.markdown-alert-caution) a {
-       @apply text-foreground;
+    @apply underline text-foreground hover:text-strong-accent;
   }
 
   blockquote {
@@ -102,45 +89,53 @@
       var(--muted) 14px,
       color-mix(in oklab, var(--muted), transparent 50%) 14px
     );
+
+    &:is(
+        .markdown-alert-note,
+        .markdown-alert-tip,
+        .markdown-alert-important,
+        .markdown-alert-warning,
+        .markdown-alert-caution
+      ) {
+      &::before {
+        @apply block font-semibold text-lg;
+      }
+      a {
+        @apply text-inherit;
+      }
+      @apply pl-4 border;
+      background-image: none;
+    }
+
     &.markdown-alert-note {
       &::before {
         content: "注意";
-        @apply block font-semibold text-lg;
       }
-      @apply pl-4 border bg-cyan-50 border-cyan-100 text-cyan-700 dark:bg-cyan-950 dark:border-cyan-700 dark:text-cyan-300;
-      background-image: none;
+      @apply bg-cyan-50 border-cyan-100 text-cyan-700 dark:bg-cyan-950 dark:border-cyan-700 dark:text-cyan-300;
     }
     &.markdown-alert-tip {
       &::before {
         content: "提示";
-        @apply block font-semibold text-lg;
       }
-      @apply pl-4 border bg-teal-50 border-teal-100 text-teal-700 dark:bg-teal-950 dark:border-teal-700 dark:text-teal-300;
-      background-image: none;
+      @apply bg-teal-50 border-teal-100 text-teal-700 dark:bg-teal-950 dark:border-teal-700 dark:text-teal-300;
     }
     &.markdown-alert-important {
       &::before {
         content: "重要";
-        @apply block font-semibold text-lg;
       }
-      @apply pl-4 border bg-fuchsia-100 border-fuchsia-200 text-fuchsia-700 dark:bg-fuchsia-950 dark:border-fuchsia-700 dark:text-fuchsia-300;
-      background-image: none;
+      @apply bg-fuchsia-100 border-fuchsia-200 text-fuchsia-700 dark:bg-fuchsia-950 dark:border-fuchsia-700 dark:text-fuchsia-300;
     }
     &.markdown-alert-warning {
       &::before {
         content: "警告";
-        @apply block font-semibold text-lg;
       }
-      @apply pl-4 border bg-orange-100 border-orange-200 text-orange-700 dark:bg-orange-950 dark:border-orange-700 dark:text-orange-300;
-      background-image: none;
+      @apply bg-orange-100 border-orange-200 text-orange-700 dark:bg-orange-950 dark:border-orange-700 dark:text-orange-300;
     }
     &.markdown-alert-caution {
       &::before {
         content: "注意！";
-        @apply block font-semibold text-lg;
       }
-      @apply pl-4 border bg-rose-100 border-rose-200 text-rose-700 dark:bg-rose-950 dark:border-rose-700 dark:text-rose-300;
-      background-image: none;
+      @apply bg-rose-100 border-rose-200 text-rose-700 dark:bg-rose-950 dark:border-rose-700 dark:text-rose-300;
     }
   }
 
@@ -157,6 +152,23 @@
   section.footnotes::before {
     content: "脚注";
     @apply block pb-2 my-4 border-border border-b text-xl font-semibold;
+  }
+
+  section.footnotes ol li p a:last-of-type {
+    /* 脚注后面的返回箭头 */
+    @apply no-underline hover:underline text-muted-foreground;
+  }
+
+  dl {
+    & > dt {
+      @apply font-semibold italic mt-4;
+    }
+    & > dt:first-of-type {
+      @apply mt-0;
+    }
+    & > dd {
+      @apply pl-8;
+    }
   }
 }
 
@@ -184,5 +196,37 @@
     & * {
       @apply text-foreground;
     }
+  }
+}
+
+fa-toc-header {
+  @apply block pl-3;
+  a {
+    @apply block pt-1;
+  }
+
+  &.toc-highlighted {
+    & > a {
+      @apply font-semibold text-strong-accent;
+    }
+  }
+}
+
+fa-toc-children {
+  @apply grid grid-rows-[1fr];
+  transition: grid-template-rows 200ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.toc-collapsed {
+    @apply grid-rows-[0fr];
+  }
+
+  & > .fa-toc-children-inner {
+    @apply min-h-0 overflow-hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  fa-toc-children {
+    transition: none;
   }
 }

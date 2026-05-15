@@ -3,20 +3,22 @@ base_url = "https://enita.cn"
 compile_sass = false
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
-title="Faraway Ash"
-generate_feeds=true
+title = "Faraway Ash"
+generate_feeds = true
+feed_filenames = ["rss.xml", "atom.xml"]
 taxonomies = [
-    {name = "categories", feed = true, paginate_by=5},
-    {name = "tags", feed = true,paginate_by=5},
+    { name = "categories", feed = true, paginate_by = 5 },
+    { name = "tags", feed = true, paginate_by = 5 },
 ]
-author="Enita Nureya"
-default_language="zh"
+author = "Enita Nureya"
+default_language = "zh"
 
 [markdown]
-external_links_target_blank=true
+external_links_target_blank = true
 # lazy_async_image=true # This would cause error
 github_alerts = true
 bottom_footnotes = true
+definition_list = true
 
 [markdown.highlighting]
 style = "class"
@@ -30,9 +32,9 @@ index_format = "fuse_json"
 # Put all your custom variables here
 # Menu items
 menu = [
-    {url = "$BASE_URL", name = "主页"},
-    {url = "$BASE_URL/categories", name = "分类"},
-    {url = "$BASE_URL/about", name = "关于"},
+    { url = "$BASE_URL", name = "主页" },
+    { url = "$BASE_URL/categories", name = "分类" },
+    { url = "$BASE_URL/about", name = "关于" },
 ]
 banner_img = "$BASE_URL/imgs/banner.webp"
 creative_commons = ["BY"]

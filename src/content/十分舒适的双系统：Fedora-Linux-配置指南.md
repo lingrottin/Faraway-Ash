@@ -28,7 +28,7 @@ categories = ["烈焰"]
 
 这个过程非常容易。使用 DiskGenius 在硬盘中创建出一块空白（没有分区）的空间，然后在里面放一个大约 4GB 的 FAT32 分区即可。
 
-> **注意**  
+> [!NOTE]
 > 一定要给这个 FAT32 分区起一个名字！（在文件资源管理器中直接右键重命名即可，比如 `FEDORA`。）
 
 前往 [Fedora 的官方网站](https://fedoraproject.org/workstation/download) ，下载安装 iso 文件，双击挂载，然后把里面的东西全部复制到新的分区里。
@@ -111,8 +111,8 @@ sudo umount /run/initramfs/live
 
 现在，你就可以打开 Install to Hard Drive 应用来把 Fedora 安装到你的硬盘上了。
 
- > **提示**
- > 如果你忘记了的话，那么记得在分区时把装有 Fedora Live 的临时分区删了。
+> [!TIP]
+> 如果你忘记了的话，那么记得在分区时把装有 Fedora Live 的临时分区删了。
 
 ## 配置
 
