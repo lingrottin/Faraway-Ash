@@ -52,6 +52,7 @@ jobs:
                   rm -rf src/public
                   sed -i -e "s/^base_url.*$/base_url = \"https:\/\/cf.enita.cn\"/" src/zola.toml
                   zola -r src/ build
+                  rm src/public/.gitignore
                   
             - name: Deploy to Cloudflare Pages
               env:
