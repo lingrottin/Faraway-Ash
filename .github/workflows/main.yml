@@ -32,10 +32,27 @@ jobs:
               with:
                   tool: zola
 
-            - name: Generate static files
+            - name: Generate static files (for server deployment)
               run: |
                   zola -r src/ build
 
+            - name: Deploy to server
+              uses: easingthemes/ssh-deploy@main
+              env:
+                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIV_KEY }}
+                  ARGS: "-avz -u --chown=nginx:nginx"
+                  SOURCE: "src/public/"
+                  REMOTE_HOST: ${{ secrets.SERVER_IP }}
+                  REMOTE_PORT: ${{ secrets.SERVER_PORT }}
+                  REMOTE_USER: ${{ secrets.SERVER_USER }}
+                  TARGET: "/srv/www/enita.cn"
+                  
+            - name: Generate static files (for CF pages)
+              run: |
+                  rm -rf src/public
+                  sed -i -e "s/^base_url.*$/base_url = \"https:\/\/cf.enita.cn\"/" src/zola.toml
+                  zola -r src/ build
+                  
             - name: Deploy to Cloudflare Pages
               env:
                   GIT_NAME: FA
@@ -49,14 +66,3 @@ jobs:
                   git config --global user.email $GIT_EMAIL
                   git commit -m "Site deployed by GitHub Actions"
                   git push --force "https://$GH_TOKEN@$REPO" cf_web:cf_web
-
-            - name: Deploy to server
-              uses: easingthemes/ssh-deploy@main
-              env:
-                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIV_KEY }}
-                  ARGS: "-avz -u --chown=nginx:nginx"
-                  SOURCE: "src/public/"
-                  REMOTE_HOST: ${{ secrets.SERVER_IP }}
-                  REMOTE_PORT: ${{ secrets.SERVER_PORT }}
-                  REMOTE_USER: ${{ secrets.SERVER_USER }}
-                  TARGET: "/srv/www/enita.cn"

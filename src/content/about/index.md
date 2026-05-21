@@ -126,7 +126,7 @@ Dear creator, if you do not want me to use your artworks, plz. contact me to rem
 
 有条件建议搭配梯子访问。
 
-~~博客已经随 University of Fool 搬迁到了中国香港~~ 但仍然保留在 Cloudflare Pages 上的[备用链接](https://lingrottin.pages.dev)
+~~博客已经随 University of Fool 搬迁到了中国香港~~ 但仍然保留在 Cloudflare Pages 上的[备用链接](https://cf.enita.cn)
 
 ~~博客和 [Evershifting Fountain](https://akyuu.cn) 搬迁到了雨云上位于中国的服务器，同时迁移到了目前的域名（enita.cn）下，搭配 Cloudflare+雨云 CDN 进行访问，可能会有一些慢，不过由于年龄我无法对域名进行备案，请谅解。~~
 
