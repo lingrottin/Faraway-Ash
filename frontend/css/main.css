@@ -43,53 +43,66 @@
 }
 
 @font-face {
-  font-family: "Adwaita Sans";
+  font-family: "Sarasa Adwaita UI SC";
   src:
-    local("Adwaita Sans"),
-    url("/fonts/AdwaitaSans-Regular.ttf") format("truetype");
+    local("Sarasa Adwaita UI SC"),
+    url("/fonts/SarasaAdwaitaUiSC-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
 }
 @font-face {
-  font-family: "Adwaita Sans";
-  src: url("/fonts/AdwaitaSans-Italic.ttf") format("truetype");
+  font-family: "Sarasa Adwaita UI SC";
+  src: url("/fonts/SarasaAdwaitaUiSC-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Sarasa Adwaita UI SC";
+  src: url("/fonts/SarasaAdwaitaUiSC-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Sarasa Adwaita UI SC";
+  src: url("/fonts/SarasaAdwaitaUiSC-SemiBoldItalic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Sarasa Adwaita UI SC";
+  src: url("/fonts/SarasaAdwaitaUiSC-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Sarasa Adwaita UI SC";
+  src: url("/fonts/SarasaAdwaitaUiSC-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
-  font-family: "Adwaita Mono";
+  font-family: "Sarasa Adwaita Mono SC";
   src:
-    local("Adwaita Mono"),
-    url("/fonts/AdwaitaMono-Regular.ttf") format("truetype");
+    local("Sarasa Adwaita Mono SC"),
+    url("/fonts/SarasaAdwaitaMonoSC-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: "Adwaita Mono";
-  src:
-    local("Adwaita Mono"),
-    url("/fonts/AdwaitaMono-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Adwaita Mono";
-  src: url("/fonts/AdwaitaMono-Italic.ttf") format("truetype");
+  font-family: "Sarasa Adwaita Mono SC";
+  src: url("/fonts/SarasaAdwaitaMonoSC-Italic.woff2") format("woff2");
   font-weight: 400;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Adwaita Mono";
-  src: url("/fonts/AdwaitaMono-BoldItalic.ttf") format("truetype");
-  font-weight: 700;
   font-style: italic;
 }
 
 @theme {
   --font-sans:
-    "Adwaita Sans", "Inter", "Noto Sans SC", "Noto Sans CJK SC",
+    "Sarasa Adwaita UI SC", "Inter", "Noto Sans SC", "Noto Sans CJK SC",
     "Microsoft YaHei UI", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-mono:
-    "Adwaita Mono", "Iosevka", "Monaco", "Cascadia Mono", "Zed Mono",
+    "Sarasa Adwaita Mono SC", "Iosevka", "Monaco", "Cascadia Mono", "Zed Mono",
     "JetBrains Mono", "Fira Code", "Hack", "Consolas", monospace;
 }
 

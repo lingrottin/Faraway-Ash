@@ -6,7 +6,7 @@ type SearchItem = {
   title: string;
   body: string;
 };
-const isMac = navigator.platform.toLowerCase().indexOf("mac") >= 0;
+const isMac = /Mac/i.test(navigator.userAgent);
 let searchIndex: SearchItem[] = [];
 let initDone = false;
 let initPromise: Promise<void> | null = null;

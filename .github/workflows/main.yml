@@ -17,15 +17,19 @@ jobs:
               with:
                   submodules: true
 
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
+
             - name: Setup Node.js
               uses: actions/setup-node@v4
               with:
                   node-version: "latest"
+                  cache: "pnpm"
 
             - name: Install frontend dependencies & Build
               run: |
-                  npx pnpm install
-                  npx pnpm frontend-build
+                  pnpm install
+                  pnpm frontend-build
 
             - name: Install Zola
               uses: taiki-e/install-action@v2

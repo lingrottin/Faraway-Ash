@@ -71,7 +71,9 @@ date="2022-07-10"
 
 本站已于 2026-5-1 迁移到了 [Zola](https://getzola.org)，网站的主题完全由我从 0 开始编写，AI-free。部分配色来自 [shadcn/ui](https://ui.shadcn.com/)。
 
-字体是 [Adwaita](https://gitlab.gnome.org/GNOME/adwaita-fonts) Sans 和 Mono，因为它们很优雅美观，加上我非常喜欢 GTK4 Adwaita 的风格。
+我很喜欢 [Adwaita](https://gitlab.gnome.org/GNOME/adwaita-fonts) Sans 和 Mono，因为它们很优雅美观，加上我非常喜欢 GTK4 Adwaita 的风格。
+
+本站使用的字体是我 DIY 的[更纱独黑](https://github.com/lingrottin/Sarasa-Adwaita)，一个[更纱黑体](https://github.com/be5invis/Sarasa-Gothic)的改版。它把更纱黑体中的西方字符改成用 Adwaita 字体，这样，对我来说更好看。
 
 *btw. 本站本来是使用衬线字体如 Noto Serif 的，但是后来发现在低分屏上衬线字体确实会晃眼睛。*
 
@@ -110,7 +112,10 @@ UOF 成员会以 UOF 的名义产出一些优秀的开源软件，如 [Spectra �
 The contents listed below is copyrighted by the authors of the contents.
 
 - 首页大图来自[Pixiv](https://www.pixiv.net/artworks/89991203)
-- 网站内置了 Adwaita Sans 和 Adwaita Mono 作为英文字体。前者是 [Inter](https://rsms.me/inter) 的改版，后者是 [Iosevka](https://typeof.net/Iosevka/) 的改版。Adwaita 字体家族的存储库在[这里](https://gitlab.gnome.org/GNOME/adwaita-fonts)。
+- 网站内置了[更纱独黑](https://github.com/lingrottin/Sarasa-Adwaita)（一个[更纱黑体](https://github.com/be5invis/Sarasa-Gothic)的改版）作为显示字体。
+	-  其中，英文字体是 Adwaita Sans 和 Adwaita Mono。前者是 [Inter](https://rsms.me/inter) 的改版，后者是 [Iosevka](https://typeof.net/Iosevka/) 的改版。Adwaita 字体家族的存储库在[这里](https://gitlab.gnome.org/GNOME/adwaita-fonts)。
+	- 中文字体是思源黑体。
+	- 更纱独黑是我 DIY 的，但我对它不声明任何版权。
 
 侵删。
 
@@ -151,5 +156,6 @@ Dear creator, if you do not want me to use your artworks, plz. contact me to rem
 - X：@enita8601
 - Mastodon：@lilc@mastodon.social
 - GitHub：[@lingrottin](https://github.com/lingrottin)
+- Matrix: @enita:fedora.im
 
 如果使用邮箱联系，我会在 48h 内答复。很抱歉，邮箱之外的任何联系方式都有可能不能得到迅速的回复。

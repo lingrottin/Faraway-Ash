@@ -81,6 +81,10 @@
     @apply underline text-foreground hover:text-strong-accent;
   }
 
+  strong {
+    @apply text-foreground;
+  }
+
   blockquote {
     @apply py-4 pl-8 pr-4 rounded-lg;
     background-image: linear-gradient(
@@ -100,7 +104,7 @@
       &::before {
         @apply block font-semibold text-lg;
       }
-      a {
+      a,strong {
         @apply text-inherit;
       }
       @apply pl-4 border;
