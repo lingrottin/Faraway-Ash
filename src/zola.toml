@@ -42,4 +42,4 @@ creative_commons = ["BY"]
 # "version" is appended onto the URLs of JavaScript and CSS files
 # like: https://yoursite.com/app.js?version=2
 # this is used to prevent browser cache from corrupting updated styles
-version = "4"
+version = "5"
