@@ -20,9 +20,9 @@
         {% block icon %}<link rel="icon" href="/img/special/favicon.png">{%endblock icon%}
 
         {%block css%}
-            <link rel="stylesheet" href="/app.css?version={{config.extra.version}}" />
-            <link rel="stylesheet" href="/giallo-dark.css" />
-            <link rel="stylesheet" href="/giallo-light.css" />
+            <link rel="stylesheet" href="{{get_url(path="/app.css", cachebust=true)}}"/>
+            <link rel="stylesheet" href="{{get_url(path="/giallo-dark.css")}}" />
+            <link rel="stylesheet" href="{{get_url(path="/giallo-light.css")}}" />
         {%endblock css%}
 
         {% block extra_head %}
@@ -81,7 +81,7 @@
         {%endblock searchbar%}
 
         {%block js%}
-            <script type="module" src="/app.js?version={{config.extra.version}}"></script>
+            <script type="module" src="{{get_url(path="/app.js", cachebust=true)}}"></script>
             <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8792e91a650f424aada77def6f7a4bcd"}'></script>
         {%endblock js%}
 
