@@ -11,11 +11,15 @@ interface Props {
 }
 const { kind, items, title } = Astro.props;
 ---
+
 <section class="mt-4 fa-container mx-auto flex flex-col relative not-md:px-4">
   <header class="text-2xl my-4 font-bold text-center">
     <h1>{title}</h1>
   </header>
-  <section class="grid gap-4 md:grid-cols-3 sm:grid-cols-2" aria-label={`${title} 列表`}>
+  <section
+    class="grid gap-4 md:grid-cols-3 sm:grid-cols-2"
+    aria-label={`${title} 列表`}
+  >
     {items.map((item) => (
       <article>
         <a class="block p-4 bg-muted/50 hover:bg-muted border-border border rounded-lg" href={`/${kind}/${item.slug}/`}>

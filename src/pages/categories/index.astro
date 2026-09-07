@@ -6,7 +6,8 @@ import { getTaxonomyList } from "../../lib/taxonomy";
 
 const items = await getTaxonomyList("categories");
 ---
+
 <BaseLayout title="List of categories">
   <Banner />
-  <TaxonomyGrid kind="categories" title="categories" items={items} />
+  <TaxonomyGrid kind="categories" title="分类列表" items={items} />
 </BaseLayout>

@@ -7,18 +7,19 @@
     "npm:@astrojs/check@~0.9.4": "0.9.10_typescript@5.9.3",
     "npm:@biomejs/biome@*": "2.5.12",
     "npm:@biomejs/biome@2.5.12": "2.5.12",
+    "npm:@lucide/astro@0.525.0": "0.525.0_astro@5.18.2",
     "npm:@tailwindcss/vite@^4.1.11": "4.3.3_vite@6.4.3",
     "npm:@types/hast@^3.0.5": "3.0.5",
     "npm:astro@*": "5.18.2_typescript@5.9.3",
     "npm:astro@^5.12.0": "5.18.2_typescript@5.9.3",
     "npm:clsx@^2.1.1": "2.1.1",
     "npm:glightbox@^3.3.1": "3.3.1",
-    "npm:lucide@0.525": "0.525.0",
     "npm:npm-remote-ls@*": "1.3.2",
     "npm:npm@latest": "12.0.2",
     "npm:overlayscrollbars@^2.11.4": "2.16.0",
     "npm:pinyin-pro@3.29.3": "3.29.3",
     "npm:pinyin-pro@^3.26.0": "3.29.3",
+    "npm:rehype@^13.0.2": "13.0.2",
     "npm:remark-custom-header-id@1": "1.0.0",
     "npm:remark-definition-list@2": "2.0.0",
     "npm:remark-github-alerts@~0.1.1": "0.1.1_@types+mdast@4.0.4_unified@11.0.5",
@@ -695,6 +696,12 @@
       "dependencies": [
         "@jridgewell/resolve-uri",
         "@jridgewell/sourcemap-codec"
+      ]
+    },
+    "@lucide/astro@0.525.0_astro@5.18.2": {
+      "integrity": "sha512-CjX9aJlmHg5/Io6mRSrSi3TbwRXtrV/6kwsRjv6eVhBymAA8ogq3j8YrV1PsXn1EHK9HFyzeJOhaXGm00acVLg==",
+      "dependencies": [
+        "astro"
       ]
     },
     "@oslojs/encoding@1.1.0": {
@@ -2148,9 +2155,6 @@
     },
     "lru-cache@11.5.2": {
       "integrity": "sha512-4pfM1Ff0x50o0tQwb5ucw/RzNyD0/YJME6IVcStalZuMWxdt3sR3huStTtxz4PUmvZfRguvDejasvQ2kifR11g=="
-    },
-    "lucide@0.525.0": {
-      "integrity": "sha512-sfehWlaE/7NVkcEQ4T9JD3eID8RNMIGJBBUq9wF3UFiJIrcMKRbU3g1KGfDk4svcW7yw8BtDLXaXo02scDtUYQ=="
     },
     "magic-string@0.30.21": {
       "integrity": "sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==",
@@ -3857,14 +3861,15 @@
       "dependencies": [
         "npm:@astrojs/check@~0.9.4",
         "npm:@biomejs/biome@2.5.12",
+        "npm:@lucide/astro@0.525.0",
         "npm:@tailwindcss/vite@^4.1.11",
         "npm:@types/hast@^3.0.5",
         "npm:astro@^5.12.0",
         "npm:clsx@^2.1.1",
         "npm:glightbox@^3.3.1",
-        "npm:lucide@0.525",
         "npm:overlayscrollbars@^2.11.4",
         "npm:pinyin-pro@^3.26.0",
+        "npm:rehype@^13.0.2",
         "npm:remark-custom-header-id@1",
         "npm:remark-definition-list@2",
         "npm:remark-github-alerts@~0.1.1",

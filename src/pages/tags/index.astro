@@ -6,6 +6,7 @@ import { getTaxonomyList } from "../../lib/taxonomy";
 
 const items = await getTaxonomyList("tags");
 ---
+
 <BaseLayout title="List of tags">
   <Banner />
   <TaxonomyGrid kind="tags" title="tags" items={items} />

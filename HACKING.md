@@ -22,7 +22,6 @@ deno task lint
 - `src/lib/permalink.ts`：Hexo 兼容 permalink
 - `src/lib/taxonomy.ts`：分类/标签聚合与拼音 slug
 - `public/`：静态资源
-- `legacy/`：迁移前的 Zola/Hexo 对照（可在稳定后删除）
 
 ## Permalink
 

@@ -10,6 +10,6 @@ export const siteConfig = {
     { url: "/about/", name: "关于" },
   ],
   bannerImg: "/imgs/banner.webp",
-  creativeCommons: ["BY"],
+  creativeCommons: ["Attribution-ShareAlike"],
   pageSize: 5,
 } as const;

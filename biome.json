@@ -28,8 +28,7 @@
     "enabled": true,
     "rules": {
       "preset": "recommended",
-      "style": {
-      }
+      "style": {}
     }
   },
   "javascript": {
@@ -42,6 +41,12 @@
       "tailwindDirectives": true
     },
     "linter": {
+      "enabled": true
+    }
+  },
+  "html": {
+    "experimentalFullSupportEnabled": true,
+    "formatter": {
       "enabled": true
     }
   },

@@ -21,6 +21,12 @@ const { post, permalink } = Astro.props;
 const { Content, headings } = await render(post);
 const plainText = post.body ?? "";
 ---
-<PostLayout post={post} permalink={permalink} headings={headings} plainText={plainText}>
+
+<PostLayout
+  post={post}
+  permalink={permalink}
+  headings={headings}
+  plainText={plainText}
+>
   <Content />
 </PostLayout>

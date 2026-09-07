@@ -70,11 +70,11 @@ description: 关于 Faraway Ash
 
 ~~主题是 [Fluid](https://github.com/fluid-dev/hexo-theme-fluid)，不过是[我的改版](https://github.com/lingrottin/hexo-theme-fluid)。部分页面上的东西（如[友情链接](/links)）是我自己写的。~~
 
-本站已于 2026-5-1 迁移到了 [Zola](https://getzola.org)，网站的主题完全由我从 0 开始编写，AI-free。部分配色来自 [shadcn/ui](https://ui.shadcn.com/)。
+~~本站已于 2026-5-1 迁移到了 [Zola](https://getzola.org)，网站的主题完全由我从 0 开始编写，AI-free。~~ 本站在 2026-9-8 迁移到了 [Astro](https://astro.build)，网站的主题是让 AI 从我之前的 Zola 源码迁移的。这次迁移主要是为了 make use of 现代前端工具链，同时仍然保持作为 SSG 的高效迅速，并且得益于 Astro，本站的 JS 应该十分少。
 
-我很喜欢 [Adwaita](https://gitlab.gnome.org/GNOME/adwaita-fonts) Sans 和 Mono，因为它们很优雅美观，加上我非常喜欢 GTK4 Adwaita 的风格。
+本站的部分配色来自 [shadcn/ui](https://ui.shadcn.com/)。
 
-本站使用的字体是我 DIY 的[更纱独黑](https://github.com/lingrottin/Sarasa-Adwaita)，一个[更纱黑体](https://github.com/be5invis/Sarasa-Gothic)的改版。它把更纱黑体中的西方字符改成用 Adwaita 字体，这样，对我来说更好看。
+我很喜欢 [Adwaita](https://gitlab.gnome.org/GNOME/adwaita-fonts) Sans 和 Mono，因为它们很优雅美观，加上我非常喜欢 GTK4 Adwaita 的风格，所以本站内置了这两个字体。（使用 OFL 协议授权）
 
 *btw. 本站本来是使用衬线字体如 Noto Serif 的，但是后来发现在低分屏上衬线字体确实会晃眼睛。*
 
@@ -157,7 +157,8 @@ Dear creator, if you do not want me to use your artworks, plz. contact me to rem
 - X：@enita8601
 - Mastodon：@lilc@mastodon.social
 - GitHub：[@lingrottin](https://github.com/lingrottin)
-- Matrix: @enita:fedora.im
+- Matrix: [@enita:fedora.im](https://matrix.to/#/@enita:fedora.im)
 
-如果使用邮箱联系，我会在 48h 内答复。很抱歉，邮箱之外的任何联系方式都有可能不能得到迅速的回复。
+如果使用邮箱联系，我会在 48h 内答复。如果使用 QQ 联系，我应该当日就能联系到你。*（但是如果你的账号加好友太过频繁以至于触发了腾讯的风控，我有可能完全接收不到你的好友请求。这一点很抱歉，因此更建议使用邮箱和我建立连接，因为垃圾邮件箱我也会翻看。）*
 
+很抱歉，邮箱和 QQ 之外的任何联系方式都有可能不能得到迅速的回复。

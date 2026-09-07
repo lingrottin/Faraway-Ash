@@ -11,18 +11,29 @@ interface Props {
 const { title, description = siteConfig.description } = Astro.props;
 const pageTitle = title ? `${title} - ${siteConfig.title}` : siteConfig.title;
 ---
+
 <!doctype html>
 <html lang={siteConfig.locale} data-overlayscrollbars-initialize>
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {description && <meta name="description" content={description} />}
     <title>{pageTitle}</title>
-    <link rel="icon" href="/img/special/favicon.png" />
-    <link rel="alternate" type="application/rss+xml" title={`${siteConfig.title} RSS`} href="/rss.xml" />
-    <link rel="alternate" type="application/atom+xml" title={`${siteConfig.title} Atom`} href="/atom.xml" />
-    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/img/special/favicon.png">
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${siteConfig.title} RSS`}
+      href="/rss.xml"
+    >
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title={`${siteConfig.title} Atom`}
+      href="/atom.xml"
+    >
+    <meta name="generator" content={Astro.generator}>
   </head>
   <body data-overlayscrollbars-initialize>
     <SiteHeader />
@@ -31,21 +42,21 @@ const pageTitle = title ? `${title} - ${siteConfig.title}` : siteConfig.title;
     </main>
     <SiteFooter />
     <script>
-      import { OverlayScrollbars } from "overlayscrollbars";
+    import { OverlayScrollbars } from "overlayscrollbars";
 
-      // Initialize first so later page scripts can mount into a stable scroll tree.
-      OverlayScrollbars(document.body, {
-        scrollbars: {
-          theme: "os-theme-custom",
-          autoHide: "leave",
-          autoHideDelay: 200,
-          visibility: "auto",
-          clickScroll: true,
-        },
-      });
+    // Initialize first so later page scripts can mount into a stable scroll tree.
+    OverlayScrollbars(document.body, {
+      scrollbars: {
+        theme: "os-theme-custom",
+        autoHide: "leave",
+        autoHideDelay: 200,
+        visibility: "auto",
+        clickScroll: true,
+      },
+    });
 
-      // Let article scripts know the body DOM has been wrapped.
-      document.dispatchEvent(new CustomEvent("fa:scrollbars-ready"));
+    // Let article scripts know the body DOM has been wrapped.
+    document.dispatchEvent(new CustomEvent("fa:scrollbars-ready"));
     </script>
   </body>
 </html>

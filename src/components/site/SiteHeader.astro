@@ -1,15 +1,27 @@
 ---
+import { Laptop, Moon, Sun } from "@lucide/astro";
 import { siteConfig } from "../../lib/site";
 ---
-<header id="topbar" class="fixed top-0 z-100 backdrop-blur-sm not-dark:bg-background/80 dark:bg-background/50 w-full h-15 text-lg flex flex-row px-6 border-b border-border items-center">
+
+<header
+  id="topbar"
+  class="fixed top-0 z-100 backdrop-blur-sm not-dark:bg-background/80 dark:bg-background/50 w-full h-15 text-lg flex flex-row px-6 border-b border-border items-center"
+>
   <nav aria-label="主导航" class="flex flex-row items-center gap-4">
-    <a id="topbar-logo" class="block font-semibold hover:text-strong-accent hover:underline" href="/"></a>
+    <a
+      href="/"
+      class="block font-semibold hover:text-strong-accent hover:underline"
+      aria-label="Faraway Ash"
+    >
+      <span aria-hidden="true" id="topbar-logo-short">FA</span>
+      <span aria-hidden="true" id="topbar-logo-full">Faraway Ash</span>
+    </a>
     <ul class="flex flex-row items-center gap-4 text-base">
       {siteConfig.menu.map((item) => (
-        <li class="text-foreground hover:underline">
-          <a href={item.url}>{item.name}</a>
-        </li>
-      ))}
+                    <li class="text-foreground hover:underline">
+                        <a href={item.url}>{item.name}</a>
+                    </li>
+                ))}
     </ul>
   </nav>
   <div class="flex-1"></div>
@@ -20,57 +32,63 @@ import { siteConfig } from "../../lib/site";
     id="theme-toggle"
     aria-label="Toggle theme"
   >
-    <i data-lucide="moon" class="hidden group-data-[selected=dark]:block"></i>
-    <i data-lucide="sun" class="hidden group-data-[selected=light]:block"></i>
-    <i data-lucide="laptop" class="hidden group-data-[selected=system]:block"></i>
+    <Moon class="hidden group-data-[selected=dark]:block" aria-hidden="true" />
+    <Sun class="hidden group-data-[selected=light]:block" aria-hidden="true" />
+    <Laptop
+      class="hidden group-data-[selected=system]:block"
+      aria-hidden="true"
+    />
   </button>
 </header>
 
 <script>
-  import { createIcons, Moon, Sun, Laptop } from "lucide";
+const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+const themes = ["system", "dark", "light"] as const;
+const themeToggle = document.getElementById(
+  "theme-toggle",
+) as HTMLButtonElement | null;
 
-  const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  const themes = ["system", "dark", "light"] as const;
-  const themeToggle = document.getElementById("theme-toggle") as HTMLButtonElement | null;
-
-  function setDarkMode() {
-    let dark = false;
-    const setting = localStorage.getItem("dark_mode");
-    switch (setting) {
-      case "dark":
-        dark = true;
-        break;
-      case "light":
-        dark = false;
-        break;
-      default:
-        dark = darkModeQuery.matches;
-    }
-    document.body.classList.toggle("dark", dark);
+function setDarkMode() {
+  let dark = false;
+  const setting = localStorage.getItem("dark_mode");
+  switch (setting) {
+    case "dark":
+      dark = true;
+      break;
+    case "light":
+      dark = false;
+      break;
+    default:
+      dark = darkModeQuery.matches;
   }
+  document.body.classList.toggle("dark", dark);
+}
 
-  function initThemeButton() {
-    let current = (localStorage.getItem("dark_mode") as (typeof themes)[number] | null) ?? "system";
-    themeToggle?.setAttribute("data-selected", current);
-  }
+function initThemeButton() {
+  const current =
+    (localStorage.getItem("dark_mode") as (typeof themes)[number] | null) ??
+    "system";
+  themeToggle?.setAttribute("data-selected", current);
+}
 
-  themeToggle?.addEventListener("click", () => {
-    let current = (localStorage.getItem("dark_mode") as (typeof themes)[number] | null) ?? "system";
-    const next = themes[(themes.indexOf(current) + 1) % themes.length];
-    localStorage.setItem("dark_mode", next);
-    themeToggle.setAttribute("data-selected", next);
-    setDarkMode();
-  });
-
-  darkModeQuery.addEventListener("change", setDarkMode);
-  addEventListener("storage", (event) => {
-    if (event.key === "dark_mode") {
-      initThemeButton();
-      setDarkMode();
-    }
-  });
-
-  initThemeButton();
+themeToggle?.addEventListener("click", () => {
+  const current =
+    (localStorage.getItem("dark_mode") as (typeof themes)[number] | null) ??
+    "system";
+  const next = themes[(themes.indexOf(current) + 1) % themes.length];
+  localStorage.setItem("dark_mode", next);
+  themeToggle.setAttribute("data-selected", next);
   setDarkMode();
-  createIcons({ icons: { Moon, Sun, Laptop } });
+});
+
+darkModeQuery.addEventListener("change", setDarkMode);
+addEventListener("storage", (event) => {
+  if (event.key === "dark_mode") {
+    initThemeButton();
+    setDarkMode();
+  }
+});
+
+initThemeButton();
+setDarkMode();
 </script>

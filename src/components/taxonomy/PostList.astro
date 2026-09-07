@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { ChevronRight, Clock, Shapes } from "@lucide/astro";
 import { formatDateYMD } from "../../lib/dates";
 import { postPermalink } from "../../lib/permalink";
 import { taxonomyUrl } from "../../lib/taxonomy";
@@ -15,6 +16,7 @@ const items = await Promise.all(
   })),
 );
 ---
+
 <ul>
   {items.map(({ post, permalink }, index) => (
     <>
@@ -32,11 +34,11 @@ const items = await Promise.all(
             </a>
           </section>
           <footer class="flex flex-row items-center text-muted-foreground">
-            <i data-lucide="clock" class="size-4 mr-2"></i>
+            <Clock class="size-4 mr-2" aria-hidden="true" />
             <span>{formatDateYMD(post.data.date)}</span>
             {post.data.categories.length > 0 && (
               <>
-                <i data-lucide="shapes" class="size-4 mx-2"></i>
+                <Shapes class="size-4 mx-2" aria-hidden="true" />
                 <span>
                   {post.data.categories.map((category, i) => (
                     <>
@@ -50,7 +52,7 @@ const items = await Promise.all(
             <div class="flex-1"></div>
             <a href={permalink} class="hover:underline group text-muted-foreground hover:text-foreground font-semibold cursor-pointer flex flex-row items-center">
               <span class="underline">Read more</span>
-              <i data-lucide="chevron-right" class="size-6 group-hover:text-strong-accent transition-colors duration-200 ease-out"></i>
+              <ChevronRight class="size-6 group-hover:text-strong-accent transition-colors duration-200 ease-out" aria-hidden="true" />
             </a>
           </footer>
         </article>
@@ -58,7 +60,3 @@ const items = await Promise.all(
     </>
   ))}
 </ul>
-<script>
-  import { createIcons, Clock, Shapes, ChevronRight } from "lucide";
-  createIcons({ icons: { Clock, Shapes, ChevronRight } });
-</script>

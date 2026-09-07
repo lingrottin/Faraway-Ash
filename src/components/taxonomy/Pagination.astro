@@ -1,4 +1,11 @@
 ---
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "@lucide/astro";
+
 interface Props {
   page: number;
   totalPages: number;
@@ -22,27 +29,49 @@ const next =
     : null;
 // Zola home page 1 is also /
 const prevHref = page === 2 && basePath === "/" ? "/" : prev;
+
+const Prev = prevHref ? "a" : "span";
+const Next = next ? "a" : "span";
 ---
-<nav class="fa-container mx-auto mt-8 flex flex-row items-center justify-center text-lg *:py-4 text-muted-foreground *:hover:text-foreground *:hover:underline not-md:px-4">
-  <a class:list={["pr-10", !prev && "text-muted-foreground/20!"]} href={first}>
-    <i data-lucide="chevrons-left" class="size-8"></i>
-  </a>
+
+<nav
+  class="fa-container mx-auto mt-8 flex flex-row items-center justify-center text-lg *:py-4 text-muted-foreground *:hover:text-foreground *:hover:underline not-md:px-4"
+>
+  <Prev
+    aria-label="Go to first page"
+    class:list={["pr-10", !prev && "text-muted-foreground/20!"]}
+    href={first}
+  >
+    <ChevronsLeft class="size-8" aria-hidden="true" />
+  </Prev>
   <div class="flex-1"></div>
-  <a class:list={["flex flex-row items-center *:block px-5", !prevHref && "text-muted-foreground/20!"]} href={prevHref ?? undefined}>
-    <i class="size-8" data-lucide="chevron-left"></i>
+  <Prev
+    class:list={[
+            "flex flex-row items-center *:block px-5",
+            !prevHref && "text-muted-foreground/20!",
+        ]}
+    href={prevHref ?? undefined}
+  >
+    <ChevronLeft class="size-8" aria-hidden="true" />
     <span class="not-md:hidden">上一页</span>
-  </a>
+  </Prev>
   <span class="px-5">{page}</span>
-  <a class:list={["flex flex-row items-center *:block px-5", !next && "text-muted-foreground/20!"]} href={next ?? undefined}>
+  <Next
+    class:list={[
+            "flex flex-row items-center *:block px-5",
+            !next && "text-muted-foreground/20!",
+        ]}
+    href={next ?? undefined}
+  >
     <span class="not-md:hidden">下一页</span>
-    <i class="size-8" data-lucide="chevron-right"></i>
-  </a>
+    <ChevronRight class="size-8" aria-hidden="true" />
+  </Next>
   <div class="flex-1"></div>
-  <a class:list={["pl-10", !next && "text-muted-foreground/20!"]} href={last}>
-    <i data-lucide="chevrons-right" class="size-8"></i>
-  </a>
+  <Next
+    aria-label="Go to last page"
+    class:list={["pl-10", !next && "text-muted-foreground/20!"]}
+    href={last}
+  >
+    <ChevronsRight class="size-8" aria-hidden="true" />
+  </Next>
 </nav>
-<script>
-  import { createIcons, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide";
-  createIcons({ icons: { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } });
-</script>

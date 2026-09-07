@@ -18,11 +18,14 @@ const { name, posts } = Astro.props;
 const { items, page, totalPages } = paginate(posts, 1, siteConfig.pageSize);
 const basePath = `/tags/${Astro.params.slug}/`;
 ---
+
 <BaseLayout title={name}>
   <Banner />
   <section class="mt-4 fa-container mx-auto flex flex-col not-md:px-4">
-    <header class="text-2xl my-4 font-bold text-center pb-4 border-border border-b">
-      <h1>标记为“{name}”的文章列表</h1>
+    <header
+      class="text-2xl my-4 font-bold text-center pb-4 border-border border-b"
+    >
+      <h1>标签：{name}</h1>
     </header>
     <PostList posts={items} />
   </section>

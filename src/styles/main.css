@@ -12,12 +12,19 @@
   }
 }
 
-#topbar-logo::before {
-  content: "FA";
-  @media (width >= 48rem) {
-    content: "Faraway Ash";
+#topbar-logo-full {
+  display: none;
+}
+
+@media (width >= 48rem) {
+  #topbar-logo-full {
+    display: block;
+  }
+  #topbar-logo-short {
+    display: none;
   }
 }
+
 @layer components {
   .fa-container {
     width: 100%;

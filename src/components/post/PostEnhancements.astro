@@ -3,282 +3,249 @@
 ---
 
 <script>
-    import { createIcons, Link } from "lucide";
-    import { OverlayScrollbars } from "overlayscrollbars";
-    import { toast } from "../../lib/toast";
+import { OverlayScrollbars } from "overlayscrollbars";
+import { toast } from "../../lib/toast";
 
-    const share = document.getElementById("share_this_page");
-    share?.addEventListener("click", async () => {
-        try {
-            const link =
-                share.getAttribute("data-share-link") || window.location.href;
-            await navigator.clipboard.writeText(link);
-            toast("文本已成功复制到剪贴板", { variant: "success" });
-        } catch (err) {
-            toast(`无法复制文本: ${err}`, { variant: "destructive" });
-        }
+const share = document.getElementById("share_this_page");
+share?.addEventListener("click", async () => {
+  try {
+    const link = share.getAttribute("data-share-link") || window.location.href;
+    await navigator.clipboard.writeText(link);
+    toast("文本已成功复制到剪贴板", { variant: "success" });
+  } catch (err) {
+    toast(`无法复制文本: ${err}`, { variant: "destructive" });
+  }
+});
+
+// Heading copy anchors are injected by rehype; only wire the click handler.
+document.querySelector(".content")?.addEventListener("click", async (e) => {
+  const target = e.target as HTMLElement;
+  const anchorEl = target.closest("[data-target-id]");
+  if (!anchorEl) return;
+  e.preventDefault();
+  const targetId = anchorEl.getAttribute("data-target-id");
+  if (!targetId) return;
+  const url = `${window.location.origin}${window.location.pathname}#${targetId}`;
+  try {
+    await navigator.clipboard.writeText(url);
+    toast("标题链接已复制到剪贴板", { variant: "success" });
+  } catch (err) {
+    toast(`无法复制链接: ${err}`, { variant: "destructive" });
+  }
+});
+
+// --- highlight anchor targets ---
+
+let highlightToken = 0;
+let highlightedTarget: HTMLElement | null = null;
+
+function clearHighlight(target: HTMLElement | null) {
+  if (!target) return;
+  target.classList.remove("being-highlighted", "highlight-active", "relative");
+  if (highlightedTarget === target) highlightedTarget = null;
+}
+
+function resolveHighlightTarget(
+  element: HTMLElement | null,
+): HTMLElement | null {
+  let current = element;
+  while (current) {
+    const tag = current.tagName.toLowerCase();
+    // Footnote refs live in <sup><a id="user-content-fnref-...">.
+    // Climb out of the superscript so the highlight covers the
+    // surrounding content the reader is returning to.
+    if (
+      tag === "sup" ||
+      tag === "sub" ||
+      (tag === "a" && current.id.startsWith("user-content-fnref-"))
+    ) {
+      current = current.parentElement;
+      continue;
+    }
+    return current;
+  }
+  return null;
+}
+
+function highlightAnchorTargets(init: boolean) {
+  return async () => {
+    const rawHash = window.location.hash.slice(1);
+    if (!rawHash) return;
+
+    let targetId = rawHash;
+    try {
+      targetId = decodeURIComponent(rawHash);
+    } catch {
+      // Keep the raw hash if it is not valid URI encoding.
+    }
+    if (!targetId) return;
+
+    // On first paint only: skip footnote back-references. Readers
+    // usually have not seen the footnote yet, so highlighting the
+    // tiny ref marker is confusing. After load, the same hash is
+    // treated as "reader returned from the footnote" and should
+    // highlight the surrounding content.
+    if (init && targetId.includes("user-content-fnref")) return;
+
+    const actualTarget = document.getElementById(targetId);
+    const target = resolveHighlightTarget(actualTarget);
+    if (!target) return;
+
+    const token = ++highlightToken;
+    clearHighlight(highlightedTarget);
+    highlightedTarget = target;
+
+    target.classList.add("being-highlighted", "highlight-active", "relative");
+
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    if (token !== highlightToken || highlightedTarget !== target) return;
+
+    target.classList.remove("highlight-active");
+    await new Promise((resolve) => setTimeout(resolve, 1100));
+    if (token !== highlightToken || highlightedTarget !== target) return;
+
+    clearHighlight(target);
+  };
+}
+
+function runInitialHighlight() {
+  void highlightAnchorTargets(true)();
+}
+
+class FaTocHeader extends HTMLElement {
+  correspondingHeader: HTMLHeadingElement | null = null;
+  childrenContainer: FaTocChildren | null = null;
+  parentTocHeader: FaTocHeader | null = null;
+  init() {
+    const dataId = this.dataset.id;
+    this.correspondingHeader = dataId
+      ? (document.getElementById(dataId) as HTMLHeadingElement | null)
+      : null;
+    this.childrenContainer = this.querySelector(
+      ":scope > fa-toc-children",
+    ) as FaTocChildren | null;
+    this.parentTocHeader = this.parentElement?.closest(
+      "fa-toc-header",
+    ) as FaTocHeader | null;
+  }
+  setHighlighted(highlighted: boolean) {
+    this.classList.toggle("toc-highlighted", highlighted);
+  }
+  setExpanded(expanded: boolean) {
+    const hasChildren = !!this.childrenContainer;
+    this.classList.toggle("toc-expanded", hasChildren && expanded);
+    this.classList.toggle("toc-collapsed", hasChildren && !expanded);
+    this.childrenContainer?.classList.toggle("toc-collapsed", !expanded);
+  }
+}
+class FaTocChildren extends HTMLElement {}
+if (!customElements.get("fa-toc-header"))
+  customElements.define("fa-toc-header", FaTocHeader);
+if (!customElements.get("fa-toc-children"))
+  customElements.define("fa-toc-children", FaTocChildren);
+
+function initSidebarToc() {
+  const sidebar = document.getElementById("fa-toc-container");
+  if (!sidebar) return;
+  const tocHeaders = Array.from(
+    sidebar.querySelectorAll("fa-toc-header"),
+  ) as FaTocHeader[];
+  for (const h of tocHeaders) h.init();
+
+  function getActiveHeader(): FaTocHeader | null {
+    const triggerY = window.innerHeight / 3;
+    let active: FaTocHeader | null = null;
+    let bestTop = -Infinity;
+    for (const tocHeader of tocHeaders) {
+      const heading = tocHeader.correspondingHeader;
+      if (!heading) continue;
+      const rect = heading.getBoundingClientRect();
+      if (rect.top <= triggerY && rect.top > bestTop) {
+        bestTop = rect.top;
+        active = tocHeader;
+      }
+    }
+    if (active) return active;
+    let fallback: FaTocHeader | null = null;
+    let minTop = Infinity;
+    for (const tocHeader of tocHeaders) {
+      const heading = tocHeader.correspondingHeader;
+      if (!heading) continue;
+      const rect = heading.getBoundingClientRect();
+      if (rect.top > triggerY && rect.top < minTop) {
+        minTop = rect.top;
+        fallback = tocHeader;
+      }
+    }
+    return fallback;
+  }
+
+  function collectActiveChain(active: FaTocHeader | null) {
+    const chain = new Set<FaTocHeader>();
+    let cur = active;
+    while (cur) {
+      chain.add(cur);
+      cur = cur.parentTocHeader;
+    }
+    return chain;
+  }
+
+  function updateTocState() {
+    const active = getActiveHeader();
+    const activeChain = collectActiveChain(active);
+    for (const tocHeader of tocHeaders) {
+      tocHeader.setHighlighted(tocHeader === active);
+      if (tocHeader.childrenContainer)
+        tocHeader.setExpanded(activeChain.has(tocHeader));
+    }
+  }
+
+  let scheduled = false;
+  function scheduleUpdate() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      updateTocState();
     });
+  }
 
-    function injectHeadingAnchors() {
-        const content = document.querySelector(".content");
-        if (!content) return;
-        for (const heading of content.querySelectorAll(
-            "h1, h2, h3, h4, h5, h6",
-        )) {
-            const id = heading.id;
-            if (!id || heading.querySelector(".heading-anchor")) continue;
-            const anchor = document.createElement("i");
-            anchor.className = "heading-anchor";
-            anchor.setAttribute("data-lucide", "link");
-            anchor.setAttribute("data-target-id", id);
-            anchor.setAttribute("role", "button");
-            anchor.setAttribute("tabindex", "0");
-            anchor.setAttribute(
-                "aria-label",
-                `复制「${heading.textContent?.trim() ?? id}」的链接`,
-            );
-            anchor.title = "复制链接";
-            heading.appendChild(anchor);
-        }
-        createIcons({ icons: { Link }, attrs: { "aria-hidden": "true" } });
-        content.addEventListener("click", async (e) => {
-            const target = e.target as HTMLElement;
-            const anchorEl = target.closest("[data-target-id]");
-            if (!anchorEl) return;
-            const targetId = anchorEl.getAttribute("data-target-id");
-            if (!targetId) return;
-            const url = `${window.location.origin}${window.location.pathname}#${targetId}`;
-            try {
-                await navigator.clipboard.writeText(url);
-                toast("标题链接已复制到剪贴板", { variant: "success" });
-            } catch (err) {
-                toast(`无法复制链接: ${err}`, { variant: "destructive" });
-            }
-        });
-    }
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", scheduleUpdate);
+  scheduleUpdate();
+}
 
-    // --- highlight anchor targets ---
+function initPreScrollbars() {
+  document.querySelectorAll(".content pre").forEach((pre) => {
+    OverlayScrollbars(pre as HTMLElement, {
+      scrollbars: {
+        theme: "os-theme-custom",
+        autoHide: "leave",
+        autoHideDelay: 200,
+        visibility: "auto",
+      },
+      overflow: { x: "scroll", y: "hidden" },
+    });
+  });
+}
 
-    let highlightToken = 0;
-    let highlightedTarget: HTMLElement | null = null;
+initSidebarToc();
 
-    function clearHighlight(target: HTMLElement | null) {
-        if (!target) return;
-        target.classList.remove(
-            "being-highlighted",
-            "highlight-active",
-            "relative",
-        );
-        if (highlightedTarget === target) highlightedTarget = null;
-    }
+// Module scripts are deferred; DOMContentLoaded may already have fired.
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", runInitialHighlight);
+} else {
+  runInitialHighlight();
+}
+window.addEventListener("hashchange", highlightAnchorTargets(false));
 
-    function resolveHighlightTarget(element: HTMLElement | null): HTMLElement | null {
-        let current = element;
-        while (current) {
-            const tag = current.tagName.toLowerCase();
-            // Footnote refs live in <sup><a id="user-content-fnref-...">.
-            // Climb out of the superscript so the highlight covers the
-            // surrounding content the reader is returning to.
-            if (
-                tag === "sup" ||
-                tag === "sub" ||
-                current.matches(".heading-anchor")
-            ) {
-                current = current.parentElement;
-                continue;
-            }
-            return current;
-        }
-        return null;
-    }
-
-    function highlightAnchorTargets(init: boolean) {
-        return async () => {
-            const rawHash = window.location.hash.slice(1);
-            if (!rawHash) return;
-
-            let targetId = rawHash;
-            try {
-                targetId = decodeURIComponent(rawHash);
-            } catch {
-                // Keep the raw hash if it is not valid URI encoding.
-            }
-            if (!targetId) return;
-
-            // On first paint only: skip footnote back-references. Readers
-            // usually have not seen the footnote yet, so highlighting the
-            // tiny ref marker is confusing. After load, the same hash is
-            // treated as "reader returned from the footnote" and should
-            // highlight the surrounding content.
-            if (init && targetId.includes("user-content-fnref")) return;
-
-            const actualTarget = document.getElementById(targetId);
-            const target = resolveHighlightTarget(actualTarget);
-            if (!target) return;
-
-            const token = ++highlightToken;
-            clearHighlight(highlightedTarget);
-            highlightedTarget = target;
-
-            target.classList.add(
-                "being-highlighted",
-                "highlight-active",
-                "relative",
-            );
-
-            await new Promise((resolve) => setTimeout(resolve, 5000));
-            if (token !== highlightToken || highlightedTarget !== target) return;
-
-            target.classList.remove("highlight-active");
-            await new Promise((resolve) => setTimeout(resolve, 1100));
-            if (token !== highlightToken || highlightedTarget !== target) return;
-
-            clearHighlight(target);
-        };
-    }
-
-    function runInitialHighlight() {
-        void highlightAnchorTargets(true)();
-    }
-
-    class FaTocHeader extends HTMLElement {
-        correspondingHeader: HTMLHeadingElement | null = null;
-        childrenContainer: FaTocChildren | null = null;
-        parentTocHeader: FaTocHeader | null = null;
-        init() {
-            const dataId = this.dataset.id;
-            this.correspondingHeader = dataId
-                ? (document.getElementById(dataId) as HTMLHeadingElement | null)
-                : null;
-            this.childrenContainer = this.querySelector(
-                ":scope > fa-toc-children",
-            ) as FaTocChildren | null;
-            this.parentTocHeader = this.parentElement?.closest(
-                "fa-toc-header",
-            ) as FaTocHeader | null;
-        }
-        setHighlighted(highlighted: boolean) {
-            this.classList.toggle("toc-highlighted", highlighted);
-        }
-        setExpanded(expanded: boolean) {
-            const hasChildren = !!this.childrenContainer;
-            this.classList.toggle("toc-expanded", hasChildren && expanded);
-            this.classList.toggle("toc-collapsed", hasChildren && !expanded);
-            this.childrenContainer?.classList.toggle(
-                "toc-collapsed",
-                !expanded,
-            );
-        }
-    }
-    class FaTocChildren extends HTMLElement {}
-    if (!customElements.get("fa-toc-header"))
-        customElements.define("fa-toc-header", FaTocHeader);
-    if (!customElements.get("fa-toc-children"))
-        customElements.define("fa-toc-children", FaTocChildren);
-
-    function initSidebarToc() {
-        const sidebar = document.getElementById("fa-toc-container");
-        if (!sidebar) return;
-        const tocHeaders = Array.from(
-            sidebar.querySelectorAll("fa-toc-header"),
-        ) as FaTocHeader[];
-        for (const h of tocHeaders) h.init();
-
-        function getActiveHeader(): FaTocHeader | null {
-            const triggerY = window.innerHeight / 3;
-            let active: FaTocHeader | null = null;
-            let bestTop = -Infinity;
-            for (const tocHeader of tocHeaders) {
-                const heading = tocHeader.correspondingHeader;
-                if (!heading) continue;
-                const rect = heading.getBoundingClientRect();
-                if (rect.top <= triggerY && rect.top > bestTop) {
-                    bestTop = rect.top;
-                    active = tocHeader;
-                }
-            }
-            if (active) return active;
-            let fallback: FaTocHeader | null = null;
-            let minTop = Infinity;
-            for (const tocHeader of tocHeaders) {
-                const heading = tocHeader.correspondingHeader;
-                if (!heading) continue;
-                const rect = heading.getBoundingClientRect();
-                if (rect.top > triggerY && rect.top < minTop) {
-                    minTop = rect.top;
-                    fallback = tocHeader;
-                }
-            }
-            return fallback;
-        }
-
-        function collectActiveChain(active: FaTocHeader | null) {
-            const chain = new Set<FaTocHeader>();
-            let cur = active;
-            while (cur) {
-                chain.add(cur);
-                cur = cur.parentTocHeader;
-            }
-            return chain;
-        }
-
-        function updateTocState() {
-            const active = getActiveHeader();
-            const activeChain = collectActiveChain(active);
-            for (const tocHeader of tocHeaders) {
-                tocHeader.setHighlighted(tocHeader === active);
-                if (tocHeader.childrenContainer)
-                    tocHeader.setExpanded(activeChain.has(tocHeader));
-            }
-        }
-
-        let scheduled = false;
-        function scheduleUpdate() {
-            if (scheduled) return;
-            scheduled = true;
-            requestAnimationFrame(() => {
-                scheduled = false;
-                updateTocState();
-            });
-        }
-
-        window.addEventListener("scroll", scheduleUpdate, { passive: true });
-        window.addEventListener("resize", scheduleUpdate);
-        scheduleUpdate();
-    }
-
-    function initPreScrollbars() {
-        document.querySelectorAll(".content pre").forEach((pre) => {
-            OverlayScrollbars(pre as HTMLElement, {
-                scrollbars: {
-                    theme: "os-theme-custom",
-                    autoHide: "leave",
-                    autoHideDelay: 200,
-                    visibility: "auto",
-                },
-                overflow: { x: "scroll", y: "hidden" },
-            });
-        });
-    }
-
-    injectHeadingAnchors();
-    initSidebarToc();
-
-    // Module scripts are deferred; DOMContentLoaded may already have fired.
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", runInitialHighlight);
-    } else {
-        runInitialHighlight();
-    }
-    window.addEventListener("hashchange", highlightAnchorTargets(false));
-
-    void (async () => {
-        try {
-            const { default: GLightbox } = await import("glightbox");
-            GLightbox({ selector: ".content img" });
-        } catch (err) {
-            console.error("Failed to init GLightbox:", err);
-        }
-        initPreScrollbars();
-    })();
+void (async () => {
+  try {
+    const { default: GLightbox } = await import("glightbox");
+    GLightbox({ selector: ".content img" });
+  } catch (err) {
+    console.error("Failed to init GLightbox:", err);
+  }
+  initPreScrollbars();
+})();
 </script>
