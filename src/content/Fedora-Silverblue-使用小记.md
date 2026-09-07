@@ -12,13 +12,15 @@ description = "记录在 Fedora Silverblue 上通过 rpm-ostree 替换 ffmpeg-fr
 
 ### 介绍
 
-Fedora Silverblue 是一个原子化的操作系统。这里的“原子化”取的是量子世界中能量“不连续”的语义，指的是将系统的变化拆解成一个个可追踪、不连续的“状态”，不同状态间没有过渡态，切换状态要么完全成功，要么完全失败。可见将原子化的概念放在操作系统上——特别是对于桌面 Linux 这种迅猛发展，时常有软件包更新的操作系统上——的好处是相当明显的。
+Fedora Silverblue 是一个原子化的操作系统。这里的“原子化”取的是“原子作为物质的最小单元不可再分”的语义，指的是将数据的变化拆解成一个个不连续的“状态”，不同状态间没有过渡态，切换状态要么完全成功，要么完全失败。可见将原子化的概念放在操作系统上——特别是对于桌面 Linux 这种迅猛发展，时常有软件包更新的操作系统上——的好处是相当明显的。
 
 考虑一下，如果你在 Windows 更新时突然关闭了电脑，这一定会带来灾难性的后果。不过，在原子化操作系统上就不存在这样的顾虑：系统更新要么成功，要么就彻底失败（失败的后果是系统回退到更新前的状态），不存在“更新到一半失败了”的情况。
 
-Fedora 的原子系列系统是基于 [OSTree](https://github.com/ostreedev/ostree) 和 rpm-ostree 构建的。
+常见的原子 OS 有 [NixOS](https://nixos.org/)（虽然系统不可变，但确实符合原子的定义）、[Vanilla OS](https://vanillaos.org/)、Fedora Atomic、[Universal Blue 系列](https://universal-blue.org/)（含 [Bazzite](https://bazzite.gg/)、[Aurora](https://getaurora.dev/en/)、[Bluefin](https://projectbluefin.io/)、[Guix System](https://guix.gnu.org/)（NixOS 的 GNU 洁癖版）等。
 
 相信聪明的读者应该可以发现，“原子化”的思想有点类似版本管理软件——虽然版本管理中不强调“不存在中间态”，但每个版本所代表的状态是固定的，这正好和原子化的“状态固定”思想所契合。因此，OSTree 就参考 Git 版本管理软件的思想，构建了一个“操作系统的 Git”。
+
+Fedora 的原子系列系统是基于 [OSTree](https://github.com/ostreedev/ostree) 和 rpm-ostree 构建的。
 
 rpm-ostree 则是基于 libostree 和 RPM 构建的一个用 OSTree 管理红帽系 OS 的工具，用来管理红帽系原子操作系统的文件系统。
 
@@ -28,7 +30,7 @@ rpm-ostree 则是基于 libostree 和 RPM 构建的一个用 OSTree 管理红帽
 - **状态可回滚**。OSTree 有能力保留当前和上一次两个系统状态。要是系统真的崩溃了或是你不喜欢更新的内容，则随时可以回滚到上一个系统状态。这里还支持固定某一个特定的系统状态，永久保留。
 - **系统目录只读**[^1]。这意味着你的系统不会被随便哪来的病毒或你自己手贱（`sudo rm -rf /*`）弄崩坏。
 
-[^1]: 严格来说，“原子化”并不强调系统只读。也有“原子化但系统可写”的发行版，如 NixOS（原子化并不是 NixOS 的核心卖点，但它[确实是原子化的](https://nixos.org/guides/how-nix-works/#atomic)）。但至少对于基于 OSTree 的原子发行版而言，[系统必须是只读的](https://github.com/ostreedev/ostree#:~:text=It%27s%20unlike%20git%20in%20that%20it%20%22checks%20out%22%20the%20files%20via%20hardlinks%2C%20and%20they%20thus%20need%20to%20be%20immutable%20to%20prevent%20corruption)。
+[^1]: 严格来说，“原子化”并不强调系统只读。也有“原子化但系统可写”的发行版，如 NixOS。但至少对于基于 OSTree 的原子发行版而言，[系统必须是只读的](https://github.com/ostreedev/ostree#:~:text=It%27s%20unlike%20git%20in%20that%20it%20%22checks%20out%22%20the%20files%20via%20hardlinks%2C%20and%20they%20thus%20need%20to%20be%20immutable%20to%20prevent%20corruption)。
 
 ### 坏处
 
