@@ -1,0 +1,12 @@
+---
+import Banner from "../../components/site/Banner.astro";
+import TaxonomyGrid from "../../components/taxonomy/TaxonomyGrid.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getTaxonomyList } from "../../lib/taxonomy";
+
+const items = await getTaxonomyList("tags");
+---
+<BaseLayout title="List of tags">
+  <Banner />
+  <TaxonomyGrid kind="tags" title="tags" items={items} />
+</BaseLayout>

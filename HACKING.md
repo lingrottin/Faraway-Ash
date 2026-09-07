@@ -1,67 +1,45 @@
 # Hacking Faraway-Ash
 
-目前来说，这个博客已经迁移到了 [Zola](https://getzola.org)。在我定制的 Zola 工作流上工作，可能和以往以 Hexo 为中心的工作流有一定的区别。以下是关于如何修改这些内容的详细文档。
+本站已迁移到 Astro。包管理与脚本统一使用 Deno。
 
-## 编写文章和维护站点
-
-Zola 的目录位于 [src/](./src/)。所有文章和有关 Zola 的维护都应该放在这里。
-
-运行以下命令来动态监听站点更改。
+## 常用命令
 
 ```bash
-zola -r src/ serve
+deno install --allow-scripts
+deno task dev
+deno task build
+deno task preview
+deno task permalink:sync
+deno task test:permalink
+deno task lint
 ```
 
-## 开发主题
+## 目录
 
-这里的主题使用 Rolldown 来打包 JavaScript 文件，使用 Tailwind CLI 来产生 CSS。在**仓库根目录**下运行以下命令来安装依赖：
+- `src/content/posts/`：文章 Markdown（文件名可读）
+- `src/pages/`：路由
+- `src/components/`：UI 与交互组件
+- `src/lib/permalink.ts`：Hexo 兼容 permalink
+- `src/lib/taxonomy.ts`：分类/标签聚合与拼音 slug
+- `public/`：静态资源
+- `legacy/`：迁移前的 Zola/Hexo 对照（可在稳定后删除）
 
-```bash
-pnpm i
-```
+## Permalink
 
-运行以下命令来动态监听 JavaScript 和 Tailwind 类。（需要 tmux。如果你在 Windows 下，请参考 [package.json](package.json)，手动运行构建命令。）
+- 已有 `path` 的文章永远使用 `path`，不重算。
+- 无 `path` 的文章按 Hexo 规则生成：`/YYYY/MMDD/<sha1(slug+unix)[0:12]>/`
+- `deno task permalink:sync` 会把生成结果写回 frontmatter。
 
-```bash
-pnpm dev
-```
+## Feeds / Sitemap
 
-运行以下命令来打包最终的文件。
+与旧站路径一致：
 
-```bash
-pnpm frontend-build
-```
+- `/rss.xml`
+- `/atom.xml`
+- `/sitemap.xml`
+- `/categories/<slug>/rss.xml` / `atom.xml`
+- `/tags/<slug>/rss.xml` / `atom.xml`
 
-### 代码风格（Lint 和格式化）
+## 搜索
 
-JavaScript/CSS 部分，使用 [Biome](https://biomejs.dev) 来 Lint 和格式化。
-
-如果你安装好了 npm 依赖，那么 Biome 也装好了。
-
-```bash
-# 检查代码风格以及格式化，顺便整理导入
-pnpm biome check --fix
-
-# 仅格式化
-pnpm biome format --fix
-```
-
-HTML 部分，由于传统的模板引擎（比如说，我们这里使用的 Tera）不被现代前端工具链支持，我们可能需要用一个传统的开发工具来格式化 HTML。
-
-由于 Tera 的语法基本来自 Django 模板，所以我们可以直接复用 Django 的开发工具。
-
-```bash
-pip install -U djhtml
-djhtml path/to/template.html
-```
-
-### 文件结构
-
-关于该站点的前端样式，有这些目录：
-
-- [`src/`](src/): Zola 目录。
-  - [`src/static/`](src/static): 静态资源目录。编译后的 JS 和 CSS 文件放在这里。
-  - [`src/templates/`](src/templates): 模板目录。HTML 文件在这里。
-- [`frontend/`](frontend/): 前端源码目录。
-  - [`frontend/css/main.css`](frontend/css/main.css): 主 CSS 文件。
-  - [`frontend/src/main.ts`](frontend/src/main.ts): 前端 TypeScript 源代码。
+当前版本暂不提供站内搜索。

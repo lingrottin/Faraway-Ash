@@ -1,0 +1,43 @@
+---
+import type { TocNode } from "../../lib/toc";
+
+interface Props {
+  nodes: TocNode[];
+  variant?: "sidebar" | "inline";
+}
+const { nodes, variant = "inline" } = Astro.props;
+
+function renderSidebar(nodes: TocNode[]): string {
+  return nodes
+    .map((n) => {
+      const children = n.children.length
+        ? `<fa-toc-children><div class="fa-toc-children-inner">${renderSidebar(n.children)}</div></fa-toc-children>`
+        : "";
+      return `<fa-toc-header data-id="${n.id}"><a href="#${n.id}">${n.text}</a>${children}</fa-toc-header>`;
+    })
+    .join("");
+}
+---
+{variant === "sidebar" ? (
+  <Fragment set:html={renderSidebar(nodes)} />
+) : (
+  <nav class="toc mb-4 py-4 border-border border rounded-lg bg-muted/20" aria-label="文章目录">
+    <h2 class="text-xl px-4 font-semibold text-foreground pb-2 mb-2 border-b border-border">Table of Contents</h2>
+    <ol class="text-muted-foreground mx-4">
+      {nodes.map((h1) => (
+        <li>
+          <a href={`#${h1.id}`}>{h1.text}</a>
+          {h1.children.length > 0 && (
+            <ol>
+              {h1.children.map((h2) => (
+                <li>
+                  <a href={`#${h2.id}`}>{h2.text}</a>
+                </li>
+              ))}
+            </ol>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}

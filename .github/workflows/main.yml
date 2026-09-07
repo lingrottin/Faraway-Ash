@@ -1,73 +1,64 @@
-name: Zola Deployment
-# Thank ltfjx
+name: Astro Deployment
 
 on:
-    push:
-        branches: [main]
+  push:
+    branches: [main]
 
 jobs:
-    zola-deployment:
-        runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+      SITE_URL: https://enita.cn
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Install dependencies
+        run: deno install --allow-scripts
+
+      - name: Sync missing permalinks
+        run: deno task permalink:sync
+
+      - name: Build site (server)
+        run: deno task build
         env:
-            TZ: Asia/Shanghai
+          SITE_URL: https://enita.cn
 
-        steps:
-            - name: Checkout source
-              uses: actions/checkout@v4
-              with:
-                  submodules: true
+      - name: Deploy to server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIV_KEY }}
+          ARGS: "-avz -u --chown=nginx:nginx"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.SERVER_IP }}
+          REMOTE_PORT: ${{ secrets.SERVER_PORT }}
+          REMOTE_USER: ${{ secrets.SERVER_USER }}
+          TARGET: "/srv/www/enita.cn"
 
-            - name: Setup pnpm
-              uses: pnpm/action-setup@v4
+      - name: Build site (Cloudflare Pages)
+        run: |
+          rm -rf dist
+          SITE_URL=https://cf.enita.cn deno task build
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: "latest"
-                  cache: "pnpm"
-
-            - name: Install frontend dependencies & Build
-              run: |
-                  pnpm install
-                  pnpm frontend-build
-
-            - name: Install Zola
-              uses: taiki-e/install-action@v2
-              with:
-                  tool: zola
-
-            - name: Generate static files (for server deployment)
-              run: |
-                  zola -r src/ build
-
-            - name: Deploy to server
-              uses: easingthemes/ssh-deploy@main
-              env:
-                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIV_KEY }}
-                  ARGS: "-avz -u --chown=nginx:nginx"
-                  SOURCE: "src/public/"
-                  REMOTE_HOST: ${{ secrets.SERVER_IP }}
-                  REMOTE_PORT: ${{ secrets.SERVER_PORT }}
-                  REMOTE_USER: ${{ secrets.SERVER_USER }}
-                  TARGET: "/srv/www/enita.cn"
-                  
-            - name: Generate static files (for CF pages)
-              run: |
-                  rm -rf src/public
-                  sed -i -e "s/^base_url.*$/base_url = \"https:\/\/cf.enita.cn\"/" src/zola.toml
-                  zola -r src/ build
-                  rm src/public/.gitignore
-                  
-            - name: Deploy to Cloudflare Pages
-              env:
-                  GIT_NAME: FA
-                  GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
-                  REPO: github.com/lingrottin/FarawayAsh.git
-                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
-              run: |
-                  git config --global init.defaultBranch cf_web
-                  cd ./src/public && git init && git add -A
-                  git config --global user.name $GIT_NAME
-                  git config --global user.email $GIT_EMAIL
-                  git commit -m "Site deployed by GitHub Actions"
-                  git push --force "https://$GH_TOKEN@$REPO" cf_web:cf_web
+      - name: Deploy to Cloudflare Pages
+        env:
+          GIT_NAME: FA
+          GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+          REPO: github.com/lingrottin/FarawayAsh.git
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git config --global init.defaultBranch cf_web
+          cd ./dist && git init && git add -A
+          git config --global user.name "$GIT_NAME"
+          git config --global user.email "$GIT_EMAIL"
+          git commit -m "Site deployed by GitHub Actions"
+          git push --force "https://$GH_TOKEN@$REPO" cf_web:cf_web

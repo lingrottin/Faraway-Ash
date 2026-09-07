@@ -1,0 +1,34 @@
+---
+import Banner from "../../components/site/Banner.astro";
+import Pagination from "../../components/taxonomy/Pagination.astro";
+import PostList from "../../components/taxonomy/PostList.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../lib/site";
+import { getPublishedPosts, paginate } from "../../lib/taxonomy";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const totalPages = Math.max(1, Math.ceil(posts.length / siteConfig.pageSize));
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: String(i + 1) },
+  }));
+}
+
+const pageNum = Number(Astro.params.page);
+const posts = await getPublishedPosts();
+const { items, page, totalPages } = paginate(
+  posts,
+  pageNum,
+  siteConfig.pageSize,
+);
+if (pageNum === 1) {
+  return Astro.redirect("/");
+}
+---
+<BaseLayout title={`第 ${page} 页`}>
+  <Banner />
+  <section class="mt-4 fa-container mx-auto flex flex-col not-md:px-4">
+    <PostList posts={items} />
+  </section>
+  <Pagination page={page} totalPages={totalPages} basePath="/" />
+</BaseLayout>

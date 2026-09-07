@@ -1,0 +1,26 @@
+{
+  "nodeModulesDir": "auto",
+  "tasks": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "permalink:sync": "deno run -A --sloppy-imports scripts/permalink-sync.ts",
+    "test:permalink": "deno run -A --sloppy-imports scripts/test-permalink.ts",
+    "lint": "deno run -A npm:@biomejs/biome check --write src scripts astro.config.ts"
+  },
+  "exclude": [
+    "dist",
+    "legacy",
+    "node_modules",
+    ".astro",
+    "hexo-legacy"
+  ],
+  "unstable": [
+    "sloppy-imports"
+  ],
+  "imports": {},
+  "compilerOptions": {
+    "strict": true
+  }
+}

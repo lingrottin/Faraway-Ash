@@ -1,0 +1,48 @@
+---
+interface Props {
+  page: number;
+  totalPages: number;
+  basePath: string; // e.g. "/" or "/categories/lie-yan/"
+}
+const { page, totalPages, basePath } = Astro.props;
+const first = basePath === "/" ? "/page/1/" : `${basePath}page/1/`;
+const last =
+  basePath === "/" ? `/page/${totalPages}/` : `${basePath}page/${totalPages}/`;
+const prev =
+  page > 1
+    ? basePath === "/"
+      ? `/page/${page - 1}/`
+      : `${basePath}page/${page - 1}/`
+    : null;
+const next =
+  page < totalPages
+    ? basePath === "/"
+      ? `/page/${page + 1}/`
+      : `${basePath}page/${page + 1}/`
+    : null;
+// Zola home page 1 is also /
+const prevHref = page === 2 && basePath === "/" ? "/" : prev;
+---
+<nav class="fa-container mx-auto mt-8 flex flex-row items-center justify-center text-lg *:py-4 text-muted-foreground *:hover:text-foreground *:hover:underline not-md:px-4">
+  <a class:list={["pr-10", !prev && "text-muted-foreground/20!"]} href={first}>
+    <i data-lucide="chevrons-left" class="size-8"></i>
+  </a>
+  <div class="flex-1"></div>
+  <a class:list={["flex flex-row items-center *:block px-5", !prevHref && "text-muted-foreground/20!"]} href={prevHref ?? undefined}>
+    <i class="size-8" data-lucide="chevron-left"></i>
+    <span class="not-md:hidden">上一页</span>
+  </a>
+  <span class="px-5">{page}</span>
+  <a class:list={["flex flex-row items-center *:block px-5", !next && "text-muted-foreground/20!"]} href={next ?? undefined}>
+    <span class="not-md:hidden">下一页</span>
+    <i class="size-8" data-lucide="chevron-right"></i>
+  </a>
+  <div class="flex-1"></div>
+  <a class:list={["pl-10", !next && "text-muted-foreground/20!"]} href={last}>
+    <i data-lucide="chevrons-right" class="size-8"></i>
+  </a>
+</nav>
+<script>
+  import { createIcons, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide";
+  createIcons({ icons: { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } });
+</script>

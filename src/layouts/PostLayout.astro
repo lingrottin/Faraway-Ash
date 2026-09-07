@@ -1,0 +1,101 @@
+---
+import type { CollectionEntry } from "astro:content";
+import PostEnhancements from "../components/post/PostEnhancements.astro";
+import Toc from "../components/post/Toc.astro";
+import Banner from "../components/site/Banner.astro";
+import { formatDateYMD, readingTimeMinutes } from "../lib/dates";
+import { siteConfig } from "../lib/site";
+import { taxonomyUrl } from "../lib/taxonomy";
+import { type AstroHeading, buildTocFromHeadings } from "../lib/toc";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+  permalink: string;
+  headings: AstroHeading[];
+  plainText: string;
+}
+const { post, permalink, headings, plainText } = Astro.props;
+const toc = buildTocFromHeadings(headings);
+const minutes = readingTimeMinutes(plainText);
+const cc = siteConfig.creativeCommons.join("-");
+---
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <Banner title={post.data.title}>
+    <div slot="meta" class="flex flex-row items-center not-md:items-start font-semibold text-lg mt-5 backdrop-blur-lg not-dark:bg-background/80 dark:bg-background/50 my-1 px-3">
+      <i data-lucide="calendar" class="size-5 mr-2 -mt-0.5 not-md:mt-1"></i>
+      <div>发布日期 {formatDateYMD(post.data.date)}</div>
+      <div class="border-l border-foreground mx-2 self-stretch"></div>
+      <i data-lucide="clock" class="size-5 mr-2 -mt-0.5 not-md:mt-1"></i>
+      <div>阅读时间 {minutes}min</div>
+    </div>
+  </Banner>
+
+  <section class="relative mt-4">
+    {toc.length > 0 && (
+      <aside class="hidden xl:block absolute top-0 h-full" style="left:1rem;width:min(18em,calc((100vw - var(--fa-container-value))/2 - 2rem));">
+        <div class="sticky top-25 border rounded-lg py-2 bg-muted/20 backdrop-blur-md z-2">
+          <span class="text-lg px-3 font-semibold">目录</span>
+          <div id="fa-toc-container" class="block">
+            <Toc nodes={toc} variant="sidebar" />
+          </div>
+        </div>
+      </aside>
+    )}
+
+    <article class="flex flex-col not-md:px-4 fa-container mx-auto">
+      {post.data.description && (
+        <section class="p-4 mb-4 rounded-lg border bg-muted/20" aria-label="文章简介">
+          <h2 class="text-xl font-bold mb-4 text-foreground">文章简介</h2>
+          <p class="text-muted-foreground block">{post.data.description}</p>
+        </section>
+      )}
+      {toc.length > 0 && <Toc nodes={toc} variant="inline" />}
+      <section class="content">
+        <slot />
+      </section>
+
+      {post.data.tags.length > 0 && (
+        <section class="mt-4" aria-label="文章标签">
+          <div class="border-border border-b my-4"></div>
+          <div class="font-mono [&_a]:hover:underline">
+            <span class="font-bold font-sans">Tags:</span>{" "}
+            {post.data.tags.map((tag) => (
+              <a href={taxonomyUrl("tags", tag)}>#{tag}</a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <footer class="flex flex-col md:flex-row *:flex-1 *:p-4 rounded-lg border bg-muted/70 mt-4">
+        <div class="text-xl not-md:border-b md:border-r border-border">
+          <span class="font-bold italic">{post.data.title}</span>
+          {" "}by{" "}
+          <span>{post.data.authors?.join(", ") || siteConfig.author}</span>
+        </div>
+        <div class="text-lg not-md:border-b md:border-r border-border md:text-center">
+          本文以 Creative Commons {cc} 4.0 协议公开发布并授权。
+        </div>
+        <div
+          class="text-lg not-md:underline md:text-end not-md:bg-muted hover:bg-muted md:rounded-r-lg not-md:rounded-b-lg transition-colors duration-200 hover:underline cursor-pointer"
+          data-share-link={new URL(permalink, Astro.site).toString()}
+          id="share_this_page"
+        >
+          分享此页面
+        </div>
+      </footer>
+
+      <nav aria-label="返回主页">
+        <a href="/" class="mt-6 text-muted-foreground hover:underline hover:text-foreground flex flex-row items-center">
+          <i data-lucide="arrow-left" class="mr-2"></i>
+          <div>回到主页</div>
+        </a>
+      </nav>
+    </article>
+  </section>
+  <PostEnhancements />
+  <script>
+    import { createIcons, Calendar, Clock, ArrowLeft } from "lucide";
+    createIcons({ icons: { Calendar, Clock, ArrowLeft } });
+  </script>
+</BaseLayout>

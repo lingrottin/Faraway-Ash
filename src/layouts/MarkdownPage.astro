@@ -1,0 +1,42 @@
+---
+import PostEnhancements from "../components/post/PostEnhancements.astro";
+import Toc from "../components/post/Toc.astro";
+import Banner from "../components/site/Banner.astro";
+import { buildTocFromHeadings } from "../lib/toc";
+import BaseLayout from "./BaseLayout.astro";
+
+const { title, description } = Astro.props.frontmatter ?? Astro.props;
+const toc = buildTocFromHeadings(Astro.props.headings ?? []);
+---
+<BaseLayout title={title} description={description}>
+  <Banner title={title} />
+  <section class="relative mt-4">
+    {toc.length > 0 && (
+      <aside class="hidden xl:block absolute top-0 h-full" style="left:1rem;width:min(18em,calc((100vw - var(--fa-container-value))/2 - 2rem));">
+        <div class="sticky top-25 border rounded-lg py-2 bg-muted/20 backdrop-blur-md z-2">
+          <span class="text-lg px-3 font-semibold">目录</span>
+          <div id="fa-toc-container" class="block">
+            <Toc nodes={toc} variant="sidebar" />
+          </div>
+        </div>
+      </aside>
+    )}
+    <article class="flex flex-col not-md:px-4 fa-container mx-auto">
+      {toc.length > 0 && <Toc nodes={toc} variant="inline" />}
+      <section class="content">
+        <slot />
+      </section>
+    </article>
+    <nav aria-label="返回主页">
+      <a href="/" class="mt-6 text-muted-foreground hover:underline hover:text-foreground flex flex-row items-center">
+        <i data-lucide="arrow-left" class="mr-2"></i>
+        <div>回到主页</div>
+      </a>
+    </nav>
+  </section>
+  <script>
+    import { createIcons, ArrowLeft } from "lucide";
+    createIcons({ icons: { ArrowLeft } });
+  </script>
+  <PostEnhancements />
+</BaseLayout>

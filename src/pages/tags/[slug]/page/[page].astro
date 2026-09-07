@@ -1,0 +1,48 @@
+---
+import Banner from "../../../../components/site/Banner.astro";
+import Pagination from "../../../../components/taxonomy/Pagination.astro";
+import PostList from "../../../../components/taxonomy/PostList.astro";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../../../lib/site";
+import { getTaxonomyList, paginate } from "../../../../lib/taxonomy";
+
+export async function getStaticPaths() {
+  const list = await getTaxonomyList("tags");
+  const paths = [];
+  for (const item of list) {
+    const totalPages = Math.max(
+      1,
+      Math.ceil(item.posts.length / siteConfig.pageSize),
+    );
+    for (let p = 1; p <= totalPages; p++) {
+      paths.push({
+        params: { slug: item.slug, page: String(p) },
+        props: { name: item.name, posts: item.posts },
+      });
+    }
+  }
+  return paths;
+}
+
+const pageNum = Number(Astro.params.page);
+if (pageNum === 1) {
+  return Astro.redirect(`/tags/${Astro.params.slug}/`);
+}
+const { name, posts } = Astro.props;
+const { items, page, totalPages } = paginate(
+  posts,
+  pageNum,
+  siteConfig.pageSize,
+);
+const basePath = `/tags/${Astro.params.slug}/`;
+---
+<BaseLayout title={name}>
+  <Banner />
+  <section class="mt-4 fa-container mx-auto flex flex-col not-md:px-4">
+    <header class="text-2xl my-4 font-bold text-center pb-4 border-border border-b">
+      <h1>标记为“{name}”的文章列表</h1>
+    </header>
+    <PostList posts={items} />
+  </section>
+  <Pagination page={page} totalPages={totalPages} basePath={basePath} />
+</BaseLayout>

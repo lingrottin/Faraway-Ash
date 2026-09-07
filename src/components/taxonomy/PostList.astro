@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDateYMD } from "../../lib/dates";
+import { postPermalink } from "../../lib/permalink";
+import { taxonomyUrl } from "../../lib/taxonomy";
+
+interface Props {
+  posts: CollectionEntry<"posts">[];
+}
+const { posts } = Astro.props;
+const items = await Promise.all(
+  posts.map(async (post) => ({
+    post,
+    permalink: await postPermalink(post),
+  })),
+);
+---
+<ul>
+  {items.map(({ post, permalink }, index) => (
+    <>
+      {index > 0 && <li aria-hidden="true" class="border-b border-border my-4"></li>}
+      <li class="block">
+        <article class="flex flex-col">
+          <header>
+            <a href={permalink} class="text-2xl font-semibold mb-2 block hover:underline hover:text-foreground cursor-pointer">
+              {post.data.title}
+            </a>
+          </header>
+          <section>
+            <a href={permalink} class="text-muted-foreground hover:text-foreground cursor-pointer mb-2 block">
+              <p>{post.data.description || "No description provided."}</p>
+            </a>
+          </section>
+          <footer class="flex flex-row items-center text-muted-foreground">
+            <i data-lucide="clock" class="size-4 mr-2"></i>
+            <span>{formatDateYMD(post.data.date)}</span>
+            {post.data.categories.length > 0 && (
+              <>
+                <i data-lucide="shapes" class="size-4 mx-2"></i>
+                <span>
+                  {post.data.categories.map((category, i) => (
+                    <>
+                      {i > 0 && ", "}
+                      <a class="underline hover:text-foreground" href={taxonomyUrl("categories", category)}>{category}</a>
+                    </>
+                  ))}
+                </span>
+              </>
+            )}
+            <div class="flex-1"></div>
+            <a href={permalink} class="hover:underline group text-muted-foreground hover:text-foreground font-semibold cursor-pointer flex flex-row items-center">
+              <span class="underline">Read more</span>
+              <i data-lucide="chevron-right" class="size-6 group-hover:text-strong-accent transition-colors duration-200 ease-out"></i>
+            </a>
+          </footer>
+        </article>
+      </li>
+    </>
+  ))}
+</ul>
+<script>
+  import { createIcons, Clock, Shapes, ChevronRight } from "lucide";
+  createIcons({ icons: { Clock, Shapes, ChevronRight } });
+</script>

@@ -1,0 +1,20 @@
+---
+import Banner from "../components/site/Banner.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="404 Not Found">
+  <Banner title="404 Not Found" />
+  <section class="mt-4 fa-container mx-auto flex flex-col not-md:px-4">
+    <article class="content"><p>您访问的页面不存在或已被移除。</p></article>
+    <nav aria-label="返回主页">
+      <a href="/" class="mt-6 text-muted-foreground hover:underline hover:text-foreground flex flex-row items-center">
+        <i data-lucide="arrow-left" class="mr-2"></i>
+        <div>回到主页</div>
+      </a>
+    </nav>
+  </section>
+  <script>
+    import { createIcons, ArrowLeft } from "lucide";
+    createIcons({ icons: { ArrowLeft } });
+  </script>
+</BaseLayout>

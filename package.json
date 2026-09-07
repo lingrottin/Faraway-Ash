@@ -1,31 +1,35 @@
 {
   "name": "faraway-ash",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "concurrently -n js,css \"pnpm rolldown -c -w\" \"pnpm tailwindcss -i frontend/css/main.css -o src/static/app.css --watch\"",
-    "frontend-build": "tailwindcss -i frontend/css/main.css -o src/static/app.css && rolldown -c"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.27.0",
-  "devDependencies": {
-    "@biomejs/biome": "2.4.14",
-    "@tailwindcss/cli": "^4.2.4",
-    "concurrently": "^9.2.1",
-    "rolldown": "^1.0.0",
-    "tailwindcss": "^4.2.4",
-    "typescript": "^6.0.3"
-  },
+  "private": true,
   "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "permalink:sync": "deno run -A --sloppy-imports scripts/permalink-sync.ts",
+    "test:permalink": "deno run -A --sloppy-imports scripts/test-permalink.ts",
+    "lint": "biome check --write src scripts astro.config.ts"
+  },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/hast": "^3.0.5",
+    "astro": "^5.12.0",
     "clsx": "^2.1.1",
-    "core-js": "^3.49.0",
     "glightbox": "^3.3.1",
-    "lucide": "^1.14.0",
-    "overlayscrollbars": "^2.15.1",
-    "tailwind-merge": "^3.5.0"
+    "lucide": "^0.525.0",
+    "overlayscrollbars": "^2.11.4",
+    "pinyin-pro": "^3.26.0",
+    "remark-custom-header-id": "^1.0.0",
+    "remark-definition-list": "^2.0.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3",
+    "remark-github-alerts": "^0.1.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.12"
   }
 }

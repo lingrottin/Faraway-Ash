@@ -1,0 +1,49 @@
+---
+import { siteConfig } from "../../lib/site";
+
+interface Props {
+  title?: string;
+  compact?: boolean;
+}
+const { title, compact = false } = Astro.props;
+const src = siteConfig.bannerImg;
+---
+{src && (
+  <header>
+    <style>
+      #banner-img {
+        background-size: cover;
+        background-position: center;
+      }
+      #banner-img::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 200% 100% at top,
+          transparent,
+          transparent 85%,
+          var(--background)
+        );
+      }
+    </style>
+    <div
+      id="banner-img"
+      class:list={[
+        "w-screen relative overflow-hidden",
+        "h-[60lvh]",
+        title ? "flex justify-center items-center" : "",
+      ]}
+      style={`background-image: url(${src})`}
+    >
+      {title && (
+        <div class="flex flex-col items-start not-md:*:mx-4 relative z-1">
+          <h1 class="font-bold text-3xl backdrop-blur-lg not-dark:bg-background/80 dark:bg-background/50 py-3 px-5 not-md:px-3">
+            {title}
+          </h1>
+          <slot name="meta" />
+        </div>
+      )}
+    </div>
+  </header>
+)}
