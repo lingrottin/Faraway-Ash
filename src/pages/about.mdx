@@ -1,14 +1,76 @@
 ---
-layout: ../layouts/MarkdownPage.astro
 title: 关于 Faraway Ash
 description: 关于 Faraway Ash
 ---
+import {X} from "@lucide/astro"
+import Layout from "../layouts/MarkdownPage.astro";
+
+<Layout frontmatter={frontmatter} headings={getHeadings()}>
+
+<div class="border p-0 rounded-xl mb-4 flex flex-row items-stretch min-h-48 relative" slot="before-toc">
+    <div class="border-r p-4 flex-1 flex flex-col items-center rounded-l-xl bg-muted/20">
+        <div class="text-foreground/20 -z-1 absolute left-0 bottom-1 text-7xl font-bold">
+            TL;DR
+        </div>
+        <img alt="Enita Nureya's avatar" src="/imgs/avatar.png" class="max-w-32 rounded-full"></img>
+    </div>
+    <div class="w-72 flex flex-col p-4 flex-2 rounded-r-xl bg-background">
+        <div class="text-xl">**Enita Nureya**</div>
+        <div class="text-muted-foreground pb-1 mb-1 border-b">**Chief Potato Operator**</div>
+        <div>**出生**：2007 年 1 月</div>
+        <div>**联系**：enitanureya@outlook.com</div>
+        <div>**目前**：就读于上海交通大学</div>
+        <div>**PGP 密钥**：<button id="pgp-dlg-trigger" title="点击查看密钥详情" class="cursor-pointer hover:underline" command="show-modal" commandfor="pgp-dlg">F0E5924669B17B3B</button></div>
+    </div>
+    <div class="absolute right-4 top-4 text-muted-foreground *:underline *:hover:text-foreground">[详细信息](#jie-shu)</div>
+    <dialog id="pgp-dlg" class="w-dvw! h-full z-114515 bg-transparent open:flex max-w-dvw! max-h-dvh! items-center justify-center backdrop:backdrop-blur-xl">
+        <div class="bg-background text-foreground border-border rounded-xl border flex flex-col w-vw fa-container">
+            <div class="rounded-t-xl bg-muted/20 p-4 border-b flex flex-row">
+                <span class="flex-1">**Enita Nureya 的 PGP 身份**</span>
+                <button commandfor="pgp-dlg" command="close" class="cursor-pointer transition duration-200 hover:text-strong-accent"><X/></button>
+            </div>
+            <div class="p-4 content rounded-b-xl bg-muted/20">
+            **署名**：Enita Nureya &lt;enitanureya@outlook.com&gt;
+            
+            **ID**：`F0E5924669B17B3B`
+            
+            **指纹**：
+            
+            ```
+            8A94 EB5D E7AE 55C8 D02A F67E F0E5 9246 69B1 7B3B
+            ```
+            
+            **公钥**：
+            
+            ```
+            -----BEGIN PGP PUBLIC KEY BLOCK-----
+            
+            mDMEap5iKxYJKwYBBAHaRw8BAQdANcsC+9MDefTCuAqwoY6dV5fsW9X0iDA22Lyn
+            xvFtCZa0JkVuaXRhIE51cmV5YSA8ZW5pdGFudXJleWFAb3V0bG9vay5jb20+iJME
+            ExYKADsWIQSKlOtd565VyNAq9n7w5ZJGabF7OwUCap5iKwIbAwULCQgHAgIiAgYV
+            CgkICwIEFgIDAQIeBwIXgAAKCRDw5ZJGabF7O0lVAP90vFH+Gbhj8S3cXvUvNKQY
+            RmzHR6s+azXA3DO/JjylDAEAuCsGiAb836NZLnx+4H7YTWN4ePUAo3MToJRfF7AH
+            0Au4OARqnmIrEgorBgEEAZdVAQUBAQdA5teiIbhlP/BRgSugn4oTTJJjWdlux2s9
+            aqkcSK9kDjQDAQgHiHgEGBYKACAWIQSKlOtd565VyNAq9n7w5ZJGabF7OwUCap5i
+            KwIbDAAKCRDw5ZJGabF7O2jRAP9JTbDJYb40x4lMKsFhBOiDzDZuwm/wv4YLVJa6
+            SFiwhAD7Bp6SneMAX75MQD4zaXExEpWF2FHLNVTWguLZN7X0xg8=
+            =4fn5
+            -----END PGP PUBLIC KEY BLOCK-----
+            ```
+            
+            你也可以在 [Mailvelope Keyserver](https://keys.mailvelope.com/pks/lookup?op=get&search=enitanureya@outlook.com) 下载我的 PGP 公钥。
+            </div>
+        </div>
+    </dialog>
+</div>
+
+
 
 这里是 Enita Nureya 的私人博客，欢迎！
 
 ## 我的介绍
 
-- 上海交通大学 2025 级本科新生（船舶海洋与建筑工程学院）
+- 上海交通大学 2025 级本科生
 - Rust 狂热爱好者 ~~（Ferris 厨）~~
 - 超菜鸟开发者
 - ~~很可爱~~
@@ -25,31 +87,17 @@ description: 关于 Faraway Ash
 - 语言学（入门）
 - ~~节奏游戏游玩学~~（资深新手）
 
-## 关于朋友 {#about-friends}
+<h2 id="about-friends">关于朋友</h2>
 
-- 热力图 (RLt) : [<a href="https://akyuu.cn/">他的网站</a>]
-- 尤尔苏斯 菲莱恩 (UrsusFeline) : [<a href="https://lgy07.github.io">他的博客</a>]
+- 热力图 (RLt) : [他的网站](https://akyuu.cn/)
+- 尤尔苏斯 菲莱恩 (UrsusFeline) : [他的博客](https://blog.rosmontis.moe)
 
 ## 关于本站分类
 
-<ul>
-<li class="about-category-name"><b>尘埃</b></li>
-记录琐事。
-<p class="about-category-saying" align="right">——琐事如尘埃不值一提。</p>
-
-<li class="about-category-name"><b>星耀</b></li>
-技术性文章。
-<p class="about-category-saying" align="right">——知识将如星耀般永不磨灭。</p>
-
-<li class="about-category-name"><b>烈焰</b></li>
-记录探索和发现的过程。
-<p class="about-category-saying" align="right">——探索未知，就如举起火焰，驱散阴霾。</p>
-
-<li class="about-category-name"><b>自然</b></li>
-可能会写一些故事。
-<p class="about-category-saying" align="right">——人是自然的一部分，人的故事便亦是自然的一部分。</p>
- 
-</ul>
+- **尘埃**: 记录琐事。
+- **星耀**: 技术性文章。
+- **烈焰**: 记录探索和发现的过程。
+- **自然**: 可能会写一些故事。
 
 ## 关于“Faraway Ash”
 
@@ -113,10 +161,7 @@ UOF 成员会以 UOF 的名义产出一些优秀的开源软件，如 [Spectra �
 The contents listed below is copyrighted by the authors of the contents.
 
 - 首页大图来自[Pixiv](https://www.pixiv.net/artworks/89991203)
-- 网站内置了[更纱独黑](https://github.com/lingrottin/Sarasa-Adwaita)（一个[更纱黑体](https://github.com/be5invis/Sarasa-Gothic)的改版）作为显示字体。
-	-  其中，英文字体是 Adwaita Sans 和 Adwaita Mono。前者是 [Inter](https://rsms.me/inter) 的改版，后者是 [Iosevka](https://typeof.net/Iosevka/) 的改版。Adwaita 字体家族的存储库在[这里](https://gitlab.gnome.org/GNOME/adwaita-fonts)。
-	- 中文字体是思源黑体。
-	- 更纱独黑是我 DIY 的，但我对它不声明任何版权。
+- 网站内置了 Adwaita Sans 和 Adwaita Mono 作为显示的字体。前者是 [Inter](https://rsms.me/inter) 的改版，后者是 [Iosevka](https://typeof.net/Iosevka/) 的改版。Adwaita 字体家族的存储库在[这里](https://gitlab.gnome.org/GNOME/adwaita-fonts)。
 
 侵删。
 
@@ -128,7 +173,7 @@ Dear creator, if you do not want me to use your artworks, plz. contact me to rem
 
 ## 关于访问
 
-该网站采用了 Cloudflare CDN 加速，对大陆用户可能不友好。
+~~该网站采用了 Cloudflare CDN 加速，对大陆用户可能不友好。~~
 
 有条件建议搭配梯子访问。
 
@@ -144,7 +189,7 @@ Dear creator, if you do not want me to use your artworks, plz. contact me to rem
 
 网站使用 [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/) 来跟踪访问数据。但是别担心！该服务是隐私优先的。
 
-## 结束
+<h2 id="jie-shu">结束</h2>
 
 感谢阅读，同时欢迎和我交朋友！
 
@@ -158,7 +203,10 @@ Dear creator, if you do not want me to use your artworks, plz. contact me to rem
 - Mastodon：@lilc@mastodon.social
 - GitHub：[@lingrottin](https://github.com/lingrottin)
 - Matrix: [@enita:fedora.im](https://matrix.to/#/@enita:fedora.im)
+- 如果你要验证我的身份，详见：<button type="button" class="cursor-pointer underline text-foreground hover:text-strong-accent" command="show-modal" commandfor="pgp-dlg">PGP Key</button>
 
 如果使用邮箱联系，我会在 48h 内答复。如果使用 QQ 联系，我应该当日就能联系到你。*（但是如果你的账号加好友太过频繁以至于触发了腾讯的风控，我有可能完全接收不到你的好友请求。这一点很抱歉，因此更建议使用邮箱和我建立连接，因为垃圾邮件箱我也会翻看。）*
 
 很抱歉，邮箱和 QQ 之外的任何联系方式都有可能不能得到迅速的回复。
+
+</Layout>

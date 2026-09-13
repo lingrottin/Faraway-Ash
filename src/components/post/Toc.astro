@@ -1,4 +1,5 @@
 ---
+import { ChevronDown } from "@lucide/astro";
 import type { TocNode } from "../../lib/toc";
 
 interface Props {
@@ -20,25 +21,64 @@ function renderSidebar(nodes: TocNode[]): string {
 ---
 
 {variant === "sidebar" ? (
-  <Fragment set:html={renderSidebar(nodes)} />
+    <Fragment set:html={renderSidebar(nodes)} />
 ) : (
-  <nav class="toc mb-4 py-4 border-border border rounded-lg bg-muted/20" aria-label="文章目录">
-    <h2 class="text-xl px-4 font-semibold text-foreground pb-2 mb-2 border-b border-border">Table of Contents</h2>
-    <ol class="text-muted-foreground mx-4">
-      {nodes.map((h1) => (
-        <li>
-          <a href={`#${h1.id}`}>{h1.text}</a>
-          {h1.children.length > 0 && (
-            <ol>
-              {h1.children.map((h2) => (
-                <li>
-                  <a href={`#${h2.id}`}>{h2.text}</a>
-                </li>
-              ))}
-            </ol>
-          )}
-        </li>
-      ))}
-    </ol>
-  </nav>
+    <>
+        <nav
+            id="fa-toc"
+            class="toc mb-4 border-border border rounded-lg bg-muted/20 group"
+            aria-label="文章目录"
+        >
+            <div class="flex flex-row items-center text-foreground">
+                <h2 class="flex-1 text-xl font-semibold m-0">
+                    <button
+                        id="fa-toc-collapse"
+                        type="button"
+                        class="fa-toc-header flex w-full flex-row items-center pt-4 px-4 text-left text-foreground cursor-pointer"
+                        aria-controls="fa-toc-panel"
+                        aria-expanded="true"
+                    >
+                        <span class="flex-1">Table of Contents</span>
+                        <ChevronDown class="fa-toc-chevron text-muted-foreground" />
+                    </button>
+                </h2>
+            </div>
+            <div id="fa-toc-panel" class="fa-toc-panel">
+                <div class="fa-toc-panel-inner">
+                    <ol class="fa-toc-list text-muted-foreground px-4 border-t border-border pt-2 pb-4">
+                        {nodes.map((h1) => (
+                            <li>
+                                <a href={`#${h1.id}`}>{h1.text}</a>
+                                {h1.children.length > 0 && (
+                                    <ol>
+                                        {h1.children.map((h2) => (
+                                            <li>
+                                                <a href={`#${h2.id}`}>
+                                                    {h2.text}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ol>
+                                )}
+                            </li>
+                        ))}
+                    </ol>
+                </div>
+            </div>
+        </nav>
+        <script>
+            const faTocCollapse =
+                document.querySelector<HTMLButtonElement>("#fa-toc-collapse");
+            const faToc = document.querySelector<HTMLElement>("#fa-toc");
+            if (faTocCollapse && faToc) {
+                faTocCollapse.addEventListener("click", () => {
+                    const collapsed = faToc.toggleAttribute("data-collapsed");
+                    faTocCollapse.setAttribute(
+                        "aria-expanded",
+                        String(!collapsed),
+                    );
+                });
+            }
+        </script>
+    </>
 )}

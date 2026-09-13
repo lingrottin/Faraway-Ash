@@ -14,19 +14,20 @@ const toc = buildTocFromHeadings(Astro.props.headings ?? []);
   <Banner title={title} />
   <section class="relative mt-4">
     {toc.length > 0 && (
-                <aside
-                    class="hidden xl:block absolute top-0 h-full"
-                    style="left:1rem;width:min(18em,calc((100vw - var(--fa-container-value))/2 - 2rem));"
-                >
-                    <div class="sticky top-25 border rounded-lg py-2 bg-muted/20 backdrop-blur-md z-2">
-                        <span class="text-lg px-3 font-semibold">目录</span>
-                        <div id="fa-toc-container" class="block">
-                            <Toc nodes={toc} variant="sidebar" />
-                        </div>
+            <aside
+                class="hidden xl:block absolute top-0 h-full"
+                style="left:1rem;width:min(18em,calc((100vw - var(--fa-container-value))/2 - 2rem));"
+            >
+                <div class="sticky top-25 border rounded-lg py-2 bg-muted/20 backdrop-blur-md z-2">
+                    <span class="text-lg px-3 font-semibold">目录</span>
+                    <div id="fa-toc-container" class="block">
+                        <Toc nodes={toc} variant="sidebar" />
                     </div>
-                </aside>
-            )}
+                </div>
+            </aside>
+        )}
     <article class="flex flex-col not-md:px-4 fa-container mx-auto">
+      <slot name="before-toc" />
       {toc.length > 0 && <Toc nodes={toc} variant="inline" />}
       <section class="content">
         <slot />
