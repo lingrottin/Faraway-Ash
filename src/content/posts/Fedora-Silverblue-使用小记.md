@@ -67,7 +67,7 @@ Flatpak
 部署（Deployment）
 : 在这里的语境下，指文件系统的一个“状态”，即一个可启动的“系统快照”。这非常类似于 Git 的提交（Commit），只是 OSTree 不把它叫作“提交”这个名字而已。
 
-[^2]: Toolbox 是它的旧称。尽管在很多地方（如 `toolbox` 二进制文件）仍在使用 Toolbox 这一名字，该项目本身已经改名成了 Toolbx。见[官方陈述](https://github.com/containers/toolbox#:~:text=Toolbx%20was%20previously%20known%20as%20Toolbox%2C%20and%20even%20before%20that%20as%20Fedora%20Toolbox.%20Work%20is%20in%20progress%20to%20update%20the%20name%20to%20Toolbx%20in%20various%20places.%20Thus%20this%20Git%20repository%20and%20the%20binary%20are%20still%20toolbox%20and%20the%20package%20may%20still%20be%20toolbox%20on%20various%20systems)。
+[^2]: Toolbox 是它的旧称。尽管在很多地方（如 `toolbox` 二进制文件）仍在使用 Toolbox 这一名字，该项目本身已经改名成了 Toolbx。见[官方陈述](https://github.com/containers/toolbox#:~:text=Toolbx%20was%20previously%20known%20as%20Toolbox)。
 
 ## 安装
 
@@ -85,17 +85,3 @@ Flatpak
 ## 结语
 
 To Be Done.
-
-<!--
-after RPMFusion,
-
-ffmpeg can be installed:
-
-https://rpmfusion.org/Howto/Multimedia
-
-```bash
-sudo rpm-ostree install dnf -A
-dnf download ffmpeg # 从 RPMFusion 下载 ffmpeg RPM
-sudo rpm-ostree override replace --remove=ffmpeg-free ./ffmpeg-7.1.2-7.fc43.x86_64.rpm
-```
--->
