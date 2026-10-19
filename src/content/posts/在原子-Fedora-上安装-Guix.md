@@ -59,7 +59,7 @@ rpm-ostree initramfs-etc --track=/etc/ostree/prepare-root.conf
 
 执行之后可以重启，这样根目录就默认可读写了。当然，可读写是临时的，此时对根目录的修改不会固化到 OSTree 提交中，因此重启之后就会丢失。
 
-### 开机自动创建 `/gnu`
+### `/gnu`
 
 然后，我们需要让 `/gnu` 存在，且在 `guix-daemon` 之前被创建。我是通过创建 Systemd 的 oneshot 服务和挂载点实现的。所以：
 
@@ -134,7 +134,7 @@ wget https://guix.gnu.org/install.sh -O guix-install.sh
 sudo env GUIX_ALLOW_OVERWRITE=1 bash ./guix-install.sh
 ```
 
-### 开机自创建 `/gnu`
+### `/gnu` 的开机自创建
 
 在重启之前，请运行
 
