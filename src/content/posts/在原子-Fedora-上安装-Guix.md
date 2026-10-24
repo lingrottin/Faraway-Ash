@@ -61,7 +61,9 @@ rpm-ostree initramfs-etc --track=/etc/ostree/prepare-root.conf
 
 ### `/gnu`
 
-然后，我们需要让 `/gnu` 存在，且在 `guix-daemon` 之前被创建。我是通过创建 Systemd 的 oneshot 服务和挂载点实现的。所以：
+然后，我们需要让 `/gnu` 存在，且在 `guix-daemon` 之前被创建。[^4]我是通过创建 Systemd 的 oneshot 服务和挂载点实现的。所以：
+
+[^4]: `guix-basedir.service` 有 `DefaultDependencies=no`，这是为了避免 Systemd 为其加上隐式的 `sysinit.target` 依赖。如果不这样做，那么就会产生 `sysinit.target` -> ... -> `local-fs.target` -> `gnu.mount` -> `guix-basedir.service` -> `sysinit.target` 的依赖循环，造成意料之外的问题。
 
 ```ini
 # /etc/systemd/system/gnu.mount
@@ -85,6 +87,8 @@ RequiredBy=guix-daemon.service
 # /etc/systemd/system/guix-basedir.service
 [Unit]
 Description=Create base /gnu dir for GNU Guix
+DefaultDependencies=no
+Before=local-fs.target
 
 [Service]
 Type=oneshot
