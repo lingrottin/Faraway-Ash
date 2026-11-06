@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@12.11.2",
+  "engines": {
+    "node": ">=26"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "permalink:sync": "deno run -A --sloppy-imports scripts/permalink-sync.ts",
-    "test:permalink": "deno run -A --sloppy-imports scripts/test-permalink.ts",
+    "permalink:sync": "node scripts/permalink-sync.ts",
+    "test:permalink": "node scripts/test-permalink.ts",
     "lint": "biome check --write src scripts astro.config.ts"
   },
   "dependencies": {
@@ -28,13 +32,14 @@
     "rehype": "^13.0.2",
     "remark-custom-header-id": "^1.0.0",
     "remark-definition-list": "^2.0.0",
+    "remark-github-alerts": "^0.1.1",
     "solid-js": "^1.9.15",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
-    "typescript": "^5.8.3",
-    "remark-github-alerts": "^0.1.1"
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.12"
+    "@biomejs/biome": "2.5.12",
+    "@types/node": "^26.6.6"
   }
 }

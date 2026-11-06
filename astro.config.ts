@@ -10,10 +10,8 @@ import {
 import remarkGithubAlerts from "remark-github-alerts";
 import rehypeHeadingIds from "./src/lib/rehype-heading-ids";
 
-const site = process.env.SITE_URL ?? "https://enita.cn";
-
 export default defineConfig({
-  site,
+  site: "https://enita.cn",
   trailingSlash: "always",
 
   build: {

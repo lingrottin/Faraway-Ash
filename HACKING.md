@@ -1,17 +1,17 @@
 # Hacking Faraway-Ash
 
-本站已迁移到 Astro。包管理与脚本统一使用 Deno。
+本站已迁移到 Astro。包管理与脚本统一使用 pnpm（Node.js 26+）。
 
 ## 常用命令
 
 ```bash
-deno install --allow-scripts
-deno task dev
-deno task build
-deno task preview
-deno task permalink:sync
-deno task test:permalink
-deno task lint
+pnpm install
+pnpm run dev
+pnpm run build
+pnpm run preview
+pnpm run permalink:sync
+pnpm run test:permalink
+pnpm run lint
 ```
 
 ## 目录
@@ -27,7 +27,7 @@ deno task lint
 
 - 已有 `path` 的文章永远使用 `path`，不重算。
 - 无 `path` 的文章按 Hexo 规则生成：`/YYYY/MMDD/<sha1(slug+unix)[0:12]>/`
-- `deno task permalink:sync` 会把生成结果写回 frontmatter。
+- `pnpm run permalink:sync` 会把生成结果写回 frontmatter。
 
 ## Feeds / Sitemap
 

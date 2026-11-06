@@ -8,9 +8,9 @@ Human docs: `README.md`, `HACKING.md`. Prefer this file for exact commands, inva
 
 - Static personal blog migrated from Hexo/Zola to **Astro 5**
 - **TypeScript** (strict), **Tailwind CSS v4** via `@tailwindcss/vite`
-- Package manager and tasks: **Deno only** (do not use npm/pnpm/yarn for installs or scripts)
+- Package manager and tasks: **pnpm** with **Node.js 26+** (do not use npm/yarn/Deno for installs or scripts)
 - Site defaults: locale `zh`, timezone `Asia/Shanghai`, trailing slashes always
-- Production hosts: primary `https://enita.cn`, Cloudflare mirror `https://cf.enita.cn` (build with `SITE_URL`)
+- Production host: `https://enita.cn`, served by **Cloudflare Pages**. `https://cf.enita.cn` is a Cloudflare-level 308 redirect to the primary domain, not a separate deployment
 
 ## Architecture
 
@@ -24,7 +24,7 @@ src/
   lib/               permalink, taxonomy, feeds, dates, site config, rehype helpers
   styles/            main.css + content.css (Tailwind + prose)
 public/              Static assets (img/, imgs/, fonts/, robots.txt)
-scripts/             Deno utilities (permalink sync + tests)
+scripts/             Node utilities (permalink sync + tests)
 hexo-legacy/         Historical Hexo tree (reference only; never deploy)
 dist/                Build output (generated)
 ```
@@ -40,32 +40,32 @@ Key routing facts:
 
 ## Setup Commands
 
-Requires Deno 2.x.
+Requires Node.js 26+ and pnpm 12.x.
 
 ```bash
-# Install deps into node_modules (Deno nodeModulesDir auto)
-deno install --allow-scripts
+# Install dependencies
+pnpm install
 
 # Optional: typecheck / Astro diagnostics
-deno task check
+pnpm run check
 ```
 
 Environment:
 
-- `SITE_URL` — absolute site origin used in feeds/sitemap/canonicals. Defaults to `https://enita.cn` in `astro.config.ts`. CI sets it explicitly.
+- Site origin is fixed to `https://enita.cn` in `astro.config.ts`; feeds, sitemap, and canonicals always use it.
 - `TZ=Asia/Shanghai` is used in CI; date logic is written against Shanghai wall time for permalink math. Prefer Shanghai when debugging dates.
 
 ## Development Workflow
 
 ```bash
-deno task dev        # astro dev
-deno task build      # astro build → dist/
-deno task preview    # astro preview
-deno task check      # astro check
-deno task lint       # Biome check --write on src, scripts, astro.config.ts
+pnpm run dev        # astro dev
+pnpm run build      # astro build → dist/
+pnpm run preview    # astro preview
+pnpm run check      # astro check
+pnpm run lint       # Biome check --write on src, scripts, astro.config.ts
 ```
 
-Package scripts live in `deno.jsonc` (`tasks`). `package.json` mirrors them for tooling compatibility, but agents must invoke **`deno task …`**.
+Package scripts live in `package.json`. Use **`pnpm run …`** (not npm or yarn).
 
 Import alias: `@/*` → `src/*` (`tsconfig.json`).
 
@@ -94,7 +94,7 @@ Frontmatter schema:
    Implementation: `src/lib/permalink.ts` + Shanghai helpers in `src/lib/dates.ts`.
 3. Sync missing paths into frontmatter:
    ```bash
-   deno task permalink:sync
+   pnpm run permalink:sync
    ```
 4. CI runs `permalink:sync` before build. Local production builds should too when adding posts without `path`.
 5. Two old Zola auto-slugs are hard-redirected in `astro.config.ts` (`redirects`). Keep them unless URLs are intentionally retired.
@@ -126,19 +126,19 @@ Feed builders: `src/lib/feeds.ts` and the corresponding `src/pages/**/*.ts` endp
 There is no full unit-test framework. Permalink invariants are the critical automated check:
 
 ```bash
-deno task test:permalink   # scripts/test-permalink.ts fixtures from Hexo era
-deno task check            # Astro/TS diagnostics
-deno task lint             # Biome (writes fixes)
-deno task build            # full static generation smoke test
+pnpm run test:permalink   # scripts/test-permalink.ts fixtures from Hexo era
+pnpm run check            # Astro/TS diagnostics
+pnpm run lint             # Biome (writes fixes)
+pnpm run build            # full static generation smoke test
 ```
 
 When changing permalink/date/hash logic:
 
 1. Update or extend fixtures in `scripts/test-permalink.ts`
-2. Run `deno task test:permalink`
+2. Run `pnpm run test:permalink`
 3. Confirm existing posts keep the same `path` / public URL
 
-When changing routes, feeds, or taxonomy slugs, run `deno task build` and spot-check `dist/` paths.
+When changing routes, feeds, or taxonomy slugs, run `pnpm run build` and spot-check `dist/` paths.
 
 ## Code Style
 
@@ -162,17 +162,17 @@ Lint command already uses `--write`. Review the diff after linting.
 Local production-shaped build:
 
 ```bash
-deno task permalink:sync
-SITE_URL=https://enita.cn deno task build
+pnpm run permalink:sync
+pnpm run build
 # output: dist/
 ```
 
 CI: `.github/workflows/main.yml` on push to `main`
 
-1. `deno install --allow-scripts`
-2. `deno task permalink:sync`
-3. Build with `SITE_URL=https://enita.cn` and rsync `dist/` to server `/srv/www/enita.cn` (SSH secrets)
-4. Rebuild with `SITE_URL=https://cf.enita.cn` and force-push `dist/` to `cf_web` branch of the Cloudflare Pages repo
+1. `pnpm install --frozen-lockfile`
+2. `pnpm run permalink:sync`
+3. `pnpm run build` (site origin fixed to `https://enita.cn`)
+4. Force-push `dist/` to the `cf_web` branch of the Cloudflare Pages repo; Cloudflare Pages serves `enita.cn`. There is no server copy and no separate `cf.enita.cn` build.
 
 Agents should **not** deploy, rotate secrets, or push to `cf_web` unless explicitly asked. Do not commit secrets.
 
@@ -181,10 +181,10 @@ Agents should **not** deploy, rotate secrets, or push to `cf_web` unless explici
 Before finishing a change:
 
 ```bash
-deno task lint
-deno task test:permalink
-deno task check   # if types/routes/content schema touched
-deno task build   # if routes, content, markdown pipeline, or public URLs touched
+pnpm run lint
+pnpm run test:permalink
+pnpm run check   # if types/routes/content schema touched
+pnpm run build   # if routes, content, markdown pipeline, or public URLs touched
 ```
 
 Commit hygiene:
@@ -196,13 +196,13 @@ Commit hygiene:
 
 ## Security / Safety Notes
 
-- Deploy secrets live only in GitHub Actions (`SSH_PRIV_KEY`, `SERVER_*`, `GH_TOKEN`, `GIT_EMAIL`). Never read them into source or logs.
-- `permalink:sync` and tests use `deno run -A` (full permissions). That is expected for local scripts; do not widen permissions further in app code.
+- Deploy secrets live only in GitHub Actions (`GH_TOKEN`, `GIT_EMAIL`). Never read them into source or logs.
+- Scripts run directly with Node's native TypeScript support and only write to `src/content/posts/`; keep them that way.
 - User-authored Markdown is trusted site content, not arbitrary multi-tenant input; still avoid introducing `eval` or unsandboxed HTML injection helpers.
 
 ## Common Gotchas
 
-- **Package manager**: always Deno. `node_modules/` exists because of Deno’s Node compat, not because npm is the workflow.
+- **Package manager**: always pnpm; `pnpm-lock.yaml` is committed. Node 26 runs `scripts/*.ts` directly via type stripping, so relative imports inside imported TS modules need explicit `.ts` extensions.
 - **Trailing slashes**: `trailingSlash: "always"` and `build.format: "directory"`. Links should end with `/`.
 - **Filename ≠ URL**: post file names are editorial; URLs are `path`.
 - **Date-only frontmatter**: interpreted as Shanghai midnight (`+08:00`), not UTC midnight.
@@ -215,7 +215,7 @@ Commit hygiene:
 | Concern | Start here |
 | --- | --- |
 | Astro + Markdown config | `astro.config.ts` |
-| Deno tasks | `deno.jsonc` |
+| pnpm scripts | `package.json` |
 | Post schema | `src/content.config.ts` |
 | Permalink / hash | `src/lib/permalink.ts`, `scripts/permalink-sync.ts` |
 | Taxonomy / pagination | `src/lib/taxonomy.ts` |

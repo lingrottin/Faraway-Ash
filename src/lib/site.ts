@@ -9,7 +9,7 @@ export const siteConfig = {
     { url: "/categories/", name: "分类" },
     { url: "/about/", name: "关于" },
   ],
-  bannerImg: "https://cf.enita.cn/imgs/banner.webp",
+  bannerImg: "/imgs/banner.webp",
   creativeCommons: ["Attribution-ShareAlike"],
   pageSize: 5,
 } as const;

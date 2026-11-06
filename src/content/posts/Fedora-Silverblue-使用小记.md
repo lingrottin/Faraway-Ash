@@ -2,7 +2,7 @@
 title: Fedora Silverblue 使用小记
 date: "2026-05-12"
 path: "2026/0512/c031b0d235aa/"
-description: a
+description: 从原子化更新、只读根目录到 rpm-ostree、Flatpak 与 Toolbx，记录 Fedora Silverblue 的日常使用体验，以及软件分层安装与系统定制的实践建议。
 tags: []
 categories: []
 ---

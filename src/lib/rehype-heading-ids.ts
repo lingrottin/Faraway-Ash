@@ -71,13 +71,12 @@ function allTextContent(node: Element | Root): string {
 }
 
 function hasHeadingAnchor(heading: Element): boolean {
-  return heading.children.some(
-    (child) =>
-      child.type === "element" &&
-      (child.properties?.className === "heading-anchor" ||
-        (Array.isArray(child.properties?.className) &&
-          child.properties.className.includes("heading-anchor"))),
-  );
+  return heading.children.some((child) => {
+    if (child.type !== "element") return false;
+    const className: unknown = child.properties?.className;
+    if (typeof className === "string") return className === "heading-anchor";
+    return Array.isArray(className) && className.includes("heading-anchor");
+  });
 }
 
 function buildHeadingAnchor(id: string, labelText: string): Element {

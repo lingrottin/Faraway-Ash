@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import { dateToShanghaiUnix, shanghaiParts } from "./dates";
+import { dateToShanghaiUnix, shanghaiParts } from "./dates.ts";
 
 export async function hexoHash(
   slug: string,

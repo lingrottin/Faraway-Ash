@@ -2,7 +2,7 @@
 title: 无 U 盘安装 Linux 的方法总结
 date: "2026-05-22"
 path: "2026/0522/866a6e310571/"
-description: 无
+description: 没有 U 盘也能安装 Linux：从 PXE 网络启动、在 GPT 硬盘上划出分区模拟启动盘，到用 GRUB 直接挂载 ISO 启动，整理了三种可行路径与操作要点。
 tags: []
 categories:
   - 烈焰
@@ -16,6 +16,9 @@ categories:
 
 > [!NOTE]
 > 下面的方法可能需要一定的系统维护能力和知识，且很多方法极有可能损坏你本来的系统。**如果你不知道你在做什么，请不要继续**。
+
+> [!IMPORTANT]
+> 下面的一些说法可能比较简略，如果你决定跟着教程走，那么我建议在旁边备一个 AI 给你提建议。
 
 ## PXE
 
@@ -98,12 +101,59 @@ UEFI 模式下，固件只支持读取 GPT 硬盘内的分区。因此为了让�
 
 **核心原理**：见[Linux 启动过程](#linux-startup-procedure)叙述。通过修改内核命令行参数[^1]，可以介入 initramfs/initrd 寻找根分区的过程并指导它的行为，来让它找到正确的、不在 U 盘上的系统资源文件。
 
-1. 获取 Fedora 的安装介质 `.iso` 文件。
-2. 
-
 [^1]: 内核命令行参数：引导加载程序在启动内核时，向内核传递的字符串。它一般来说可以指定根分区位置、内核开机行为、屏蔽/强制加载某一特定的内核模块等。如果你有一个 Linux 系统，可以查看 `/proc/cmdline` 来看到内核命令行参数。
 
-### 附录 1. Linux 启动过程 {#linux-startup-procedure}
+1. 获取 Fedora 的安装介质 `.iso` 文件。
+2. 把它挂载起来。
+3. 在 GPT 硬盘中创建一个 FAT32 分区，至少比这个 .iso 文件要大，然后把所有东西复制进去。记得给这个分区起一个名字。
+4. 重启到 BIOS 设置页面，从这个分区启动。
+5. 在 GRUB 页面按 e 修改启动配置。
+6. 启动。
+7. 安装。
+
+具体的操作方法我在[《十分舒适的双系统：Fedora Linux 配置指南》](/2025/0524/a9a82b4fc5f0/#an-zhuang)里有说，可以参考那里。
+
+## 直接启动法
+
+- 适用情况：支持从文件系统里搜索 iso 文件并从里面读取的发行版。一般来说主流发行版都支持。
+- 材料：已有 GRUB2 以及 GRUB 和 Linux 内核可读的分区。
+
+### 概述
+
+很多 initrd 打包系统支持从文件系统搜索 iso 文件、临时挂载并从里面读取到内存，以此构建根分区，不过需要定制内核参数才可以。
+
+### 操作步骤（Dracut/Casper）
+
+1. 下载相应的安装 iso，放到一个容易记忆的地方，比如说 `/fedora.iso`。
+2. 记住这个 iso 在哪一个分区。比如说 `/dev/sda2`。
+3. 重启，在 GRUB 自动启动前按下 `c` 进入 GRUB 命令行。
+4. 运行 `ls (hd0,gpt2)/` 来定位这个文件。
+5. 找到这个文件后，运行：
+    ```
+    loopback loop (hd0,gpt2)/fedora.iso
+    set root=loop
+    ```
+    来临时挂载。
+6. 寻找 LiveCD 里的 GRUB 配置，然后在内核参数后加上 `iso-scan/filename=/fedora.iso`。如果是 Dracut 你还需要加上 `rd.live.ram=1`；如果是 Casper 你还需要加上 `boot=casper`。
+7. 运行 `boot`。
+
+### 操作步骤（Arch Linux）
+
+前 5 步类似，不过第 6 步需要添加的参数变成：
+
+```
+img_dev=/dev/sda2 img_loop=/archlinux.iso earlymodules=loop
+```
+
+### 解释
+
+Dracut/Casper 在 `iso-scan/filename=PATH` 被指定时，会挂载所有可以识别的分区，在里面寻找 `PATH` 对应的文件，如果找到一个，把它当作 live cd iso，临时挂载并读取系统文件。
+
+Arch Linux 同理，不过它会找 `$img_dev` 分区内的 `$img_loop` 文件。
+
+## 附录
+
+### 1. Linux 启动过程 {#linux-startup-procedure}
 
 Linux 发行版, Linux 操作系统, 发行版
 : 以 Linux 内核为核心所构建的一整套宏内核操作系统。

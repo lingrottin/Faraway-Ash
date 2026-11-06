@@ -1,11 +1,15 @@
 /**
  * Write Hexo-style path into posts missing frontmatter.path.
- * Usage: deno task permalink:sync
+ * Usage: pnpm run permalink:sync
  */
-import { walk } from "jsr:@std/fs@1/walk";
+import { readdir, readFile, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { computeHexoPermalink, normalizePath } from "../src/lib/permalink.ts";
 
-const postsDir = new URL("../src/content/posts/", import.meta.url);
+const postsDir = fileURLToPath(
+  new URL("../src/content/posts/", import.meta.url),
+);
 
 function parseFrontmatter(text: string): {
   fm: string;
@@ -54,9 +58,10 @@ const used = new Map<string, string>();
 let written = 0;
 let skipped = 0;
 
-for await (const entry of walk(postsDir, { exts: ["md"], maxDepth: 1 })) {
-  if (!entry.isFile) continue;
-  const text = await Deno.readTextFile(entry.path);
+for (const entry of await readdir(postsDir, { withFileTypes: true })) {
+  if (!entry.isFile() || !entry.name.endsWith(".md")) continue;
+  const filePath = join(postsDir, entry.name);
+  const text = await readFile(filePath, "utf8");
   const { fm, body } = parseFrontmatter(text);
   const existing = getField(fm, "path");
   const dateRaw = getField(fm, "date");
@@ -81,7 +86,7 @@ for await (const entry of walk(postsDir, { exts: ["md"], maxDepth: 1 })) {
     const slug = entry.name.replace(/\.md$/, "");
     path = await computeHexoPermalink(slug, date);
     const nextFm = upsertPath(fm, path);
-    await Deno.writeTextFile(entry.path, `---\n${nextFm}\n---\n${body}`);
+    await writeFile(filePath, `---\n${nextFm}\n---\n${body}`);
     written++;
     console.log(`WRITE ${entry.name} -> /${path}`);
   }
